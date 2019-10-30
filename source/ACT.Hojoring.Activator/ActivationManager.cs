@@ -226,7 +226,11 @@ namespace ACT.Hojoring.Activator
                         else
                         {
                             Logger.Instance.Write("download task canceled.", ex.InnerException ?? ex);
+#if ENABLE_ACTIVATOR
                             ActivationManager.Instance.CurrentStatus = ActivationStatus.Error;
+#else
+                            ActivationManager.Instance.CurrentStatus = ActivationStatus.Allow;
+#endif
                             return;
                         }
                     }
@@ -243,16 +247,28 @@ namespace ACT.Hojoring.Activator
             }
             catch (Exception ex)
             {
+#if ENABLE_ACTIVATOR
                 ActivationManager.Instance.CurrentStatus = ActivationStatus.Error;
+#else
+                ActivationManager.Instance.CurrentStatus = ActivationStatus.Allow;
+#endif
                 Logger.Instance.Write("error on acount list download.", ex);
             }
         }
 
+#if ENABLE_ACTIVATOR
         private static readonly string AccountListUrl
             = "https://gist.githubusercontent.com/anoyetta/bc658cb51552ea12ce1aaa2899004e8c/raw/accounts.json";
 
         private static readonly string AccountSaltUrl
             = "https://gist.githubusercontent.com/anoyetta/bc658cb51552ea12ce1aaa2899004e8c/raw/accounts_salt.txt";
+#else
+        private static readonly string AccountListUrl
+            = "https://gist.githubusercontent.com/qitana/7e9cbf584f9944da70806daca370f23c/raw/accounts.json";
+
+        private static readonly string AccountSaltUrl
+            = "https://gist.githubusercontent.com/qitana/7e9cbf584f9944da70806daca370f23c/raw/accounts_salt.txt";
+#endif
     }
 
     public enum ActivationStatus

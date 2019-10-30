@@ -35,7 +35,7 @@
   AllowsTransparency="True"
   ShowInTaskbar="True"
   Title="Browse Icon..."
-  Width="1150" Height="700">
+  Width="860" Height="600">
 
   <Window.Resources>
     <ResourceDictionary>
@@ -146,24 +146,24 @@
           <ListView.ItemTemplate>
             <DataTemplate>
               <DockPanel
-                Width="140"
-                Height="140"
-                Margin="8 0 8 12">
+                Width="100"
+                Height="85"
+                Margin="2 0 4 2">
                 <Image
                   DockPanel.Dock="Top"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
-                  Margin="0 5 0 5"
+                  Margin="0 2 0 2"
                   Source="{Binding BitmapImage, Mode=OneWay}"
                   RenderOptions.BitmapScalingMode="HighQuality"
-                  Height="72"
-                  Width="72" />
+                  Height="48"
+                  Width="48" />
                 <TextBlock
                   DockPanel.Dock="Top"
                   HorizontalAlignment="Center"
                   TextAlignment="Center"
                   Text="{Binding Name, Mode=OneWay}"
-                  FontSize="13"
+                  FontSize="12"
                   TextWrapping="Wrap" />
               </DockPanel>
             </DataTemplate>

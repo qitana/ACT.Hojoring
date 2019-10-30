@@ -38,6 +38,18 @@
     <LangVersion>preview</LangVersion>
     <NoWarn>CS8002</NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distribution|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>preview</LangVersion>
+    <NoWarn>CS8002</NoWarn>
+  </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ACT.Hojoring.ico</ApplicationIcon>
   </PropertyGroup>
@@ -109,13 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ACT.Hojoring.ico" />
-    <EmbeddedResource Include="Costura32\AquesTalkDriver.dll" />
-    <EmbeddedResource Include="Costura64\AquesTalkDriver.dll" />
+    <EmbeddedResource Include="Costura32\AquesTalkDriver.dll" Condition=" '$(Configuration)' == 'Release|Debug' " />
+    <EmbeddedResource Include="Costura64\AquesTalkDriver.dll" Condition=" '$(Configuration)' == 'Release|Debug' " />
     <EmbeddedResource Include="Costura32\AquesTalk.dll" />
     <EmbeddedResource Include="Costura64\AquesTalk.dll" />
     <EmbeddedResource Include="Costura32\AqKanji2Koe.dll" />
     <EmbeddedResource Include="Costura64\AqKanji2Koe.dll" />
-    <Content Include="FodyWeavers.xml" />
+    <Content Include="FodyWeavers.Debug.xml" />
+    <Content Include="FodyWeavers.Distribution.xml" />
+    <Content Include="FodyWeavers.Release.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xsd">
@@ -130,7 +144,6 @@
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>@copy $(ProjectDir)FodyWeavers.$(Configuration).xml $(ProjectDir)FodyWeavers.xml &gt;nul</PreBuildEvent>
   </PropertyGroup>
 </Project>

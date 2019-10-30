@@ -19,7 +19,7 @@
   xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
   d:DataContext="{d:DesignInstance Type=vm:SpellConfigViewModel}"
   DataContext="{x:Type vm:SpellConfigViewModel}"
-  d:DesignWidth="1000"
+  d:DesignWidth="700"
   Background="White"
   FontFamily="{DynamicResource UIFont}"
   FontSize="{DynamicResource UIFontSize}"
@@ -49,7 +49,7 @@
 
       <Style TargetType="TextBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
         <EventSetter Event="MouseDoubleClick" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="GotKeyboardFocus" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TextBoxSelect" />
@@ -62,12 +62,12 @@
 
       <Style TargetType="ComboBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
       </Style>
 
       <Style TargetType="xctk:DoubleUpDown">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinHeight" Value="27" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <Style TargetType="xctk:IntegerUpDown">
@@ -104,7 +104,7 @@
           VerticalScrollBarVisibility="Auto"
           Margin="5"
           Padding="0 0 0 20">
-          <StackPanel>
+          <StackPanel Margin="0 0 10 0">
             <!-- Name -->
             <Label Content="{DynamicResource Spell_Name}" />
             <TextBox Text="{Binding Model.SpellTitle, Mode=TwoWay}" />
@@ -152,14 +152,14 @@
                 <Hyperlink
                   Command="{Binding AddTagsCommand, Mode=OneWay}"
                   CommandParameter="{Binding Model.Guid, Mode=OneWay}">
-                  <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="14" />
+                  <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="12" />
                 </Hyperlink>
               </TextBlock>
             </StackPanel>
             <!-- <<= Tags  -->
 
             <!-- パネル -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Common_SpellPanel}" VerticalAlignment="Center" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Common_SpellPanel}" VerticalAlignment="Center" />
             <ComboBox
               ItemsSource="{Binding Panels, Mode=OneWay}"
               DisplayMemberPath="PanelName"
@@ -168,8 +168,10 @@
               SelectionChanged="Panel_SelectionChanged" />
 
             <!-- Priority -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Spell_SortPriority}" VerticalAlignment="Center" />
-            <xctk:DoubleUpDown Value="{Binding Model.DisplayNo, Mode=TwoWay}" MinWidth="80" Increment="1" HorizontalAlignment="Left" />
+            <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+              <Label Margin="0 0 10 0" Content="{DynamicResource Spell_SortPriority}" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Model.DisplayNo, Mode=TwoWay}" MinWidth="80" Increment="1" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+            </StackPanel>
 
             <!-- マッチングワード -->
             <Label Margin="0 15 0 0" Content="{DynamicResource Spell_TextToMatch}" />
@@ -180,23 +182,23 @@
 
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
               <!-- Recast Time -->
-              <StackPanel Orientation="Horizontal">
-                <Label Content="{DynamicResource Spell_RecastTime}" VerticalAlignment="Center" Margin="0 0 5 0" />
-                <xctk:DoubleUpDown Value="{Binding Model.RecastTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                <Label Content="{DynamicResource Spell_RecastTime}" VerticalAlignment="Center" Margin="0 0 18 0" />
+                <xctk:DoubleUpDown Value="{Binding Model.RecastTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 <Label Content="{DynamicResource Spell_Secounds}" VerticalAlignment="Center" Margin="5 0 0 0" />
               </StackPanel>
 
               <!-- Delay to show -->
-              <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                <Label Content="{DynamicResource Spell_DelayToShow}" VerticalAlignment="Center" Margin="0 0 5 0" />
-                <xctk:DoubleUpDown Value="{Binding Model.DelayToShow, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <StackPanel Orientation="Horizontal" Margin="20 15 0 0">
+                <Label Content="{DynamicResource Spell_DelayToShow}" VerticalAlignment="Center" Margin="0 0 18 0" />
+                <xctk:DoubleUpDown Value="{Binding Model.DelayToShow, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 <Label Content="{DynamicResource Spell_Secounds}" VerticalAlignment="Center" Margin="5 0 0 0" />
               </StackPanel>
             </StackPanel>
 
             <!-- Recast Time from HotbarInfo -->
             <StackPanel Visibility="{Binding FFXIVReader.IsAvailable, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
-              <CheckBox Content="{DynamicResource Spell_UseHotbrRecastTime}" IsChecked="{Binding Model.UseHotbarRecastTime, Mode=TwoWay}" Margin="0 10 0 0" />
+              <CheckBox Content="{DynamicResource Spell_UseHotbrRecastTime}" IsChecked="{Binding Model.UseHotbarRecastTime, Mode=TwoWay}" Margin="0 5 0 0" />
               <Label Content="{DynamicResource Spell_HotbarItemName}" VerticalAlignment="Center" Margin="0 5 0 0" HorizontalAlignment="Left" Visibility="{Binding Model.UseHotbarRecastTime, Converter={StaticResource VisibilityConverter}, Mode=OneWay}" />
               <TextBox Text="{Binding Model.HotbarName, Mode=TwoWay}" Width="300" Margin="0 2 0 0" HorizontalAlignment="Left"  Visibility="{Binding Model.UseHotbarRecastTime, Converter={StaticResource VisibilityConverter}, Mode=OneWay}" />
             </StackPanel>
@@ -249,13 +251,13 @@
             <!-- Recast Time -->
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
               <Label Content="{DynamicResource Spell_UpperLimitOfRecastTime}" VerticalAlignment="Center" Margin="0 0 10 0" />
-              <xctk:DoubleUpDown Value="{Binding Model.UpperLimitOfExtension, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.UpperLimitOfExtension, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <Label Content="{DynamicResource Spell_Secounds}" VerticalAlignment="Center" Margin="5 0 0 0" />
             </StackPanel>
 
             <!-- Warning -->
             <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-              <xctk:DoubleUpDown Value="{Binding Model.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <Label Content="{DynamicResource Spell_WarningTime}" VerticalAlignment="Center" Margin="5 0 0 0" />
             </StackPanel>
             <CheckBox Margin="0 5 0 0" Content="{DynamicResource Spell_WarningTimeChangeFontColor}" IsChecked="{Binding Model.ChangeFontColorsWhenWarning}" />
@@ -675,9 +677,9 @@
             </Grid.ColumnDefinitions>
 
             <!-- Visualタブの左側 -->
-            <StackPanel Grid.Column="0" Margin="0 0 90 0">
+            <StackPanel Grid.Column="0" Margin="0 0 40 0">
               <!-- フォント -->
-              <Label Content="{DynamicResource Common_Font}" FontSize="20" FontWeight="Bold" />
+              <Label Content="{DynamicResource Common_Font}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <TextBlock HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeFontCommand}">
@@ -711,7 +713,7 @@
 
                 <!-- Warning -->
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                  <xctk:DoubleUpDown Value="{Binding Model.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" VerticalAlignment="Center" />
+                  <xctk:DoubleUpDown Value="{Binding Model.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" VerticalAlignment="Center" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                   <Label VerticalAlignment="Center" Margin="5 0 0 0" MaxWidth="300">
                     <TextBlock TextWrapping="WrapWithOverflow" Text="{DynamicResource Spell_WarningTime}" />
                   </Label>
@@ -720,16 +722,16 @@
               </StackPanel>
 
               <!-- プログレスバー -->
-              <Label Margin="0 20 0 0" Content="{DynamicResource Common_ProgressBar}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 20 0 0" Content="{DynamicResource Common_ProgressBar}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <CheckBox Margin="0 5 0 5" Content="Circle Style" IsChecked="{Binding Model.IsCircleStyle, Mode=TwoWay}" FontWeight="Bold" />
                 <CheckBox Margin="0 5 0 5" Content="{DynamicResource Common_IsReverseProgressBar}" IsChecked="{Binding Model.IsReverse, Mode=TwoWay}" />
 
                 <StackPanel Margin="0 8 0 8" Orientation="Horizontal">
                   <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.BarWidth, Mode=TwoWay}" Increment="1" MinWidth="80" />
+                  <xctk:DoubleUpDown Value="{Binding Model.BarWidth, Mode=TwoWay}" Increment="1" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                   <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.BarHeight, Mode=TwoWay}" Increment="1" MinWidth="80" />
+                  <xctk:DoubleUpDown Value="{Binding Model.BarHeight, Mode=TwoWay}" Increment="1" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
 
                 <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
@@ -746,12 +748,12 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0 6 0 0">
                   <Label Content="{DynamicResource Common_BlurRadius}" VerticalAlignment="Center" Margin="0 0 7 0" />
-                  <xctk:DoubleUpDown Value="{Binding Model.BarBlurRadius, Mode=TwoWay}" Increment="1"  HorizontalAlignment="Left" Width="70" FormatString="N0" />
+                  <xctk:DoubleUpDown Value="{Binding Model.BarBlurRadius, Mode=TwoWay}" Increment="1"  HorizontalAlignment="Left" Width="70" FormatString="N0" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
               </StackPanel>
 
               <!-- 背景色 -->
-              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeBackgroundColorCommand}">
@@ -765,11 +767,11 @@
             <!-- Visualタブの右側 -->
             <StackPanel Grid.Column="1" Margin="0 0 40 0">
               <!-- アイコン -->
-              <Label Margin="0 0 0 0" Content="{DynamicResource Common_Icon}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 0 0 0" Content="{DynamicResource Common_Icon}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <StackPanel Margin="0 8 0 8" Orientation="Horizontal">
                   <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
-                    <Image Source="{Binding Model.SpellIconFullPath, Mode=OneWay}" Height="72" Width="72" />
+                    <Image Source="{Binding Model.SpellIconFullPath, Mode=OneWay}" Height="48" Width="48" />
                   </Border>
                   <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Margin="10 0 0 10" HorizontalAlignment="Left">
@@ -780,7 +782,7 @@
 
                     <StackPanel Orientation="Horizontal">
                       <TextBlock Margin="10 0 5 2" Text="Size" VerticalAlignment="Bottom" />
-                      <xctk:DoubleUpDown Value="{Binding Model.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" />
+                      <xctk:DoubleUpDown Value="{Binding Model.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                     </StackPanel>
                   </StackPanel>
                 </StackPanel>
@@ -796,7 +798,7 @@
               </StackPanel>
 
               <!-- その他 -->
-              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Misc}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Misc}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <StackPanel
                   Margin="0 5 0 0"
@@ -841,15 +843,15 @@
 
             <WrapPanel Orientation="Horizontal">
               <!-- Match start -->
-              <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Spell_NoticeOnMatch}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+              <StackPanel Margin="0 0 20 20" VerticalAlignment="Top">
+                <Label Content="{DynamicResource Spell_NoticeOnMatch}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label DockPanel.Dock="Left" Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
@@ -858,7 +860,7 @@
                   </DockPanel>
                   <Label Margin="0 10 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" Width="415" HorizontalAlignment="Left" Text="{Binding Model.MatchTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" Width="255" HorizontalAlignment="Left" Text="{Binding Model.MatchTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS1Command}" />
                   </DockPanel>
                   <StackPanel Visibility="{Binding Model.MatchAdvancedConfig.Available, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
@@ -878,15 +880,15 @@
               <!-- Match end -->
 
               <!-- Over start -->
-              <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Spell_NoticeOnOver}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+              <StackPanel Margin="0 0 20 20" VerticalAlignment="Top">
+                <Label Content="{DynamicResource Spell_NoticeOnOver}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
@@ -895,7 +897,7 @@
                   </DockPanel>
                   <Label Margin="0 10 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="415" Text="{Binding Model.OverTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="255" Text="{Binding Model.OverTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS2Command}" />
                   </DockPanel>
                   <StackPanel Margin="0 15 0 0" Orientation="Horizontal">
@@ -919,15 +921,15 @@
               <!-- Over end -->
 
               <!-- Before start -->
-              <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Spell_NoticeOnBefore}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+              <StackPanel Margin="0 0 20 20" VerticalAlignment="Top">
+                <Label Content="{DynamicResource Spell_NoticeOnBefore}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
@@ -936,11 +938,11 @@
                   </DockPanel>
                   <Label Margin="0 10 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="415" Text="{Binding Model.BeforeTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="255" Text="{Binding Model.BeforeTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS3Command}" />
                   </DockPanel>
                   <StackPanel Margin="0 15 0 0" Orientation="Horizontal">
-                    <xctk:DoubleUpDown Increment="1" FormatString="F1" MinWidth="80" Value="{Binding Model.BeforeTime, Mode=TwoWay}" />
+                    <xctk:DoubleUpDown Increment="1" FormatString="F1" MinWidth="80" Value="{Binding Model.BeforeTime, Mode=TwoWay}" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                     <Label Margin="5 0 0 0" Content="{DynamicResource Spell_NoticeOnBeforeThisScounds}" VerticalAlignment="Center" />
                   </StackPanel>
                   <StackPanel Visibility="{Binding Model.BeforeAdvancedConfig.Available, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
@@ -960,15 +962,15 @@
               <!-- Before end -->
 
               <!-- Timeup start -->
-              <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Spell_NoticeOnTimeup}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+              <StackPanel Margin="0 0 20 20" VerticalAlignment="Top">
+                <Label Content="{DynamicResource Spell_NoticeOnTimeup}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
@@ -977,7 +979,7 @@
                   </DockPanel>
                   <Label Margin="0 10 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="415" Text="{Binding Model.TimeupTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="255" Text="{Binding Model.TimeupTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS4Command}" />
                   </DockPanel>
                   <StackPanel Visibility="{Binding Model.TimeupAdvancedConfig.Available, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
@@ -1026,7 +1028,7 @@
             VerticalScrollBarVisibility="Auto"
             HorizontalScrollBarVisibility="Auto"
             FontFamily="Consolas, Yu Gothic UI"
-            FontSize="12pt"
+            FontSize="10pt"
             Loaded="XMLEditorOnLoaded">
             <avalonEdit:TextEditor.Options>
               <avalonEdit:TextEditorOptions

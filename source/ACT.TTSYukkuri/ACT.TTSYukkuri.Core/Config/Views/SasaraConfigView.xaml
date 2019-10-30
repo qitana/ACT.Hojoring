@@ -21,10 +21,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="5"
-  d:DesignWidth="600"
+  d:DesignWidth="480"
   d:DataContext="{d:DesignInstance Type=vm:SasaraConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -45,7 +45,7 @@
     VerticalScrollBarVisibility="Auto">
 
     <StackPanel Orientation="Vertical">
-      <Label Content="{DynamicResource Sasara_Cast}" />
+      <Label Content="{DynamicResource Sasara_Cast}" Padding="0 2" />
       <ComboBox
         x:Name="PresetsComboBox"
         HorizontalAlignment="Left"
@@ -54,7 +54,7 @@
         SelectedItem="{Binding Config.Cast, Mode=TwoWay}">
       </ComboBox>
 
-      <Label Margin="0 10 0 0" Content="{DynamicResource Sasara_Emotions}" />
+      <Label Margin="0 10 0 0" Content="{DynamicResource Sasara_Emotions}" Padding="0 2" />
       <ItemsControl
         ItemsSource="{Binding Config.Components, Mode=OneWay}">
         <ItemsControl.ItemTemplate>
@@ -86,13 +86,14 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
 
-      <Label Margin="0 15 0 0" Content="{DynamicResource Sasara_General}" />
+      <Label Margin="0 15 0 5" Content="{DynamicResource Sasara_General}" Padding="0 2" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Gain}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -112,10 +113,11 @@
 
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Onryo}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -134,10 +136,11 @@
 
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Hayasa}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -156,10 +159,11 @@
 
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Takasa}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -178,10 +182,11 @@
 
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Seishitsu}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -200,10 +205,11 @@
 
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
-          Margin="0 0 0 0"
-          MinWidth="100"
+          Margin="10 0 0 0"
+          MinWidth="80"
           Content="{DynamicResource Sasara_Yokuyo}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"

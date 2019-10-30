@@ -1,0 +1,1 @@
+﻿.\make.ps1 -Configuration Distribution

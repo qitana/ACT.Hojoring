@@ -20,7 +20,6 @@ namespace ACT.UltraScouter.Config.UI.ViewModels
 
         public DirectionOrigin[] DirectionOrigins =>
             (Enum.GetValues(typeof(DirectionOrigin)) as DirectionOrigin[])
-            .Where(x => x != DirectionOrigin.Camera)
             .ToArray();
 
         private ICommand changeFontCommand;

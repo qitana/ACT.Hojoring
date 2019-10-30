@@ -127,7 +127,11 @@ namespace ACT.SpecialSpellTimer
                             var now = DateTime.Now;
 
                             // ホットバーからリキャスト時間の読込みを試みる
-                            if (!this.TryGetHotbarRecast(targetSpell, out double d))
+                            if (this.TryGetHotbarRecast(targetSpell, out double d))
+                            {
+                                spell.LastHotbarRecastTime = d;
+                            }
+                            else
                             {
                                 d = targetSpell.RecastTime;
                             }
@@ -369,8 +373,8 @@ namespace ACT.SpecialSpellTimer
         private Dictionary<string, ActionItem> GetHotbarInfo()
             => this.hotbarInfoDictionary;
 
-        private static readonly double HotbarAdjustThreshold = 1200d;
-        private static readonly double HotbarPollingRate = 4;
+        private static readonly double HotbarAdjustThreshold = 100;
+        private static readonly double HotbarPollingRate = 1;
 
         public void StoreHotbarInfo()
         {
@@ -396,13 +400,21 @@ namespace ACT.SpecialSpellTimer
                 return result;
             }
 
-            if (spell.CompleteScheduledTime.AddMilliseconds(HotbarAdjustThreshold * 2) >= now)
+            if (spell.CompleteScheduledTime.AddSeconds(2) > now)
             {
                 if (!this.TryGetHotbarRecast(spell, out double d))
                 {
                     return result;
                 }
 
+                // Sharlayanが返す値は整数なので、前回から変化していないならUpdate不要
+                if (spell.LastHotbarRecastTime - d < 1.0)
+                {
+                    return result;
+                }
+                spell.LastHotbarRecastTime = d;
+
+                now = DateTime.Now;
                 var newSchedule = now.AddSeconds(d);
 
                 // ホットバー情報とnミリ秒以上乖離したら補正する

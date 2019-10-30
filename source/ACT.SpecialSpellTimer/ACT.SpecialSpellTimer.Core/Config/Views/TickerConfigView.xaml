@@ -48,7 +48,7 @@
 
       <Style TargetType="TextBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
         <EventSetter Event="MouseDoubleClick" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="GotKeyboardFocus" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TextBoxSelect" />
@@ -61,17 +61,17 @@
 
       <Style TargetType="ComboBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
       </Style>
 
       <Style TargetType="xctk:DoubleUpDown">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinHeight" Value="27" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <Style TargetType="xctk:IntegerUpDown">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinHeight" Value="27" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <FontFamily x:Key="FontAwesome">pack://application:,,,/FontAwesome.WPF;component/#FontAwesome</FontFamily>
@@ -147,14 +147,14 @@
                 <Hyperlink
                   Command="{Binding AddTagsCommand, Mode=OneWay}"
                   CommandParameter="{Binding Model.Guid, Mode=OneWay}">
-                  <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="14" />
+                  <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="12" />
                 </Hyperlink>
               </TextBlock>
             </StackPanel>
             <!-- <<= Tags  -->
 
             <!-- Message -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Ticker_Message}" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Ticker_Message}" />
             <TextBox Text="{Binding Model.Message, Mode=TwoWay}" />
             <StackPanel Margin="5 5 0 0">
               <Label Content="{DynamicResource Ticker_MessageDiscription1}" FontSize="11" />
@@ -164,38 +164,38 @@
             </StackPanel>
 
             <!-- マッチングワード -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Spell_TextToMatch}" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Spell_TextToMatch}" />
             <TextBox Text="{Binding Model.Keyword, Mode=TwoWay}" />
 
             <!-- 非表示にするマッチングワード -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Ticker_TextToMatchToHide}" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Ticker_TextToMatchToHide}" />
             <TextBox Text="{Binding Model.KeywordToHide, Mode=TwoWay}" />
 
             <!-- Use Regex -->
-            <CheckBox Margin="0 10 0 0" Content="{DynamicResource Spell_UserRegex}" IsChecked="{Binding Model.RegexEnabled}" />
+            <CheckBox Margin="0 5 0 0" Content="{DynamicResource Spell_UserRegex}" IsChecked="{Binding Model.RegexEnabled}" />
 
             <!-- Display Time -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Ticker_DisplayTime1}" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Ticker_DisplayTime1}" />
             <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-              <xctk:DoubleUpDown Value="{Binding Model.Delay, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.Delay, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <Label Content="{DynamicResource Ticker_DisplayTime2}" VerticalAlignment="Center" Margin="0 0 10 0" />
-              <xctk:DoubleUpDown Value="{Binding Model.DisplayTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.DisplayTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <Label Content="{DynamicResource Ticker_DisplayTime3}" VerticalAlignment="Center" Margin="5 0 0 0" />
             </StackPanel>
 
             <!-- メッセージの追加表示 -->
-            <CheckBox Margin="0 15 0 0" Content="{DynamicResource Ticker_AddMessages}" IsChecked="{Binding Model.AddMessageEnabled}" />
+            <CheckBox Margin="0 5 0 0" Content="{DynamicResource Ticker_AddMessages}" IsChecked="{Binding Model.AddMessageEnabled}" />
 
             <!-- プログレスバー -->
             <CheckBox Margin="0 5 0 0" Content="{DynamicResource Ticker_VisibleProgressBar}" IsChecked="{Binding Model.ProgressBarEnabled}" />
 
             <!-- Location -->
-            <Label Margin="0 15 0 0" Content="{DynamicResource Common_Location}" />
+            <Label Margin="0 10 0 0" Content="{DynamicResource Common_Location}" />
             <StackPanel Orientation="Horizontal">
               <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-              <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-              <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+              <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
             </StackPanel>
 
             <!-- Jobフィルタ start -->
@@ -557,19 +557,19 @@
             <!-- Visualタブの左側 -->
             <StackPanel Grid.Column="0" Margin="0 0 90 0">
               <!-- 全般 -->
-              <Label Content="{DynamicResource Common_General}" FontSize="20" FontWeight="Bold" />
+              <Label Content="{DynamicResource Common_General}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <!-- Location -->
                 <Label Margin="0 5 0 0" Content="{DynamicResource Common_Location}" />
                 <StackPanel Orientation="Horizontal">
                   <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-                  <TextBox TextAlignment="Right" Text="{Binding Model.Left, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+                  <TextBox TextAlignment="Right" Text="{Binding Model.Left, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                   <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-                  <TextBox TextAlignment="Right" Text="{Binding Model.Top, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+                  <TextBox TextAlignment="Right" Text="{Binding Model.Top, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
 
                 <!-- プログレスバー -->
-                <CheckBox Margin="0 15 0 0" Content="{DynamicResource Ticker_VisibleProgressBar}" IsChecked="{Binding Model.ProgressBarEnabled}" />
+                <CheckBox Margin="0 5 0 0" Content="{DynamicResource Ticker_VisibleProgressBar}" IsChecked="{Binding Model.ProgressBarEnabled}" />
 
                 <StackPanel Orientation="Horizontal" Margin="0 6 0 0" Visibility="{Binding Model.ProgressBarEnabled, Converter={StaticResource VisibilityConverter}, Mode=OneWay}">
                   <Label Content="{DynamicResource Common_BlurRadius}" VerticalAlignment="Center" Margin="0 0 7 0" />
@@ -578,7 +578,7 @@
               </StackPanel>
 
               <!-- フォント -->
-              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Font}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Font}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <TextBlock HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeFontCommand}">
@@ -600,7 +600,7 @@
               </StackPanel>
 
               <!-- 背景色 -->
-              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="20" FontWeight="Bold" />
+              <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="15" FontWeight="Bold" />
               <StackPanel Margin="10 0 0 0">
                 <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeBackgroundColorCommand}">
@@ -633,23 +633,23 @@
             <WrapPanel Orientation="Horizontal">
               <!-- Match start -->
               <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Ticker_NoticeOnMatch}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+                <Label Content="{DynamicResource Ticker_NoticeOnMatch}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label DockPanel.Dock="Left" Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
                       SelectedValue="{Binding Model.MatchSound, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="♪" HorizontalAlignment="Right" Width="28" FontWeight="Black" Command="{Binding TestWave1Command}" />
                   </DockPanel>
-                  <Label Margin="0 10 0 0" Content="TTS" />
+                  <Label Margin="0 5 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" Width="415" HorizontalAlignment="Left" Text="{Binding Model.MatchTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" Width="255" HorizontalAlignment="Left" Text="{Binding Model.MatchTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS1Command}" />
                   </DockPanel>
                   <StackPanel Visibility="{Binding Model.MatchAdvancedConfig.Available, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
@@ -670,14 +670,14 @@
 
               <!-- Delay start -->
               <StackPanel Margin="0 0 50 40" VerticalAlignment="Top">
-                <Label Content="{DynamicResource Ticker_NoticeOnDelay}" FontSize="20" FontWeight="Bold" />
-                <StackPanel Margin="5 10 0 0" Width="450">
+                <Label Content="{DynamicResource Ticker_NoticeOnDelay}" FontSize="15" FontWeight="Bold" />
+                <StackPanel Margin="5 10 0 0" Width="290">
                   <Label Content="WAVE" />
                   <DockPanel>
                     <ComboBox
                       DockPanel.Dock="Left"
                       HorizontalAlignment="Left"
-                      Width="415"
+                      Width="255"
                       ItemsSource="{x:Static vm:SpellConfigViewModel.WaveList}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="FullPath"
@@ -686,7 +686,7 @@
                   </DockPanel>
                   <Label Margin="0 10 0 0" Content="TTS" />
                   <DockPanel>
-                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="415" Text="{Binding Model.DelayTextToSpeak, Mode=TwoWay}" />
+                    <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" Width="255" Text="{Binding Model.DelayTextToSpeak, Mode=TwoWay}" />
                     <Button DockPanel.Dock="Right" Content="▶" HorizontalAlignment="Right" Width="28" FontWeight="Black" FontSize="11"  Command="{Binding TestTTS2Command}" />
                   </DockPanel>
                   <StackPanel Visibility="{Binding Model.DelayAdvancedConfig.Available, Mode=OneWay, Converter={StaticResource VisibilityConverter}}">
@@ -735,7 +735,7 @@
             VerticalScrollBarVisibility="Auto"
             HorizontalScrollBarVisibility="Auto"
             FontFamily="Consolas, Yu Gothic UI"
-            FontSize="12pt"
+            FontSize="10pt"
             Loaded="XMLEditorOnLoaded">
             <avalonEdit:TextEditor.Options>
               <avalonEdit:TextEditorOptions

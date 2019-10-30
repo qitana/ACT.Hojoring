@@ -4,11 +4,11 @@
   xmlns:system="clr-namespace:System;assembly=mscorlib">
 
   <FontFamily x:Key="UIFont">
-    Consolas, Yu Gothic UI, Meiryo UI
+    Yu Gothic UI, Meiryo UI
   </FontFamily>
 
   <system:Double x:Key="UIFontSize">
-    17
+    12
   </system:Double>
 
   <FontWeight x:Key="UIFontWeight">

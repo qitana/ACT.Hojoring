@@ -27,6 +27,7 @@ namespace ACT.Hojoring.Activator.Models
             string guild,
             string salt = null)
         {
+#if ENABLE_ACTIVATOR
             var result = false;
 
             if (string.IsNullOrEmpty(name) &&
@@ -57,6 +58,9 @@ namespace ACT.Hojoring.Activator.Models
             }
 
             return result;
+#else
+            return false;
+#endif
         }
     }
 }

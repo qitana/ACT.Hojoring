@@ -21,10 +21,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="5"
-  d:DesignWidth="600"
+  d:DesignWidth="480"
   d:DataContext="{d:DesignInstance Type=vm:GoogleCloudTextToSpeechConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -170,7 +170,7 @@
       <TextBlock
         Margin="0 15 5 0"
         HorizontalAlignment="Left"
-        FontSize="14"
+        FontSize="12"
         TextWrapping="Wrap"
         Text="{DynamicResource GoogleCloudTextToSpeech_Licence}" />
     </StackPanel>

@@ -72,19 +72,19 @@
   <StackPanel>
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_VisibleLPS}" IsChecked="{Binding Config.LPSViewVisible, Mode=TwoWay}" />
 
-    <Label Margin="0 15 0 3" Content="{DynamicResource Options_LPSOverlayScale}" />
-    <xctk:DoubleUpDown Value="{Binding Config.LPSViewScale, Mode=TwoWay}" MinWidth="80" FormatString="F2" Increment="0.01" />
+    <Label Margin="0 10 0 3" Content="{DynamicResource Options_LPSOverlayScale}" />
+    <xctk:DoubleUpDown Value="{Binding Config.LPSViewScale, Mode=TwoWay}" MinWidth="80" FormatString="F2" Increment="0.01" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
     <!-- Location -->
-    <Label Margin="0 15 0 3" Content="{DynamicResource Options_LPSOverlayLocation}" />
+    <Label Margin="0 10 0 3" Content="{DynamicResource Options_LPSOverlayLocation}" />
     <StackPanel Orientation="Horizontal">
       <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-      <xctk:DoubleUpDown Value="{Binding Config.LPSViewX, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+      <xctk:DoubleUpDown Value="{Binding Config.LPSViewX, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-      <xctk:DoubleUpDown Value="{Binding Config.LPSViewY, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+      <xctk:DoubleUpDown Value="{Binding Config.LPSViewY, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
     </StackPanel>
 
-    <CheckBox Margin="0 25 0 0" Content="{DynamicResource Options_EnabledLog}" IsChecked="{Binding Config.SaveLogEnabled, Mode=TwoWay}" />
+    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_EnabledLog}" IsChecked="{Binding Config.SaveLogEnabled, Mode=TwoWay}" />
 
     <StackPanel Visibility="{Binding Config.SaveLogEnabled, Mode=OneWay, Converter={StaticResource CollapsedConverter}}">
       <Label Margin="0 20 0 0" Content="{DynamicResource Options_LogDirectory}" />

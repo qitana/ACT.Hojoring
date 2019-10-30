@@ -15,8 +15,10 @@ namespace FFXIV.Framework.Dialog.Views
         {
             Title = "Font",
             Content = content,
-            MaxWidth = 1100,
-            MaxHeight = 620,
+            Width = 840,
+            Height = 600,
+            MaxWidth = 1280,
+            MaxHeight = 1080,
         };
 
         public static FontInfo Font { get; set; }

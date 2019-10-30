@@ -71,30 +71,30 @@
 
   <StackPanel>
     <Label Margin="0 15 0 0" Content="{DynamicResource Options_TimeToHide}" />
-    <xctk:DoubleUpDown Value="{Binding Config.TimeOfHideSpell, Mode=TwoWay}" MinWidth="60" FormatString="F0" />
+    <xctk:DoubleUpDown Value="{Binding Config.TimeOfHideSpell, Mode=TwoWay}" MinWidth="60" FormatString="F0" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_WaitingTimeToSyncTTS}" />
-    <xctk:DoubleUpDown Value="{Binding Config.WaitingTimeToSyncTTS, Mode=TwoWay}" MinWidth="75" FormatString="F0" Maximum="1000" Minimum="20" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_WaitingTimeToSyncTTS}" />
+    <xctk:DoubleUpDown Value="{Binding Config.WaitingTimeToSyncTTS, Mode=TwoWay}" MinWidth="75" FormatString="F0" Maximum="1000" Minimum="20" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_EnabledPartyPlaceholder}" IsChecked="{Binding Config.EnabledPartyMemberPlaceholder, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledNotifyDefaultSpellTimer}" IsChecked="{Binding Config.EnabledNotifyNormalSpellTimer, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledSimplyRegex}" IsChecked="{Binding Config.SimpleRegex, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledRemoveTooltipSymbol}" IsChecked="{Binding Config.RemoveTooltipSymbols, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledRemoveWorldName}" IsChecked="{Binding Config.RemoveWorldName, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledPartyPlaceholder}" IsChecked="{Binding Config.EnabledPartyMemberPlaceholder, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledNotifyDefaultSpellTimer}" IsChecked="{Binding Config.EnabledNotifyNormalSpellTimer, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledSimplyRegex}" IsChecked="{Binding Config.SimpleRegex, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledRemoveTooltipSymbol}" IsChecked="{Binding Config.RemoveTooltipSymbols, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledRemoveWorldName}" IsChecked="{Binding Config.RemoveWorldName, Mode=TwoWay}" />
     <!--
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledCompleteUnknownSkill}" IsChecked="{Binding Config.ToComplementUnknownSkill, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledIgnoreDamageLogs}" IsChecked="{Binding Config.IgnoreDamageLogs, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledIgnoreDetailLogs}" IsChecked="{Binding Config.IgnoreDetailLogs, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledDetectPacketDump}" IsChecked="{Binding Config.DetectPacketDump, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledCompleteUnknownSkill}" IsChecked="{Binding Config.ToComplementUnknownSkill, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledIgnoreDamageLogs}" IsChecked="{Binding Config.IgnoreDamageLogs, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledIgnoreDetailLogs}" IsChecked="{Binding Config.IgnoreDetailLogs, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_EnabledDetectPacketDump}" IsChecked="{Binding Config.DetectPacketDump, Mode=TwoWay}" />
     -->
 
     <Label Margin="0 20 0 0" Content="{DynamicResource Options_ReadyText}" />
     <TextBox Text="{Binding Config.ReadyText, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" />
 
-    <Label Margin="0 20 0 0" Content="{DynamicResource Options_OverText}" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_OverText}" />
     <TextBox Text="{Binding Config.OverText, Mode=TwoWay}" Width="200" HorizontalAlignment="Left" />
 
-    <CheckBox Margin="0 25 0 0" Content="{DynamicResource Options_ResetOnWipeout}" IsChecked="{Binding Config.ResetOnWipeOut, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_ResetNotifyToACT}" IsChecked="{Binding Config.WipeoutNotifyToACT, Mode=TwoWay}" Visibility="{Binding Config.ResetOnWipeOut, Mode=OneWay, Converter={StaticResource CollapsedConverter}}" />
+    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_ResetOnWipeout}" IsChecked="{Binding Config.ResetOnWipeOut, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_ResetNotifyToACT}" IsChecked="{Binding Config.WipeoutNotifyToACT, Mode=TwoWay}" Visibility="{Binding Config.ResetOnWipeOut, Mode=OneWay, Converter={StaticResource CollapsedConverter}}" />
   </StackPanel>
 </UserControl>

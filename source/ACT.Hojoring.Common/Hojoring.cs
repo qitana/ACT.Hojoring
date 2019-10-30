@@ -8,7 +8,11 @@ namespace ACT.Hojoring.Common
 {
     public class Hojoring
     {
+#if ENABLE_SPLASH_SCREEN
         private static volatile bool isSplashShown = false;
+#else
+        private static volatile bool isSplashShown = true;
+#endif
 
         public Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 

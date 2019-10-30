@@ -18,10 +18,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="0"
-  d:DesignWidth="1024"
+  d:DesignWidth="800"
   d:DataContext="{d:DesignInstance Type=vm:DiscordViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -36,7 +36,7 @@
     BorderBrush="Violet"
     BorderThickness="2"
     CornerRadius="2"
-    Padding="8">
+    Padding="5">
 
     <ScrollViewer
       Margin="0"
@@ -63,9 +63,9 @@
         <StackPanel Grid.Row="0">
           <Label
             Margin="0 0 0 0"
+            Padding="0 2"
             Content="Token" />
           <TextBox
-            Height="30"
             VerticalContentAlignment="Center"
             IsReadOnly="{Binding Model.IsConnected, Mode=OneWay}"
             Text="{Binding Config.Token, Mode=TwoWay}"
@@ -102,7 +102,7 @@
           </StackPanel>
 
           <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-            <Label Content="Server" />
+            <Label Content="Server" Padding="0 2" />
             <Label
               Margin="10 0 0 2"
               VerticalAlignment="Bottom"
@@ -113,7 +113,6 @@
               Visibility="{Binding Model.IsConnected, Converter={StaticResource VisibilityConverter}, Mode=OneWay}" />
           </StackPanel>
           <TextBox
-            MinHeight="30"
             Padding="0 2 0 2"
             IsReadOnly="True"
             Text="{Binding Model.AvailableGuildsText, Mode=OneWay}"
@@ -123,12 +122,11 @@
             HorizontalAlignment="Left" />
 
           <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-            <Label Content="Text Channel" />
+            <Label Content="Text Channel" Padding="0 2" />
           </StackPanel>
           <StackPanel Orientation="Horizontal">
             <ComboBox
               Width="500"
-              Height="30"
               VerticalContentAlignment="Center"
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
@@ -154,7 +152,7 @@
           </StackPanel>
 
           <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-            <Label Content="Voice Channel" />
+            <Label Content="Voice Channel" Padding="0 2" />
             <Label
               Margin="10 0 0 2"
               VerticalAlignment="Bottom"
@@ -166,7 +164,6 @@
           </StackPanel>
           <ComboBox
             Width="600"
-            Height="30"
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             ItemsSource="{Binding Model.VoiceChannels, Mode=OneWay}"
@@ -217,7 +214,7 @@
           </StackPanel>
 
           <CheckBox
-            Margin="0 15 0 0"
+            Margin="0 10 0 0"
             Content="Auto join"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"
@@ -234,6 +231,7 @@
           Grid.Row="1"
           Margin="0 20 0 0">
           <TextBox
+            FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
             IsReadOnly="True"
             BorderThickness="0"
             TextWrapping="NoWrap"

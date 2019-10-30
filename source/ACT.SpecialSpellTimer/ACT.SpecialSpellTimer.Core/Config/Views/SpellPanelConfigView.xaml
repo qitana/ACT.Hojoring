@@ -20,7 +20,7 @@
   xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
   d:DataContext="{d:DesignInstance Type=vm:SpellPanelConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{x:Type vm:SpellPanelConfigViewModel}"
-  d:DesignWidth="800"
+  d:DesignWidth="700"
   Background="White"
   FontFamily="{DynamicResource UIFont}"
   FontSize="{DynamicResource UIFontSize}"
@@ -50,7 +50,7 @@
 
       <Style TargetType="TextBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
         <EventSetter Event="MouseDoubleClick" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="GotKeyboardFocus" Handler="TextBoxOnGotFocus" />
         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TextBoxSelect" />
@@ -74,12 +74,12 @@
 
       <Style TargetType="ComboBox">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="auto" />
       </Style>
 
       <Style TargetType="xctk:DoubleUpDown">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="MinHeight" Value="27" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <Style TargetType="xctk:IntegerUpDown">
@@ -152,33 +152,33 @@
           <Hyperlink
             Command="{Binding AddTagsCommand, Mode=OneWay}"
             CommandParameter="{Binding Model.ID, Mode=OneWay}">
-            <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="14" />
+            <TextBlock Text="{DynamicResource Common_AddTags}" FontSize="12" />
           </Hyperlink>
         </TextBlock>
           </StackPanel>
           <!-- <<= Tags  -->
 
           <!-- Location -->
-          <Label Margin="0 20 0 0" Content="{DynamicResource Common_Location}" />
+          <Label Margin="0 10 0 0" Content="{DynamicResource Common_Location}" />
           <StackPanel Orientation="Horizontal">
             <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-            <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" IsReadOnly="{Binding Model.Locked, Mode=OneWay}" />
+            <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" IsReadOnly="{Binding Model.Locked, Mode=OneWay}" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
             <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-            <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" IsReadOnly="{Binding Model.Locked, Mode=OneWay}" />
+            <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" IsReadOnly="{Binding Model.Locked, Mode=OneWay}" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
             <CheckBox Margin="10 0 5 0" IsChecked="{Binding Model.Locked, Mode=TwoWay}" Content="Lock" />
           </StackPanel>
 
           <!-- Margin -->
           <Label Margin="0 10 0 0" Content="{DynamicResource SpellPanel_Margin}" />
-          <StackPanel Orientation="Horizontal">
-            <xctk:DoubleUpDown Value="{Binding Model.Margin, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+          <StackPanel Orientation="Horizontal" Margin="12 0 0 0">
+            <xctk:DoubleUpDown Value="{Binding Model.Margin, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
           </StackPanel>
 
           <!-- HorizontalLayout -->
-          <CheckBox Margin="0 20 0 0" IsChecked="{Binding Model.Horizontal, Mode=TwoWay}" Content="{DynamicResource SpellPanel_HorizontalLayout}" />
+          <CheckBox Margin="0 10 0 0" IsChecked="{Binding Model.Horizontal, Mode=TwoWay}" Content="{DynamicResource SpellPanel_HorizontalLayout}" />
 
           <!-- FixLayout -->
-          <Label Margin="0 20 0 0" Content="{DynamicResource SpellPanel_SortOrder}" />
+          <Label Margin="0 10 0 0" Content="{DynamicResource SpellPanel_SortOrder}" />
           <ComboBox
             HorizontalAlignment="Left"
             MinWidth="370"
@@ -213,11 +213,11 @@
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
 
-          <StackPanel Margin="0 0 0 20" Grid.Row="0" Grid.ColumnSpan="2">
+          <StackPanel Margin="0 0 0 15" Grid.Row="0" Grid.ColumnSpan="2">
             <StackPanel.Resources>
               <Style TargetType="Label">
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontSize" Value="12" />
                 <Setter Property="FontWeight" Value="Normal" />
                 <Setter Property="Foreground" Value="OrangeRed" />
               </Style>
@@ -228,9 +228,9 @@
           </StackPanel>
 
           <!-- Visualタブの左側 -->
-          <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 90 0">
+          <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 40 0">
             <!-- フォント -->
-            <Label Content="{DynamicResource Common_Font}" FontSize="20" FontWeight="Bold" />
+            <Label Content="{DynamicResource Common_Font}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 0 0 0">
               <TextBlock HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeFontCommand}">
@@ -264,7 +264,7 @@
 
               <!-- Warning -->
               <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                <xctk:DoubleUpDown Value="{Binding FirstSpell.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" VerticalAlignment="Center" />
+                <xctk:DoubleUpDown Value="{Binding FirstSpell.WarningTime, Mode=TwoWay}" FormatString="F2" MinWidth="90" Increment="1" VerticalAlignment="Center" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 <Label VerticalAlignment="Center" Margin="5 0 0 0" MaxWidth="300">
                   <TextBlock TextWrapping="WrapWithOverflow" Text="{DynamicResource Spell_WarningTime}" />
                 </Label>
@@ -273,15 +273,15 @@
             </StackPanel>
 
             <!-- プログレスバー -->
-            <Label Margin="0 20 0 0" Content="{DynamicResource Common_ProgressBar}" FontSize="20" FontWeight="Bold" />
+            <Label Margin="0 20 0 0" Content="{DynamicResource Common_ProgressBar}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 0 0 0">
               <CheckBox Margin="0 5 0 5" Content="{DynamicResource Common_IsReverseProgressBar}" IsChecked="{Binding FirstSpell.IsReverse, Mode=TwoWay}" />
 
               <StackPanel Margin="0 8 0 8" Orientation="Horizontal">
                 <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding FirstSpell.BarWidth, Mode=TwoWay}" Increment="1" MinWidth="80" />
+                <xctk:DoubleUpDown Value="{Binding FirstSpell.BarWidth, Mode=TwoWay}" Increment="1" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding FirstSpell.BarHeight, Mode=TwoWay}" Increment="1" MinWidth="80" />
+                <xctk:DoubleUpDown Value="{Binding FirstSpell.BarHeight, Mode=TwoWay}" Increment="1" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               </StackPanel>
 
               <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
@@ -298,7 +298,7 @@
             </StackPanel>
 
             <!-- 背景色 -->
-            <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="20" FontWeight="Bold" />
+            <Label Margin="0 20 0 0" Content="{DynamicResource Common_Background}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 0 0 0">
               <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeBackgroundColorCommand}">
@@ -312,11 +312,11 @@
           <!-- Visualタブの右側 -->
           <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 0 40 0">
             <!-- アイコン -->
-            <Label Margin="0 0 0 0" Content="{DynamicResource Common_Icon}" FontSize="20" FontWeight="Bold" />
+            <Label Margin="0 0 0 0" Content="{DynamicResource Common_Icon}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 0 0 0">
               <StackPanel Margin="0 8 0 8" Orientation="Horizontal">
                 <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
-                  <Image Source="{Binding FirstSpell.SpellIconFullPath, Mode=OneWay}" Height="72" Width="72" />
+                  <Image Source="{Binding FirstSpell.SpellIconFullPath, Mode=OneWay}" Height="48" Width="48" />
                 </Border>
                 <StackPanel VerticalAlignment="Bottom">
                   <TextBlock Margin="10 0 0 10" HorizontalAlignment="Left">
@@ -327,7 +327,7 @@
 
                   <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="10 0 5 2" Text="Size" VerticalAlignment="Bottom" />
-                    <xctk:DoubleUpDown Value="{Binding FirstSpell.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" />
+                    <xctk:DoubleUpDown Value="{Binding FirstSpell.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                   </StackPanel>
                 </StackPanel>
               </StackPanel>
@@ -338,7 +338,7 @@
             </StackPanel>
 
             <!-- その他 -->
-            <Label Margin="0 20 0 0" Content="{DynamicResource Common_Misc}" FontSize="20" FontWeight="Bold" />
+            <Label Margin="0 20 0 0" Content="{DynamicResource Common_Misc}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 0 0 0">
               <CheckBox Margin="0 5 0 0" Content="{DynamicResource Common_VisibleSpell}" IsChecked="{Binding FirstSpell.ProgressBarVisible, Mode=TwoWay}" ToolTip="{DynamicResource Common_VisibleSpellDiscription}" />
               <CheckBox Margin="0 5 0 0" Content="{DynamicResource Spell_HideCounter}" IsChecked="{Binding FirstSpell.HideCounter, Mode=TwoWay}" />
@@ -358,35 +358,35 @@
         Margin="5"
         Padding="0 0 0 20">
         <StackPanel>
-          <CheckBox Margin="0 15 0 0" Content="{DynamicResource SpellPanel_EnabledAdvancedLayouyt}" IsChecked="{Binding Path=Model.EnabledAdvancedLayout, Mode=TwoWay}" />
+          <CheckBox Margin="0 10 0 0" Content="{DynamicResource SpellPanel_EnabledAdvancedLayouyt}" IsChecked="{Binding Path=Model.EnabledAdvancedLayout, Mode=TwoWay}" />
 
           <StackPanel>
-            <CheckBox Margin="0 20 0 0" Content="{DynamicResource SpellPanel_AdvancedDesignMode}" IsChecked="{Binding Path=Model.IsAdvancedDesignMode, Mode=TwoWay}" />
+            <CheckBox Margin="0 10 0 0" Content="{DynamicResource SpellPanel_AdvancedDesignMode}" IsChecked="{Binding Path=Model.IsAdvancedDesignMode, Mode=TwoWay}" />
 
             <!-- パネルのレイアウト -->
-            <Label Margin="0 20 0 0" Content="{DynamicResource SpellPanel_PanelLauout}" FontSize="18" FontWeight="Bold" />
+            <Label Margin="0 20 0 0" Content="{DynamicResource SpellPanel_PanelLauout}" FontSize="15" FontWeight="Bold" />
             <StackPanel Margin="10 5 0 0" Orientation="Horizontal">
               <StackPanel>
                 <!-- Location -->
                 <Label Content="{DynamicResource Common_Location}" />
                 <StackPanel Orientation="Horizontal">
-                  <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" />
-                  <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" />
+                  <Label Margin="4 0 5 0" Content="X" VerticalAlignment="Center" />
+                  <xctk:DoubleUpDown Value="{Binding Model.Left, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+                  <Label Margin="12 0 5 0" Content="Y" VerticalAlignment="Center" />
+                  <xctk:DoubleUpDown Value="{Binding Model.Top, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
 
                 <!-- Size -->
                 <Label Margin="0 15 0 0" Content="{DynamicResource Common_Size}" />
                 <StackPanel Orientation="Horizontal">
                   <Label Margin="0 0 5 0" Content="W" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.Width, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" />
+                  <xctk:DoubleUpDown Value="{Binding Model.Width, Mode=TwoWay}" FormatString="N0" Increment="1" Width="75" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                   <Label Margin="10 0 5 0" Content="H" VerticalAlignment="Center" />
-                  <xctk:DoubleUpDown Value="{Binding Model.Height, Mode=TwoWay}"  FormatString="N0" Increment="1" Width="75" />
+                  <xctk:DoubleUpDown Value="{Binding Model.Height, Mode=TwoWay}"  FormatString="N0" Increment="1" Width="75" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
 
                 <Label Margin="0 15 0 0" Content="Padding" />
-                <TextBox HorizontalAlignment="Left" Width="100" Text="{Binding Model.GridPaddingString, Mode=TwoWay}" />
+                <TextBox HorizontalAlignment="Left" Width="100" Text="{Binding Model.GridPaddingString, Mode=TwoWay}" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                 <TextBlock Margin="0 19 0 0" HorizontalAlignment="Left">
                   <Hyperlink Command="{Binding ChangeAdvancedBackgroundColorCommand}">
@@ -412,6 +412,7 @@
                 <Label Margin="0 15 0 0" Content="Margin of spells" />
                 <xctk:DoubleUpDown
                   HorizontalAlignment="Left"
+                  FontFamily="Consolas, Yu Gothic UI, Meiryo UI" 
                   Value="{Binding Model.Margin, Mode=TwoWay}"
                   FormatString="N0"
                   Increment="1"
@@ -426,7 +427,7 @@
             <!-- パネルのレイアウト end -->
 
             <!-- スペルのレイアウト -->
-            <Label Margin="0 22 0 0" Content="{DynamicResource SpellPanel_SpellsLayout}" FontSize="18" FontWeight="Bold" />
+            <Label Margin="0 22 0 0" Content="{DynamicResource SpellPanel_SpellsLayout}" FontSize="15" FontWeight="Bold" />
             <ItemsControl
               Margin="5 10 0 0"
               BorderThickness="0"
@@ -469,7 +470,7 @@
             VerticalScrollBarVisibility="Auto"
             HorizontalScrollBarVisibility="Auto"
             FontFamily="Consolas, Yu Gothic UI"
-            FontSize="12pt"
+            FontSize="10pt"
             Loaded="XMLEditorOnLoaded">
           <avalonEdit:TextEditor.Options>
             <avalonEdit:TextEditorOptions

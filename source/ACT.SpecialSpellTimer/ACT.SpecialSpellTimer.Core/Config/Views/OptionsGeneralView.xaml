@@ -77,47 +77,47 @@
   <StackPanel>
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_OverlayEnabled}" IsChecked="{Binding Config.OverlayVisible, Mode=TwoWay}" FontWeight="Bold">
       <CheckBox.LayoutTransform>
-        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+        <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
       </CheckBox.LayoutTransform>
     </CheckBox>
 
-    <CheckBox Margin="0 40 0 0" Content="{DynamicResource Options_HideOverlayOnNonActive}" IsChecked="{Binding Config.HideWhenNotActive, Mode=TwoWay}" />
-    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_VisibleOverlayWithoutFFXIV}" IsChecked="{Binding Config.VisibleOverlayWithoutFFXIV, Mode=TwoWay}" />
+    <CheckBox Margin="0 30 0 0" Content="{DynamicResource Options_HideOverlayOnNonActive}" IsChecked="{Binding Config.HideWhenNotActive, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_VisibleOverlayWithoutFFXIV}" IsChecked="{Binding Config.VisibleOverlayWithoutFFXIV, Mode=TwoWay}" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_Transparency}" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_Transparency}" />
     <StackPanel Orientation="Horizontal">
-      <xctk:IntegerUpDown Value="{Binding Config.Opacity, Mode=TwoWay}" MinWidth="80" Minimum="0" Maximum="100" HorizontalAlignment="Left" />
+      <xctk:IntegerUpDown Value="{Binding Config.Opacity, Mode=TwoWay}" MinWidth="80" Minimum="0" Maximum="100" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       <Label Margin="8 0 0 0" Content="%" />
     </StackPanel>
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_LogPollingRate}" />
-    <xctk:LongUpDown Value="{Binding Config.LogPollSleepInterval, Mode=TwoWay}" MinWidth="80" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_LogPollingRate}" />
+    <xctk:LongUpDown Value="{Binding Config.LogPollSleepInterval, Mode=TwoWay}" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_OverlayRefreshRate}" />
-    <xctk:LongUpDown Value="{Binding Config.RefreshInterval, Mode=TwoWay}" MinWidth="80" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_OverlayRefreshRate}" />
+    <xctk:LongUpDown Value="{Binding Config.RefreshInterval, Mode=TwoWay}" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_AnimationMaxFPS}" />
-    <xctk:LongUpDown Value="{Binding Config.MaxFPS, Mode=TwoWay}" MinWidth="80" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_AnimationMaxFPS}" />
+    <xctk:LongUpDown Value="{Binding Config.MaxFPS, Mode=TwoWay}" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_RenderOnlyCPU}" IsChecked="{Binding Config.RenderCPUOnly, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_RenderOnlyCPU}" IsChecked="{Binding Config.RenderCPUOnly, Mode=TwoWay}" />
 
     <StackPanel Margin="0 20 0 0">
-      <Label Content="{DynamicResource Options_POSOverlay}" FontWeight="Bold" FontSize="19" />
+      <Label Content="{DynamicResource Options_POSOverlay}" FontWeight="Bold" FontSize="15" />
       <CheckBox Margin="10 5 0 0" Content="{DynamicResource Options_VisiblePOS}" IsChecked="{Binding Config.POSViewVisible, Mode=TwoWay}" />
 
-      <Label Margin="10 15 0 3" Content="{DynamicResource Options_POSOverlayScale}" />
-      <xctk:DoubleUpDown Margin="10 0 0 0" Value="{Binding Config.POSViewScale, Mode=TwoWay}" MinWidth="80" FormatString="F2" HorizontalAlignment="Left" Increment="0.01" />
+      <Label Margin="10 10 0 3" Content="{DynamicResource Options_POSOverlayScale}" />
+      <xctk:DoubleUpDown Margin="10 0 0 0" Value="{Binding Config.POSViewScale, Mode=TwoWay}" MinWidth="80" FormatString="F2" HorizontalAlignment="Left" Increment="0.01" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
       <!-- Location -->
-      <Label Margin="10 15 0 3" Content="{DynamicResource Options_POSOverlayLocation}" />
+      <Label Margin="10 10 0 3" Content="{DynamicResource Options_POSOverlayLocation}" />
       <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
         <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding Config.POSViewX, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding Config.POSViewX, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding Config.POSViewY, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding Config.POSViewY, Mode=TwoWay}" FormatString="F0" MinWidth="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
-      <CheckBox Margin="10 15 0 0" Content="{DynamicResource Options_VisiblePOSDebugInfo}" IsChecked="{Binding Config.POSViewVisibleDebugInfo, Mode=TwoWay}" />
+      <CheckBox Margin="10 10 0 0" Content="{DynamicResource Options_VisiblePOSDebugInfo}" IsChecked="{Binding Config.POSViewVisibleDebugInfo, Mode=TwoWay}" />
     </StackPanel>
   </StackPanel>
 </UserControl>

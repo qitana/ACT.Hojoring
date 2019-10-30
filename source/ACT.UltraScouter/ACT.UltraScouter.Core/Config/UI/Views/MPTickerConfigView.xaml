@@ -20,9 +20,9 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
-  d:DesignWidth="1024"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
+  d:DesignWidth="800"
   d:DataContext="{d:DesignInstance Type=vm:MPTickerConfigViewModel}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -76,9 +76,9 @@
         Content="{DynamicResource Common_Location}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MPTicker.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MPTicker.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MPTicker.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MPTicker.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <Label
@@ -122,9 +122,9 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <StackPanel Orientation="Horizontal">
-              <xctk:DoubleUpDown Margin="0 0 0 0" Width="68" Value="{Binding Min, Mode=TwoWay}" FormatString="N1" Increment="0.1" />
+              <xctk:DoubleUpDown Margin="0 0 0 0" Width="68" Value="{Binding Min, Mode=TwoWay}" FormatString="N1" Increment="0.1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               <TextBlock Margin="3 0 3 0" Text="-" />
-              <xctk:DoubleUpDown Margin="0 0 0 0" Width="68" Value="{Binding Max, Mode=TwoWay}" FormatString="N1" Increment="0.1" />
+              <xctk:DoubleUpDown Margin="0 0 0 0" Width="68" Value="{Binding Max, Mode=TwoWay}" FormatString="N1" Increment="0.1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
               <Border
                 Margin="10 0 0 0"
@@ -188,9 +188,9 @@
         Content="{DynamicResource MPTicker_BarSize}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MPTicker.ProgressBar.Width, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MPTicker.ProgressBar.Width, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MPTicker.ProgressBar.Height, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MPTicker.ProgressBar.Height, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <StackPanel Margin="0 15 0 0" Orientation="Horizontal">
@@ -217,6 +217,7 @@
         Content="{DynamicResource MPTicker_Offset}" />
       <xctk:DoubleUpDown
         HorizontalAlignment="Left"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Value="{Binding MPTicker.Offset, Mode=TwoWay}"
         Width="75"
         FormatString="N1"
@@ -230,6 +231,7 @@
       <StackPanel Orientation="Horizontal">
         <xctk:DoubleUpDown
           HorizontalAlignment="Left"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Value="{Binding MPTicker.ResyncInterval, Mode=TwoWay}"
           Width="75"
           Minimum="3"
@@ -260,6 +262,7 @@
         Value="{Binding MPTicker.ExplationTimeForDisplay, Mode=TwoWay}" />
       <TextBlock
         HorizontalAlignment="Left"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Margin="8 3 0 0"
         Text="{Binding ElementName=ExplationTimeForDisplaySlider, Path=Value, Mode=OneWay, StringFormat={}{0:N0}}" />
 

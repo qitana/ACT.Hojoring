@@ -18,9 +18,9 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
-  d:DesignWidth="1000"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
+  d:DesignWidth="960"
   d:DataContext="{d:DesignInstance Type=vm:TargetConfigViewModel}">
 
   <Page.Resources>
@@ -69,9 +69,9 @@
           Content="{DynamicResource Common_Location}" />
         <StackPanel Orientation="Horizontal">
           <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-          <xctk:DoubleUpDown Value="{Binding Enmity.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
+          <xctk:DoubleUpDown Value="{Binding Enmity.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
           <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-          <xctk:DoubleUpDown Value="{Binding Enmity.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
+          <xctk:DoubleUpDown Value="{Binding Enmity.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         </StackPanel>
 
         <Label
@@ -79,6 +79,7 @@
           Content="{DynamicResource Common_Scale}" />
         <xctk:DoubleUpDown
           HorizontalAlignment="Left"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Value="{Binding Enmity.Scale, Mode=TwoWay}"
           Width="80"
           Minimum="0.01"
@@ -93,6 +94,7 @@
           <TextBlock Text="W" VerticalAlignment="Center" Margin="6 0 5 0" />
           <xctk:DoubleUpDown
             HorizontalAlignment="Left"
+            FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
             Value="{Binding Enmity.BarWidth, Mode=TwoWay}"
             Width="75"
             Minimum="0"
@@ -103,6 +105,7 @@
           <TextBlock Text="H" VerticalAlignment="Center" Margin="10 0 5 0" />
           <xctk:DoubleUpDown
             HorizontalAlignment="Left"
+            FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
             Value="{Binding Enmity.BarHeight, Mode=TwoWay}"
             Width="75"
             Minimum="0"
@@ -133,6 +136,7 @@
           Content="{DynamicResource Enmity_JobIconScale}" />
         <xctk:DoubleUpDown
           HorizontalAlignment="Left"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI" 
           Value="{Binding Enmity.IconScale, Mode=TwoWay}"
           Width="80"
           Minimum="0.01"
@@ -185,6 +189,7 @@
         <xctk:IntegerUpDown
           Value="{Binding Enmity.MaxCountOfDisplay, Mode=TwoWay}"
           HorizontalAlignment="Left"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Increment="1"
           Minimum="1"
           Maximum="32"
@@ -247,6 +252,7 @@
           <xctk:DoubleUpDown
             Value="{Binding Enmity.NearThresholdRate, Mode=TwoWay}"
             HorizontalAlignment="Left"
+            FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
             Increment="0.01"
             Minimum="0.01"
             Maximum="10"

@@ -56,7 +56,7 @@
 
     <TabControl.Resources>
       <!-- 切替タブのアイコンサイズ -->
-      <system:Double x:Key="TabIconSize">20</system:Double>
+      <system:Double x:Key="TabIconSize">12</system:Double>
     </TabControl.Resources>
 
     <!-- Timeline Manager タブ -->

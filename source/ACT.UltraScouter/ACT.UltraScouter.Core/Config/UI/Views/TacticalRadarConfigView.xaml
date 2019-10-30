@@ -19,8 +19,8 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   d:DesignWidth="1024"
   d:DataContext="{d:DesignInstance Type=vm:TacticalRadarConfigViewModel}"
   Focusable="False">
@@ -66,9 +66,9 @@
         Content="{DynamicResource Common_Location}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding TacticalRadar.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding TacticalRadar.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding TacticalRadar.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding TacticalRadar.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <Label
@@ -76,6 +76,7 @@
         Content="{DynamicResource Common_Scale}" />
       <xctk:DoubleUpDown
         HorizontalAlignment="Left"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Value="{Binding TacticalRadar.Scale, Mode=TwoWay}"
         Width="80"
         Minimum="0.01"
@@ -155,6 +156,7 @@
                 <Label Margin="10 0 0 0" Content="{DynamicResource TacticalRadar_DetectRange}" />
                 <xctk:DoubleUpDown
                   Value="{Binding DetectRangeMinimum, Mode=TwoWay}"
+                  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
                   FormatString="N1"
                   Increment="0.1"
                   Minimum="0"
@@ -163,6 +165,7 @@
                 <Label Content="～" />
                 <xctk:DoubleUpDown
                   Value="{Binding DetectRangeMaximum, Mode=TwoWay}"
+                  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
                   FormatString="N1"
                   Increment="0.1"
                   Minimum="0"

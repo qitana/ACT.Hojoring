@@ -17,8 +17,8 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   d:DesignWidth="600"
   d:DataContext="{d:DesignInstance Type=vm:ConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">

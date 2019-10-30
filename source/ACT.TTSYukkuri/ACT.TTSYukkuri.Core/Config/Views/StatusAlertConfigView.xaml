@@ -21,8 +21,8 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   d:DataContext="{d:DesignInstance Type=vm:StatusAlertConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -56,10 +56,10 @@
         BorderThickness="2"
         BorderBrush="LightSeaGreen"
         CornerRadius="2"
-        Padding="8">
+        Padding="5">
 
         <StackPanel Orientation="Vertical">
-          <Label Margin="0 0 0 20" Content="HP" FontWeight="Black" FontSize="20" />
+          <Label Margin="0 0 0 10" Content="HP" FontWeight="Black" FontSize="18" />
 
           <CheckBox
             Content="{DynamicResource SA_Enabled}"
@@ -67,9 +67,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_Threshold}" />
           <StackPanel Orientation="Horizontal">
             <TextBox
+              FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
               HorizontalAlignment="Left"
               Width="60"
               TextAlignment="Right"
@@ -79,10 +81,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_TTSFormat}" />
           <TextBox
             HorizontalAlignment="Left"
-            Width="300"
+            Width="240"
             Text="{Binding Config.HPTextToSpeack, Mode=TwoWay}" />
 
           <Label
@@ -129,10 +132,10 @@
         BorderThickness="2"
         BorderBrush="Magenta"
         CornerRadius="2"
-        Padding="8">
+        Padding="5">
 
         <StackPanel Orientation="Vertical">
-          <Label Margin="0 0 0 20" Content="MP" FontWeight="Black" FontSize="20" />
+          <Label Margin="0 0 0 10" Content="MP" FontWeight="Black" FontSize="18" />
 
           <CheckBox
             Content="{DynamicResource SA_Enabled}"
@@ -140,9 +143,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_Threshold}" />
           <StackPanel Orientation="Horizontal">
             <TextBox
+              FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
               HorizontalAlignment="Left"
               Width="60"
               TextAlignment="Right"
@@ -152,10 +157,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_TTSFormat}" />
           <TextBox
             HorizontalAlignment="Left"
-            Width="300"
+            Width="240"
             Text="{Binding Config.MPTextToSpeack, Mode=TwoWay}" />
 
           <Label
@@ -202,11 +208,11 @@
         BorderThickness="2"
         BorderBrush="Gold"
         CornerRadius="2"
-        Padding="8"
+        Padding="5"
         Visibility="Collapsed">
 
         <StackPanel Orientation="Vertical">
-          <Label Margin="0 0 0 20" Content="TP" FontWeight="Black" FontSize="20" />
+          <Label Margin="0 0 0 10" Content="TP" FontWeight="Black" FontSize="18" />
 
           <CheckBox
             Content="{DynamicResource SA_Enabled}"
@@ -214,9 +220,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_Threshold}" />
           <StackPanel Orientation="Horizontal">
             <TextBox
+              FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
               HorizontalAlignment="Left"
               Width="60"
               TextAlignment="Right"
@@ -226,6 +234,7 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_TTSFormat}" />
           <TextBox
             HorizontalAlignment="Left"
@@ -234,6 +243,7 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_Device}" />
           <ComboBox
             HorizontalAlignment="Left"
@@ -243,6 +253,7 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_AlertTarget}" />
           <ItemsControl
               Margin="5 0 5 0"
@@ -265,10 +276,10 @@
         BorderThickness="2"
         BorderBrush="Orange"
         CornerRadius="2"
-        Padding="8">
+        Padding="5">
 
         <StackPanel Orientation="Vertical">
-          <Label Margin="0 0 0 20" Content="GP" FontWeight="Black" FontSize="20" />
+          <Label Margin="0 0 0 10" Content="GP" FontWeight="Black" FontSize="18" />
 
           <CheckBox
             Content="{DynamicResource SA_Enabled}"
@@ -276,9 +287,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_Threshold}" />
           <StackPanel Orientation="Horizontal">
             <TextBox
+              FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
               HorizontalAlignment="Left"
               Width="60"
               TextAlignment="Right"
@@ -288,10 +301,11 @@
 
           <Label
             Margin="0 10 0 0"
+            Padding="0 2"
             Content="{DynamicResource SA_TTSFormat}" />
           <TextBox
             HorizontalAlignment="Left"
-            Width="300"
+            Width="240"
             Text="{Binding Config.GPTextToSpeack, Mode=TwoWay}" />
 
           <Label

@@ -245,6 +245,8 @@ namespace FFXIV.Framework.XIVHelper
             return null;
         }
 
+        public Sharlayan.Core.CameraInfo CameraInfo { get; private set; }
+
         public TargetInfo TargetInfo { get; private set; }
 
         private readonly Dictionary<uint, EnmityEntry> EnmityDictionary = new Dictionary<uint, EnmityEntry>(128);
@@ -373,6 +375,15 @@ namespace FFXIV.Framework.XIVHelper
                     this.GetActorsSimple();
                 }
 
+                if (this.IsSkipCamera)
+                {
+                    this.TargetInfo = null;
+                }
+                else
+                {
+                    this.GetCameraInfo();
+                }
+
                 if (this.IsSkipTarget)
                 {
                     this.TargetInfo = null;
@@ -408,6 +419,8 @@ namespace FFXIV.Framework.XIVHelper
         public bool IsSkipPlayer { get; set; } = false;
 
         public bool IsSkipActor { get; set; } = false;
+
+        public bool IsSkipCamera { get; set; } = false;
 
         public bool IsSkipTarget { get; set; } = false;
 
@@ -477,6 +490,12 @@ namespace FFXIV.Framework.XIVHelper
             }
 
             this.IsExistsActors = this.ActorList.Count > 0;
+        }
+
+        private void GetCameraInfo()
+        {
+            var result = ReaderEx.GetCameraResult();
+            this.CameraInfo = result.CameraInfo; 
         }
 
         private void GetTargetInfo()
@@ -693,7 +712,7 @@ namespace FFXIV.Framework.XIVHelper
 
         private DateTime lastActionsTimestamp = DateTime.MinValue;
 
-        public double ActionsPollingInterval { get; set; } = 100;
+        public double ActionsPollingInterval { get; set; } = 50;
 
         private void GetActions()
         {
@@ -1443,6 +1462,18 @@ namespace FFXIV.Framework.XIVHelper
                     entity.CPCurrent = entity.CPMax;
                 }
             }
+        }
+
+        public static CameraResult GetCameraResult()
+        {
+            var result = new CameraResult();
+
+            if(!Reader.CanGetCameraInfo() || !MemoryHandler.Instance.IsAttached)
+            {
+                return result;
+            }
+
+            return Reader.GetCameraInfo();
         }
 
         public static TargetResult GetTargetInfoSimple(

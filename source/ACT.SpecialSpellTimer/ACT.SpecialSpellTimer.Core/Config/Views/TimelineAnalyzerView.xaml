@@ -14,7 +14,7 @@
   xmlns:vm="clr-namespace:ACT.SpecialSpellTimer.Config.ViewModels"
   d:DataContext="{d:DesignInstance Type=local:TimelineAnalyzerView}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}"
-  d:DesignWidth="1280"
+  d:DesignWidth="960"
   Background="White"
   FontFamily="{DynamicResource UIFont}"
   FontSize="{DynamicResource UIFontSize}"
@@ -100,7 +100,7 @@
     <!-- Cofig Area end -->
 
     <!-- Combat Log Area -->
-    <Label Margin="0 20 0 0" Grid.Row="1" Content="{Binding Zone, Mode=OneWay}" ContentStringFormat="{}ZONE: {0}" />
+    <Label Margin="5 20 0 0" Grid.Row="1" Content="{Binding Zone, Mode=OneWay}" ContentStringFormat="{}ZONE: {0}" />
 
     <DataGrid
       x:Name="CombatLogDataGrid"
@@ -187,7 +187,7 @@
           SortMemberPath="TimeStampElapted"
           Header="Time"
           ClipboardContentBinding="{Binding TimeStampElapted, Mode=OneWay}"
-          Width="76">
+          Width="70">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -205,7 +205,7 @@
           IsReadOnly="True"
           Header="Activity Type"
           ClipboardContentBinding="{Binding LogTypeName, Mode=OneWay}"
-          MinWidth="130">
+          MinWidth="110">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <Grid>
@@ -233,7 +233,7 @@
           SortMemberPath="Actor"
           Header="Actor"
           ClipboardContentBinding="{Binding Actor, Mode=OneWay}"
-          MinWidth="130">
+          MinWidth="110">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <Border Margin="0 0 -5 0" BorderThickness="0 0 0 1" BorderBrush="{Binding BackgroundLine, Mode=OneWay}">
@@ -249,7 +249,7 @@
           IsReadOnly="True"
           Header="HP"
           ClipboardContentBinding="{Binding HPRate, Mode=OneWay}"
-          MinWidth="60">
+          MinWidth="50">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <Border Margin="0 0 -5 0" BorderThickness="0 0 0 1" BorderBrush="{Binding BackgroundLine, Mode=OneWay}">
@@ -266,7 +266,7 @@
           IsReadOnly="True"
           Header="Activity"
           ClipboardContentBinding="{Binding Activity, Mode=OneWay}"
-          MinWidth="300">
+          MinWidth="250">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <Border Margin="0 0 -5 0" BorderThickness="0 0 0 1" BorderBrush="{Binding BackgroundLine, Mode=OneWay}">

@@ -20,9 +20,9 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
-  d:DesignWidth="1024"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
+  d:DesignWidth="800"
   d:DataContext="{d:DesignInstance Type=vm:MyMarkerConfigViewModel}">
 
   <Page.Resources>
@@ -57,9 +57,9 @@
         Content="{DynamicResource Common_Location}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MyMarker.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MyMarker.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding MyMarker.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding MyMarker.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
         <TextBlock Margin="15 0 0 0" VerticalAlignment="Center">
           <Hyperlink Command="{Binding ToCenterCommand, Mode=OneWay}">
@@ -73,6 +73,7 @@
         Content="{DynamicResource Common_Scale}" />
       <xctk:DoubleUpDown
         HorizontalAlignment="Left"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Value="{Binding MyMarker.Scale, Mode=TwoWay}"
         Width="80"
         Minimum="0.01"

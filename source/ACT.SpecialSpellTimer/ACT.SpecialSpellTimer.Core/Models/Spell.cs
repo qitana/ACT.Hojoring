@@ -846,6 +846,9 @@ namespace ACT.SpecialSpellTimer.Models
             set => this.SetProperty(ref this.hotbarName, value);
         }
 
+        [XmlIgnore]
+        public double LastHotbarRecastTime { get; set; }
+
         private bool reduceIconBrightness;
 
         public bool ReduceIconBrightness

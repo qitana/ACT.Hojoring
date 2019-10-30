@@ -8,8 +8,8 @@
   xmlns:fa="http://schemas.fontawesome.io/icons/"
   mc:Ignorable="d"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.ClearTypeHint="Enabled"
   RenderOptions.EdgeMode="Unspecified"
@@ -29,13 +29,14 @@
       </TabItem>
 
       <TabItem
+        Visibility="Hidden"
         Padding="10 0 10 0"
         Background="AntiqueWhite">
         <TabItem.Header>
           <TextBlock Width="70" TextAlignment="Center" ToolTip="寄付する">DONATE</TextBlock>
         </TabItem.Header>
 
-        <StackPanel Margin="20">
+        <StackPanel Margin="20" Visibility="Hidden">
           <TextBlock FontWeight="Bold">
           謝 辞 / Thanks for using.
           </TextBlock>

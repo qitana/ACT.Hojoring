@@ -9,8 +9,8 @@
   Background="White"
   d:DataContext="{d:DesignInstance Type=local:ConfigView, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.ClearTypeHint="Enabled"
   RenderOptions.EdgeMode="Unspecified"
@@ -34,8 +34,8 @@
 
   <Grid Margin="12">
     <StackPanel>
-      <Label Content="Output Directory" />
-      <TextBox HorizontalAlignment="Left" Width="700" Text="{Binding Path=Config.OutputDirectory, Mode=TwoWay}" />
+      <Label Content="Output Directory" Padding="0 2"/>
+      <TextBox HorizontalAlignment="Left" Width="600" Text="{Binding Path=Config.OutputDirectory, Mode=TwoWay}" />
       <Label Content="{Binding Path=Plugin.LogfileNameWithoutParent, Mode=OneWay}" Height="30" VerticalContentAlignment="Center" />
       <StackPanel Orientation="Horizontal">
         <Button BorderThickness="0" Background="Transparent" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Content="Open Log" Command="{Binding OpenLogCommand, Mode=OneWay}" />

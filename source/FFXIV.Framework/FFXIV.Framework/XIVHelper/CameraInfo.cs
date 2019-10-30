@@ -63,6 +63,13 @@ namespace FFXIV.Framework.XIVHelper
 
         public void Refresh()
         {
+            var info = SharlayanHelper.Instance.CameraInfo;
+            if (info != null)
+            {
+                this.Mode = info.Mode;
+                this.Heading = info.Heading;
+                this.Elevation = info.Elevation;
+            }
         }
 
         #region ICloneable

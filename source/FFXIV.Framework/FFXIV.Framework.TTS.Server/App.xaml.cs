@@ -34,7 +34,7 @@ namespace FFXIV.Framework.TTS.Server
 
         private DispatcherTimer shutdownTimer = new DispatcherTimer(DispatcherPriority.ContextIdle)
         {
-            Interval = TimeSpan.FromSeconds(IsDebug ? 3 : 10),
+            Interval = TimeSpan.FromSeconds(2),
         };
 
         public App()
