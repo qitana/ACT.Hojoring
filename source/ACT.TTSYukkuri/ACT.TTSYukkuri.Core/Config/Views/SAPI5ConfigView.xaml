@@ -22,10 +22,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="5"
-  d:DesignWidth="600"
+  d:DesignWidth="480"
   d:DataContext="{d:DesignInstance Type=vm:SAPI5ConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -42,7 +42,7 @@
   </UserControl.Resources>
 
   <StackPanel Orientation="Vertical">
-    <Label Content="{DynamicResource SAPI5_Voices}" />
+    <Label Content="{DynamicResource SAPI5_Voices}" Padding="0 2" />
     <ComboBox
       HorizontalAlignment="Left"
       MinWidth="350"
@@ -55,9 +55,10 @@
     <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
       <Label
         Margin="0 0 0 0"
-        MinWidth="100"
+        MinWidth="80"
         Content="{DynamicResource SAPI5_Volume}" />
       <Label
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Margin="5 0 0 0"
         MinWidth="60"
         HorizontalContentAlignment="Right"
@@ -77,9 +78,10 @@
     <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
       <Label
         Margin="0 0 0 0"
-        MinWidth="100"
+        MinWidth="80"
         Content="{DynamicResource SAPI5_Rate}" />
       <Label
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Margin="5 0 0 0"
         MinWidth="60"
         HorizontalContentAlignment="Right"
@@ -100,8 +102,8 @@
       <Label Content="{DynamicResource SAPI5_Pitch}" />
       <ComboBox
         HorizontalAlignment="Left"
-        Margin="127 0 0 0"
-        MinWidth="110"
+        Margin="120 0 0 0"
+        MinWidth="120"
         ItemsSource="{Binding PitchList, Mode=OneWay}"
         DisplayMemberPath="Value"
         SelectedValuePath="Key"

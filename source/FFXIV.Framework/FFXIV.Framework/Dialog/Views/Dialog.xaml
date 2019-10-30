@@ -15,9 +15,7 @@
   WindowStyle="SingleBorderWindow"
   ShowInTaskbar="True"
   ResizeMode="CanResizeWithGrip"
-  MaxHeight="770"
-  Title="Dialog"
-  SizeToContent="WidthAndHeight">
+  Title="Dialog">
   
   <Grid>
     <Grid.RowDefinitions>
@@ -38,8 +36,8 @@
       HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
       Margin="10">
-      <Button x:Name="InnerOkButton" FontSize="17" FontFamily="Arial" Content="OK" MinWidth="120" Height="30" IsDefault="True" />
-      <Button x:Name="InnerCancelButton" FontSize="17" FontFamily="Arial" Margin="10 0 0 0" Content="Cancel" MinWidth="120" Height="30" IsCancel="True" />
+      <Button x:Name="InnerOkButton" FontSize="12" FontFamily="Yu Gothic UI, Meiryo UI" Content="OK" MinWidth="80" IsDefault="True" />
+      <Button x:Name="InnerCancelButton" FontSize="12" FontFamily="Yu Gothic UI, Meiryo UI" Margin="10 0 0 0" Content="Cancel" MinWidth="80" IsCancel="True" />
     </StackPanel>
   </Grid>
 </Window>

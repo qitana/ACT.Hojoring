@@ -21,9 +21,9 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
-  d:DesignWidth="1024"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
+  d:DesignWidth="960"
   d:DataContext="{d:DesignInstance Type=vm:MyHPConfigViewModel, IsDesignTimeCreatable=True}">
 
   <Page.Resources>
@@ -78,19 +78,19 @@
             <StackPanel>
               <Label
               Content="{DynamicResource Common_Layout}" />
-              <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
-                <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
-              </StackPanel>
-              <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.Size.W, Mode=TwoWay}" Width="75" Increment="1" />
-                <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.Size.H, Mode=TwoWay}" Width="75" Increment="1" />
-              </StackPanel>
-              <CheckBox
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Margin="8 0 7 0" Text="X" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+              <TextBlock Margin="12 0 5 0" Text="Y" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+              <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.Size.W, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+              <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.Size.H, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+            </StackPanel>
+            <CheckBox
               Margin="0 5 0 0"
               Content="Lock"
               IsChecked="{Binding Config.IsLock, Mode=TwoWay}" />
@@ -101,6 +101,7 @@
               Content="{DynamicResource Common_Scale}" />
               <xctk:DoubleUpDown
               HorizontalAlignment="Left"
+              FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
               Value="{Binding Config.Scale, Mode=TwoWay}"
               Width="80"
               Minimum="0.01"
@@ -127,13 +128,13 @@
             <StackPanel>
               <Label Content="{DynamicResource Common_Text}" />
 
-              <!-- Text X/Y -->
-              <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.TextLocation.X, Mode=TwoWay}" Width="75" Increment="1" />
-                <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.TextLocation.Y, Mode=TwoWay}" Width="75" Increment="1" />
-              </StackPanel>
+            <!-- Text X/Y -->
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.TextLocation.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+              <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
+              <xctk:DoubleUpDown Value="{Binding Config.TextLocation.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+            </StackPanel>
 
               <!-- Text Alignment -->
               <Label Content="{DynamicResource MyStatus_HorizontalAlignment}" Margin="0 3 0 0" />
@@ -150,18 +151,18 @@
 
               <!-- Bar X/Y -->
               <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.BarLocation.X, Mode=TwoWay}" Width="75" Increment="1" />
-                <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.BarLocation.Y, Mode=TwoWay}" Width="75" Increment="1" />
+                <TextBlock Margin="8 0 7 0" Text="X" VerticalAlignment="Center" />
+                <xctk:DoubleUpDown Value="{Binding Config.BarLocation.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+                <TextBlock Margin="12 0 5 0" Text="Y" VerticalAlignment="Center" />
+                <xctk:DoubleUpDown Value="{Binding Config.BarLocation.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               </StackPanel>
 
               <!-- Bar W/H -->
               <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
                 <TextBlock Margin="6 0 5 0" Text="{Binding BarSize1, Mode=OneWay}" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.ProgressBar.Width, Mode=TwoWay}" Width="75" Increment="1" />
+                <xctk:DoubleUpDown Value="{Binding Config.ProgressBar.Width, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 <TextBlock Margin="10 0 5 0" Text="{Binding BarSize2, Mode=OneWay}" VerticalAlignment="Center" />
-                <xctk:DoubleUpDown Value="{Binding Config.ProgressBar.Height, Mode=TwoWay}" Width="75" Increment="1" />
+                <xctk:DoubleUpDown Value="{Binding Config.ProgressBar.Height, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
               </StackPanel>
             </StackPanel>
           </StackPanel>
@@ -177,12 +178,12 @@
           ItemsSource="{Binding Config.ProgressBar.ColorRange, Mode=OneWay}"
           BorderThickness="0"
           HorizontalAlignment="Left">
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <StackPanel Orientation="Horizontal">
-                  <xctk:DoubleUpDown Margin="0 0 0 0" Width="62" Value="{Binding Min, Mode=TwoWay}" Increment="1" />
-                  <TextBlock Margin="3 0 3 0" Text="-" />
-                  <xctk:DoubleUpDown Margin="5 0 0 0" Width="62" Value="{Binding Max, Mode=TwoWay}" Increment="1" />
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <xctk:DoubleUpDown Margin="0 0 0 0" Width="62" Value="{Binding Min, Mode=TwoWay}" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+                <TextBlock Margin="3 0 3 0" Text="-" />
+                <xctk:DoubleUpDown Margin="5 0 0 0" Width="62" Value="{Binding Max, Mode=TwoWay}" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                   <Border
                   Margin="10 0 0 0"

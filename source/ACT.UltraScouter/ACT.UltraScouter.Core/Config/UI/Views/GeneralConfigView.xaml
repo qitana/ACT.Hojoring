@@ -19,8 +19,8 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   d:DesignWidth="600"
   d:DataContext="{d:DesignInstance Type=vm:ConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -89,6 +89,7 @@
         Value="{Binding Config.Opacity, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=OpacitySlider, Path=Value, Mode=OneWay, StringFormat={}{0:N1}}" />
 
       <Label
@@ -101,6 +102,7 @@
         Minimum="1.0" Maximum="1000" Value="{Binding Config.PollingRate, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=LogRateSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N0}}" />
 
       <Label
@@ -114,6 +116,7 @@
         Value="{Binding Config.OverlayRefreshRate, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=ViewRateSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N0}}" />
 
       <Label
@@ -151,6 +154,7 @@
         Value="{Binding Config.AnimationMaxFPS, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=AnimationFPSSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N0}}" />
 
       <Label
@@ -164,6 +168,7 @@
         Value="{Binding Config.TextOutlineThicknessGain, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=OutlineSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N1}}" />
 
       <Label
@@ -177,6 +182,7 @@
         Value="{Binding Config.TextBlurGain, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=BlurSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N1}}" />
 
       <Label
@@ -200,6 +206,7 @@
         Value="{Binding Config.WaveVolume, Mode=TwoWay}" />
       <TextBlock
         Margin="8 0 0 0"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Text="{Binding ElementName=WaveVolumeSlider, Path=Value, Mode=OneWay, StringFormat={}{0:N0}}" />
 
       <Label

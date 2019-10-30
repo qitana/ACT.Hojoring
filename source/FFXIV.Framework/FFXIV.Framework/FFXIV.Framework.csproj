@@ -62,6 +62,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Sharlayan">
+      <HintPath>..\..\ThirdParty\Sharlayan.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -393,9 +396,6 @@
     </PackageReference>
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.1.3</Version>
-    </PackageReference>
-    <PackageReference Include="Sharlayan">
-      <Version>5.0.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

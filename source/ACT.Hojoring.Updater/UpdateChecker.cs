@@ -24,7 +24,7 @@ namespace ACT.Hojoring
         {
             var client = new GitHubClient(new ProductHeaderValue("ACT.Hojoring.Updater"));
 
-            var releases = client.Repository.Release.GetAll("anoyetta", "ACT.Hojoring").Result;
+            var releases = client.Repository.Release.GetAll("qitana", "ACT.Hojoring").Result;
 
             var lastest = releases.FirstOrDefault();
             if (!usePreRelease)

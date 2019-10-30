@@ -149,8 +149,8 @@
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
                   <Grid
-                    Width="420"
-                    Height="130"
+                    Width="400"
+                    Height="95"
                     HorizontalAlignment="Left"
                     Margin="0 0 5 5">
                     <Border
@@ -228,13 +228,13 @@
                           <TextBlock
                             Text="{Binding Path=Name, Mode=OneWay}"
                             FontWeight="Bold"
-                            FontSize="16"
+                            FontSize="14"
                             VerticalAlignment="Bottom"
                             MaxWidth="330"
                             TextWrapping="WrapWithOverflow"
                             MouseLeftButtonDown="TimelineModel_MouseLeftButtonDown" />
 
-                          <TextBlock Margin="15 0 0 0" Text="{Binding Path=Revision, Mode=OneWay}" FontSize="14" VerticalAlignment="Bottom" />
+                          <TextBlock Margin="15 0 0 0" Text="{Binding Path=Revision, Mode=OneWay}" FontSize="12" VerticalAlignment="Bottom" />
                         </StackPanel>
 
                         <StackPanel
@@ -245,9 +245,9 @@
                           MaxWidth="400"
                           MaxHeight="100"
                           MouseLeftButtonDown="TimelineModel_MouseLeftButtonDown">
-                          <TextBlock Margin="10 5 0 0" Text="{Binding Path=Zone, Mode=OneWay}" FontSize="13" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
-                          <TextBlock Margin="10 1 0 0" Text="{Binding Path=LocaleText, Mode=OneWay}" FontSize="13" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
-                          <TextBlock Margin="10 1 0 3" Text="{Binding Path=SourceFileName, Mode=OneWay}" FontSize="13" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
+                          <TextBlock Margin="10 5 0 0" Text="{Binding Path=Zone, Mode=OneWay}" FontSize="12" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
+                          <TextBlock Margin="10 1 0 0" Text="{Binding Path=LocaleText, Mode=OneWay}" FontSize="12" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
+                          <TextBlock Margin="10 1 0 3" Text="{Binding Path=SourceFileName, Mode=OneWay}" FontSize="12" Foreground="{DynamicResource DetailsTextColor}" HorizontalAlignment="Left" />
                           <TextBlock Margin="10 1 0 0" Text="{Binding Path=AuthorForDisplay, Mode=OneWay}" FontSize="11" Foreground="{DynamicResource DetailsTextColor}" Visibility="{Binding Path=IsExistsAuthor, Mode=OneWay, Converter={StaticResource CollapsedConverter}}" HorizontalAlignment="Left" />
                           <TextBlock Margin="10 1 0 0" Text="{Binding Path=LicenseForDisplay, Mode=OneWay}" FontSize="11" Foreground="{DynamicResource DetailsTextColor}" Visibility="{Binding Path=IsExistsLicense, Mode=OneWay, Converter={StaticResource CollapsedConverter}}" HorizontalAlignment="Left" />
                         </StackPanel>
@@ -369,32 +369,32 @@
                     <StackPanel Orientation="Vertical">
                       <Label Margin="0 0 0 0" Content="{DynamicResource Timeline_Location}" />
                       <StackPanel Orientation="Horizontal" Margin="0 5 0 0" HorizontalAlignment="Left">
-                        <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Left, Mode=TwoWay}" Width="80" />
-                        <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Top, Mode=TwoWay}" Width="80" />
+                        <Label Margin="2 0 7 0" Content="X" VerticalAlignment="Center" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Left, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+                        <Label Margin="11 0 5 0" Content="Y" VerticalAlignment="Center" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Top, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                       </StackPanel>
                       <StackPanel Orientation="Horizontal" Margin="0 5 0 0" HorizontalAlignment="Left">
                         <Label Margin="0 0 5 0" Content="W" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Width, Mode=TwoWay}" Width="80" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Width, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                         <Label Margin="10 0 5 0" Content="H" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Height, Mode=TwoWay}" Width="80" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.Height, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                       </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="45 0 0 0">
                       <Label Margin="0 0 0 0" Content="{DynamicResource Timeline_LocationNotice}" />
                       <StackPanel Orientation="Horizontal" Margin="0 5 0 0" HorizontalAlignment="Left">
-                        <Label Margin="0 0 5 0" Content="X" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeLeft, Mode=TwoWay}" Width="80" />
-                        <Label Margin="10 0 5 0" Content="Y" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeTop, Mode=TwoWay}" Width="80" />
+                        <Label Margin="2 0 7 0" Content="X" VerticalAlignment="Center" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeLeft, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
+                        <Label Margin="11 0 5 0" Content="Y" VerticalAlignment="Center" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeTop, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                       </StackPanel>
                       <StackPanel Orientation="Horizontal" Margin="0 5 0 0" HorizontalAlignment="Left">
                         <Label Margin="0 0 5 0" Content="W" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeWidth, Mode=TwoWay}" Width="80" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeWidth, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                         <Label Margin="10 0 5 0" Content="H" VerticalAlignment="Center" />
-                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeHeight, Mode=TwoWay}" Width="80" />
+                        <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NoticeHeight, Mode=TwoWay}" Width="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                       </StackPanel>
                     </StackPanel>
                   </StackPanel>
@@ -406,22 +406,22 @@
                   <StackPanel Orientation="Horizontal">
                     <StackPanel>
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_Opacity}" />
-                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.OverlayOpacity, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" />
+                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.OverlayOpacity, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_OverlayScale}" />
-                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.OverlayScale, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" />
+                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.OverlayScale, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_ShowActivitiesCount}" />
-                      <xctk:IntegerUpDown Value="{Binding Path=TimelineConfig.ShowActivitiesCount, Mode=TwoWay}" FormatString="N0" Increment="1" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" />
+                      <xctk:IntegerUpDown Value="{Binding Path=TimelineConfig.ShowActivitiesCount, Mode=TwoWay}" FormatString="N0" Increment="1" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_NearestActivityScale}" />
-                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NearestActivityScale, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" />
+                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NearestActivityScale, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_NextActivityBrightness}" />
-                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NextActivityBrightness, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" />
+                      <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NextActivityBrightness, Mode=TwoWay}" FormatString="N2" Increment="0.01" Width="80" HorizontalAlignment="Left" ValueChanged="TopActivityStyle_ValueChanged" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
                       <Label Margin="0 15 0 0" Content="{DynamicResource Timeline_ActivityMargin}" />
-                      <TextBox Text="{Binding Path=TimelineConfig.ActivityMarginString, Mode=TwoWay}" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="3" />
+                      <TextBox Text="{Binding Path=TimelineConfig.ActivityMarginString, Mode=TwoWay}" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="3" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                     </StackPanel>
 
                     <StackPanel Margin="40 0 0 0">
@@ -505,7 +505,7 @@
                     <CheckBox Margin="0 5 0 0" Content="Default (Notice)" IsChecked="{Binding Path=IsDefaultNotice, Mode=TwoWay}" Command="{Binding ChangeDefaultVisualCommand, Mode=OneWay}" CommandParameter="{Binding}" />
 
                     <!-- フォント -->
-                    <Label Margin="0 15 0 0" Content="{DynamicResource Common_Font}" FontWeight="Bold" />
+                    <Label Margin="0 10 0 0" Content="{DynamicResource Common_Font}" FontWeight="Bold" />
                     <StackPanel Margin="10 0 0 0">
                       <TextBlock Margin="0 0 0 0" HorizontalAlignment="Left">
                     <Hyperlink Command="{Binding ChangeFontCommand, Mode=OneWay}" CommandParameter="{Binding}">
@@ -527,7 +527,7 @@
                     </StackPanel>
 
                     <!-- プログレスバー -->
-                    <Label Margin="0 20 0 0" Content="{DynamicResource Common_ProgressBar}" FontWeight="Bold" />
+                    <Label Margin="0 10 0 0" Content="{DynamicResource Common_ProgressBar}" FontWeight="Bold" />
                     <StackPanel Margin="10 0 0 0">
 
                       <TextBlock Margin="0 5 0 0" HorizontalAlignment="Left">
@@ -538,18 +538,18 @@
 
                       <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
                         <Label Content="H" Margin="0 0 5 0" />
-                        <xctk:DoubleUpDown Value="{Binding Path=BarHeight, Mode=TwoWay}" Width="80" HorizontalAlignment="Left" />
+                        <xctk:DoubleUpDown Value="{Binding Path=BarHeight, Mode=TwoWay}" Width="80" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                       </StackPanel>
 
-                      <CheckBox Margin="0 10 0 0" Content="{DynamicResource Timeline_CircleStyle}" IsChecked="{Binding IsCircleStyle, Mode=TwoWay}" />
+                      <CheckBox Margin="0 5 0 0" Content="{DynamicResource Timeline_CircleStyle}" IsChecked="{Binding IsCircleStyle, Mode=TwoWay}" />
                     </StackPanel>
 
                     <!-- アイコン -->
-                    <Label Margin="0 20 0 0" Content="{DynamicResource Common_Icon}" FontWeight="Bold" />
+                    <Label Margin="0 10 0 0" Content="{DynamicResource Common_Icon}" FontWeight="Bold" />
                     <StackPanel Margin="10 0 0 0">
                       <StackPanel Margin="0 8 0 8" Orientation="Horizontal">
                         <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
-                          <Image Source="{Binding Path=IconFile, Mode=OneWay}" Height="72" Width="72" />
+                          <Image Source="{Binding Path=IconFile, Mode=OneWay}" Height="48" Width="48" />
                         </Border>
 
                         <StackPanel VerticalAlignment="Bottom">
@@ -561,7 +561,7 @@
 
                           <StackPanel Orientation="Horizontal">
                             <TextBlock Margin="10 0 5 2" Text="Size" VerticalAlignment="Bottom" />
-                            <xctk:DoubleUpDown Value="{Binding Path=IconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" />
+                            <xctk:DoubleUpDown Value="{Binding Path=IconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                           </StackPanel>
                         </StackPanel>
                       </StackPanel>
@@ -592,7 +592,7 @@
                 Focusable="False">
                 <StackPanel>
                   <Label Margin="0 0 0 0" Content="{DynamicResource Timeline_NotifyInterval}" />
-                  <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NotifyInterval, Mode=TwoWay}" FormatString="N0" Increment="1" Width="80" HorizontalAlignment="Left" Minimum="1" Maximum="500" />
+                  <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NotifyInterval, Mode=TwoWay}" FormatString="N0" Increment="1" Width="80" HorizontalAlignment="Left" Minimum="1" Maximum="500" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                 </StackPanel>
               </ScrollViewer>
               <!-- 見た目の左側 end -->

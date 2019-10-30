@@ -16,8 +16,10 @@ namespace FFXIV.Framework.Dialog.Views
         {
             Title = "Color",
             Content = content,
-            MaxWidth = 1390,
-            MaxHeight = 700,
+            Width = 840,
+            Height = 600,
+            MaxWidth = 1920,
+            MaxHeight = 1080,
         };
 
         public static Color Color { get; set; }

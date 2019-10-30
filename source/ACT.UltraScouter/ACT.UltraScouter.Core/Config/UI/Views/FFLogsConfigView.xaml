@@ -18,8 +18,8 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   d:DesignWidth="600"
   d:DataContext="{d:DesignInstance Type=vm:TargetConfigViewModel}">
 
@@ -67,9 +67,9 @@
         Content="{DynamicResource Common_Location}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding FFLogs.Location.X, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding FFLogs.Location.X, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding FFLogs.Location.Y, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding FFLogs.Location.Y, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <Label
@@ -77,6 +77,7 @@
         Content="{DynamicResource Common_Scale}" />
       <xctk:DoubleUpDown
         HorizontalAlignment="Left"
+        FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
         Value="{Binding FFLogs.Scale, Mode=TwoWay}"
         Width="80"
         Minimum="0.01"

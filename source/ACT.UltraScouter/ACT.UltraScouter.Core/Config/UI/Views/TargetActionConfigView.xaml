@@ -20,9 +20,9 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
-  d:DesignWidth="1024"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
+  d:DesignWidth="800"
   d:DataContext="{d:DesignInstance Type=vm:TargetConfigViewModel}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -83,9 +83,9 @@
         Content="{DynamicResource Common_Location}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding Action.Location.X, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding Action.Location.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-        <xctk:DoubleUpDown Value="{Binding Action.Location.Y, Mode=TwoWay}" Width="75" Increment="1" />
+        <xctk:DoubleUpDown Value="{Binding Action.Location.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <Label
@@ -195,9 +195,9 @@
         Content="{DynamicResource Action_CastingBarSize}" />
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="6 0 5 0" Text="W" VerticalAlignment="Center" />
-        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding Action.ProgressBar.Width, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding Action.ProgressBar.Width, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         <TextBlock Margin="10 0 5 0" Text="H" VerticalAlignment="Center" />
-        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding Action.ProgressBar.Height, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" />
+        <TextBox Margin="0,0,0,0" TextAlignment="Right" Text="{Binding Action.ProgressBar.Height, Mode=TwoWay}" Width="60" HorizontalAlignment="Left" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
       </StackPanel>
 
       <StackPanel Margin="0 15 0 0" Orientation="Horizontal">
@@ -218,6 +218,7 @@
         <Label Content="{DynamicResource Action_CircleBlurRadius}" />
         <TextBox
           Text="{Binding Action.CircleBlurRadius, Mode=TwoWay, StringFormat=N0}"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           HorizontalAlignment="Left"
           HorizontalContentAlignment="Right"
           Width="60" />
@@ -235,6 +236,7 @@
           Content="{DynamicResource Common_Scale}" />
         <xctk:DoubleUpDown
           HorizontalAlignment="Left"
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Value="{Binding Action.CastingTypeScale, Mode=TwoWay}"
           Width="75"
           FormatString="N2"
@@ -247,9 +249,9 @@
           Content="{DynamicResource Common_Location}" />
         <StackPanel Orientation="Horizontal">
           <TextBlock Margin="6 0 5 0" Text="X" VerticalAlignment="Center" />
-          <xctk:DoubleUpDown Value="{Binding Action.CastingTypeLocation.X, Mode=TwoWay}" Width="75" Increment="1" />
+          <xctk:DoubleUpDown Value="{Binding Action.CastingTypeLocation.X, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
           <TextBlock Margin="10 0 5 0" Text="Y" VerticalAlignment="Center" />
-          <xctk:DoubleUpDown Value="{Binding Action.CastingTypeLocation.Y, Mode=TwoWay}" Width="75" Increment="1" />
+          <xctk:DoubleUpDown Value="{Binding Action.CastingTypeLocation.Y, Mode=TwoWay}" Width="75" Increment="1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
         </StackPanel>
       </StackPanel>
 

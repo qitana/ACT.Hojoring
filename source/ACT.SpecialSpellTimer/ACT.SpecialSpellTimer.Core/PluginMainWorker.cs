@@ -384,8 +384,8 @@ namespace ACT.SpecialSpellTimer
             }
         }
 
-        private static readonly int SyncHotbarInterval = 100;
-        private static readonly int SyncHotbarIdelInterval = 5000;
+        private static readonly int SyncHotbarInterval = 50;
+        private static readonly int SyncHotbarIdelInterval = 1000;
 
         private void SyncHotbarCore()
         {

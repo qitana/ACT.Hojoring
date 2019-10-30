@@ -17,8 +17,8 @@
   xmlns:fa="http://schemas.fontawesome.io/icons/"
   d:DataContext="{d:DesignInstance Type=vm:TriggersViewModel, IsDesignTimeCreatable=True}"
   DataContext="{x:Type vm:TriggersViewModel}"
-  d:DesignWidth="1280"
-  d:DesignHeight="800"
+  d:DesignWidth="960"
+  d:DesignHeight="600"
   Background="White"
   FontFamily="{DynamicResource UIFont}"
   FontSize="{DynamicResource UIFontSize}"
@@ -76,7 +76,7 @@
       <!-- ツリーグリッドのリソース -->
       <Grid.Resources>
         <!-- 切替タブのアイコンサイズ -->
-        <system:Double x:Key="TabIconSize">20</system:Double>
+        <system:Double x:Key="TabIconSize">12</system:Double>
 
         <Style TargetType="TreeViewItem">
           <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />

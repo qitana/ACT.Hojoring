@@ -230,7 +230,7 @@ namespace FFXIV.Framework.WPF.ViewModels
 
         public ICommand LastestReleaseCommand =>
             this.lastestReleaseCommand ?? (this.lastestReleaseCommand = new DelegateCommand(() =>
-                Process.Start(new ProcessStartInfo("https://github.com/anoyetta/ACT.Hojoring/releases"))));
+                Process.Start(new ProcessStartInfo("https://github.com/qitana/ACT.Hojoring/releases"))));
 
         #endregion LastestRelease
 
@@ -240,7 +240,7 @@ namespace FFXIV.Framework.WPF.ViewModels
 
         public ICommand IssuesCommand =>
             this.issuesCommand ?? (this.issuesCommand = new DelegateCommand(() =>
-                Process.Start(new ProcessStartInfo("https://github.com/anoyetta/ACT.Hojoring/issues"))));
+                Process.Start(new ProcessStartInfo("https://github.com/qitana/ACT.Hojoring/issues"))));
 
         #endregion Issues
 

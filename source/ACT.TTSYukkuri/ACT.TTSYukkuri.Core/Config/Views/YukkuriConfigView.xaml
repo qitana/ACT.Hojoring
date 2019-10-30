@@ -21,10 +21,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="5"
-  d:DesignWidth="600"
+  d:DesignWidth="480"
   d:DataContext="{d:DesignInstance Type=vm:YukkuriConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -54,7 +54,7 @@
     VerticalScrollBarVisibility="Auto">
 
     <StackPanel Orientation="Vertical">
-      <Label Content="{DynamicResource Yukkuri_Preset}" />
+      <Label Content="{DynamicResource Yukkuri_Preset}" Padding="0 2" />
       <ComboBox
         x:Name="PresetsComboBox"
         HorizontalAlignment="Left"
@@ -65,7 +65,7 @@
         SelectedValue="{Binding Config.Preset, Mode=TwoWay}">
       </ComboBox>
 
-      <Label Margin="0 10 0 0" Content="{DynamicResource Yukkuri_BaseVoice}" />
+      <Label Margin="0 10 0 0" Content="{DynamicResource Yukkuri_BaseVoice}" Padding="0 2" />
       <ComboBox
         HorizontalAlignment="Left"
         MinWidth="150"
@@ -79,6 +79,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_Speed}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -101,6 +102,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_Volume}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -123,6 +125,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_Pitch}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -145,6 +148,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_Accent}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -167,6 +171,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_LMD}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -189,6 +194,7 @@
           MinWidth="100"
           Content="{DynamicResource Yukkuri_FSC}" />
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="5 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -237,22 +243,22 @@
       </TextBlock>
 
       <TextBlock
-        Margin="5 20 5 0"
+        Margin="5 10 5 0"
         HorizontalAlignment="Left"
-        FontSize="14"
+        FontSize="10"
         TextWrapping="Wrap"
         Text="{DynamicResource Yukkuri_Discription}" />
 
       <TextBlock
         Margin="5 10 5 0"
         HorizontalAlignment="Left"
-        FontSize="14"
+        FontSize="12"
         TextWrapping="Wrap"
         Text="{DynamicResource Yukkuri_YukkuriVer}" />
       <TextBlock
         Margin="5 0 5 0"
         HorizontalAlignment="Left"
-        FontSize="14"
+        FontSize="12"
         TextWrapping="Wrap"
         Text="{DynamicResource Yukkuri_Kanji2KoeVer}" />
     </StackPanel>

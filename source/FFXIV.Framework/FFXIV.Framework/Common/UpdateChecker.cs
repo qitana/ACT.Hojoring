@@ -174,7 +174,7 @@ namespace FFXIV.Framework.Common
                     repository = "ACT.Hojoring";
                 }
 
-                var releases = client.Repository.Release.GetAll("anoyetta", repository).Result;
+                var releases = client.Repository.Release.GetAll("qitana", repository).Result;
 
                 var lastest = releases.FirstOrDefault(x => !x.Prerelease);
                 if (lastest == null)
@@ -244,7 +244,9 @@ namespace FFXIV.Framework.Common
             return r;
         }
 
-        private static readonly string UpdateScriptUrl = "https://raw.githubusercontent.com/anoyetta/ACT.Hojoring/master/source/ACT.Hojoring.Updater/update_hojoring.ps1";
+#if ENABLE_UPDATE_SCRIPT
+        private static readonly string UpdateScriptUrl = "https://raw.githubusercontent.com/qitana/ACT.Hojoring/master/source/ACT.Hojoring.Updater/update_hojoring.ps1";
+#endif
 
         /// <summary>
         /// アップデートスクリプトを起動する
@@ -254,6 +256,7 @@ namespace FFXIV.Framework.Common
         public static async void StartUpdateScript(
             bool usePreRelease = false)
         {
+#if ENABLE_UPDATE_SCRIPT
             var cd = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var script = Path.Combine(cd, "update_hojoring.ps1");
 
@@ -276,6 +279,10 @@ namespace FFXIV.Framework.Common
 
                 Process.Start("powershell.exe", args);
             }
+#else
+            await System.Threading.Tasks.Task.Delay(10);
+            Process.Start("https://github.com/qitana/ACT.Hojoring/releases");
+#endif
         }
 
         #region .NET Framework Version

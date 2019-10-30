@@ -55,16 +55,19 @@
       <Style TargetType="{x:Type xctk:IntegerUpDown}">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <Style TargetType="{x:Type xctk:LongUpDown}">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <Style TargetType="{x:Type xctk:DoubleUpDown}">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="24" />
       </Style>
 
       <ResourceDictionary.MergedDictionaries>
@@ -75,7 +78,7 @@
   </UserControl.Resources>
 
   <StackPanel>
-    <StackPanel Margin="0 15 0 0" HorizontalAlignment="Left">
+    <StackPanel Margin="0 10 0 0" HorizontalAlignment="Left">
       <Label Margin="0 0 0 8" Content="{DynamicResource Options_PCNameDisplayStyle}" />
       <RadioButton Margin="5 0 0 0" Content="Naoki Yoshida" VerticalContentAlignment="Center" Tag="0" x:Name="NameStyle1RadioButton" />
       <RadioButton Margin="5 5 0 0" Content="Naoki Y." VerticalContentAlignment="Center" Tag="1" x:Name="NameStyle2RadioButton" />
@@ -84,23 +87,23 @@
     </StackPanel>
 
     <Label Margin="0 20 0 0" Content="{DynamicResource Options_TextStrokeThickenessGain}" />
-    <xctk:DoubleUpDown Value="{Binding Config.TextOutlineThicknessRate, Mode=TwoWay}" MinWidth="80" FormatString="F1" Increment="0.1" />
+    <xctk:DoubleUpDown Value="{Binding Config.TextOutlineThicknessRate, Mode=TwoWay}" MinWidth="80" FormatString="F1" Increment="0.1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_TextBlurGain}" />
-    <xctk:DoubleUpDown Value="{Binding Config.TextBlurRate, Mode=TwoWay}" MinWidth="80" FormatString="F1" Increment="0.1" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_TextBlurGain}" />
+    <xctk:DoubleUpDown Value="{Binding Config.TextBlurRate, Mode=TwoWay}" MinWidth="80" FormatString="F1" Increment="0.1" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <Label Margin="0 15 0 0" Content="{DynamicResource Options_IconBrightnessInRecasting}" />
-    <xctk:IntegerUpDown Value="{Binding Config.ReduceIconBrightness, Mode=TwoWay}" MinWidth="80" />
+    <Label Margin="0 10 0 0" Content="{DynamicResource Options_IconBrightnessInRecasting}" />
+    <xctk:IntegerUpDown Value="{Binding Config.ReduceIconBrightness, Mode=TwoWay}" MinWidth="80" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
 
-    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_RecastTimeInInteger}" IsChecked="{Binding Config.EnabledSpellTimerNoDecimal, Mode=TwoWay}" />
-    <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_FixProgressBarBackground}" IsChecked="{Binding Config.BarBackgroundFixed, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_RecastTimeInInteger}" IsChecked="{Binding Config.EnabledSpellTimerNoDecimal, Mode=TwoWay}" />
+    <CheckBox Margin="0 10 0 0" Content="{DynamicResource Options_FixProgressBarBackground}" IsChecked="{Binding Config.BarBackgroundFixed, Mode=TwoWay}" />
 
-    <StackPanel Margin="0 15 0 0" Visibility="{Binding Config.BarBackgroundFixed, Mode=OneWay, Converter={StaticResource CollapsedNegativeConverter}}">
+    <StackPanel Margin="0 10 0 0" Visibility="{Binding Config.BarBackgroundFixed, Mode=OneWay, Converter={StaticResource CollapsedNegativeConverter}}">
       <Label Margin="0 0 0 0" Content="{DynamicResource Options_ProgressBarBackgroudBrightness}" />
-      <xctk:DoubleUpDown Value="{Binding Config.BarBackgroundBrightness, Mode=TwoWay}" MinWidth="80" FormatString="F2" Increment="0.01" />
+      <xctk:DoubleUpDown Value="{Binding Config.BarBackgroundBrightness, Mode=TwoWay}" MinWidth="80" FormatString="F2" Increment="0.01" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
     </StackPanel>
 
-    <StackPanel Margin="0 15 0 0" Visibility="{Binding Config.BarBackgroundFixed, Mode=OneWay, Converter={StaticResource CollapsedConverter}}">
+    <StackPanel Margin="0 10 0 0" Visibility="{Binding Config.BarBackgroundFixed, Mode=OneWay, Converter={StaticResource CollapsedConverter}}">
       <TextBlock Margin="0 3 0 0" HorizontalAlignment="Left">
         <Hyperlink Command="{Binding ChangeProgressBarBackgroundColorCommand}">
           <TextBlock Text="{DynamicResource Options_ProgressBarBackgroudColor}" />

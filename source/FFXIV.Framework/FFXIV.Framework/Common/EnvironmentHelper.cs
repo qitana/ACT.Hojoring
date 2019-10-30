@@ -306,12 +306,16 @@ namespace FFXIV.Framework.Common
                 return false;
             }
 
+#if ENABLE_ACTIVATOR
             var token = GetPublicKeyToken(asm);
 
             return string.Equals(
                 token,
                 ActivatorPublicKeyToken,
                 StringComparison.OrdinalIgnoreCase);
+#else
+            return true;
+#endif
         }
     }
 }

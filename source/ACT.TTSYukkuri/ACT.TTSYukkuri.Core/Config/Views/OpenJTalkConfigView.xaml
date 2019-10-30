@@ -21,10 +21,10 @@
   RenderOptions.BitmapScalingMode="HighQuality"
   RenderOptions.EdgeMode="Unspecified"
   Background="White"
-  FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
-  FontSize="17"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   Margin="5"
-  d:DesignWidth="600"
+  d:DesignWidth="480"
   d:DataContext="{d:DesignInstance Type=vm:OpenJTalkConfigViewModel, IsDesignTimeCreatable=True}"
   DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -44,7 +44,7 @@
     HorizontalScrollBarVisibility="Disabled"
     VerticalScrollBarVisibility="Auto">
     <StackPanel Orientation="Vertical">
-      <Label Content="{DynamicResource OJT_Voices}" />
+      <Label Content="{DynamicResource OJT_Voices}" Padding="0 2" />
       <ComboBox
         HorizontalAlignment="Left"
         MinWidth="350"
@@ -56,12 +56,13 @@
 
       <!-- Gain -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_Gain}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -81,12 +82,13 @@
 
       <!-- Volume -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_Volume}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -106,12 +108,13 @@
 
       <!-- AllPass -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_AllPass}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -131,12 +134,13 @@
 
       <!-- PostFilter -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_PostFilter}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -156,12 +160,13 @@
 
       <!-- Rate -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_Rate}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -181,12 +186,13 @@
 
       <!-- HalfTone -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_HalfTone}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -206,12 +212,13 @@
 
       <!-- UnVoice -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_UnVoice}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -231,12 +238,13 @@
 
       <!-- Accent -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_Accent}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"
@@ -256,12 +264,13 @@
 
       <!-- Weight -->
       <Label
-        Margin="5 10 0 0"
+        Margin="5 8 0 0"
         MinWidth="100"
         Padding="0"
         Content="{DynamicResource OJT_Weight}" />
       <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
         <Label
+          FontFamily="Consolas, Yu Gothic UI, Meiryo UI"
           Margin="0 0 0 0"
           MinWidth="60"
           HorizontalContentAlignment="Right"

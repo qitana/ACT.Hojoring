@@ -118,8 +118,8 @@ namespace ACT.XIVLog
 
         #region Default Values
 
-        private const double WriteIntervalDefault = 30;
-        private const double FlushIntervalDefault = 600;
+        private const double WriteIntervalDefault = 3;
+        private const double FlushIntervalDefault = 15;
         private const bool IsReplacePCNameDefault = false;
 
         #endregion Default Values

@@ -6,9 +6,9 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:FFXIV.Framework.Dialog.Views"
   mc:Ignorable="d"
-  d:DesignHeight="768" d:DesignWidth="1320"
-  FontFamily="Arial, メイリオ"
-  FontSize="16"
+  d:DesignHeight="450" d:DesignWidth="800"
+  FontFamily="Yu Gothic UI, Meiryo UI"
+  FontSize="12"
   SnapsToDevicePixels="True"
   Background="White"
   TextOptions.TextFormattingMode="Display"
@@ -33,22 +33,23 @@
 
       <DataTemplate x:Key="ColorDataTemplate" DataType="{x:Type local:PredefinedColor}">
         <StackPanel Orientation="Horizontal">
-          <Rectangle Fill="{Binding Brush, Mode=OneWay}" Width="100" Height="40" Margin="8" />
+          <Rectangle Fill="{Binding Brush, Mode=OneWay}" Width="30" Height="30" Margin="2 4 8 6" />
 
-          <StackPanel Orientation="Vertical" MinWidth="180" VerticalAlignment="Center" Margin="0,0,8,0">
+          <StackPanel Orientation="Vertical" MinWidth="120" VerticalAlignment="Center" Margin="0,0,0,0">
             <TextBlock Text="{Binding Name, Mode=OneWay}" FontWeight="Bold" />
-            <TextBlock Text="{Binding Color, Mode=OneWay}" FontSize="14" />
+            <TextBlock Text="{Binding Color, Mode=OneWay}" />
           </StackPanel>
         </StackPanel>
       </DataTemplate>
     </Grid.Resources>
 
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
       <ColumnDefinition />
+      <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
 
     <ListBox
+      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
       Grid.Column="0"
       x:Name="PredefinedColorsListBox"
       VirtualizingPanel.IsVirtualizing="True"
@@ -58,7 +59,7 @@
 
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-          <WrapPanel Width="955" />
+          <WrapPanel Orientation="Horizontal" />
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
     </ListBox>
@@ -72,45 +73,45 @@
       </Grid.RowDefinitions>
 
       <StackPanel Grid.Row="0" Margin="0,0,0,20">
-        <Label Content="RGB" FontWeight="ExtraBold" Margin="0,0,0,4" />
+        <Label Content="RGB" FontWeight="SemiBold" Margin="0,0,0,4" />
 
-        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-          <Label Content="  R" Width="100" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Margin="10,4,0,0">
+          <Label Content="R" Width="20" VerticalAlignment="Center" />
           <TextBox x:Name="RTextBox" Width="50" MaxLength="3" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-          <Slider x:Name="RSlider" Margin="8,0,0,0" Width="160" Minimum="0" Maximum="255" Value="{Binding ElementName=RTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
+          <Slider x:Name="RSlider" Margin="8,0,0,0" Width="128" Minimum="0" Maximum="255" Value="{Binding ElementName=RTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-          <Label Content="  G" Width="100" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Margin="10,4,0,0">
+          <Label Content="G" Width="20" VerticalAlignment="Center" />
           <TextBox x:Name="GTextBox" Width="50" MaxLength="3" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-          <Slider x:Name="GSlider" Margin="8,0,0,0" Width="160" Minimum="0" Maximum="255" Value="{Binding ElementName=GTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
+          <Slider x:Name="GSlider" Margin="8,0,0,0" Width="128" Minimum="0" Maximum="255" Value="{Binding ElementName=GTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-          <Label Content="  B" Width="100" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Margin="10,4,0,0">
+          <Label Content="B" Width="20" VerticalAlignment="Center" />
           <TextBox x:Name="BTextBox" Width="50" MaxLength="3" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-          <Slider x:Name="BSlider" Margin="8,0,0,0" Width="160" Minimum="0" Maximum="255"  Value="{Binding ElementName=BTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
+          <Slider x:Name="BSlider" Margin="8,0,0,0" Width="128" Minimum="0" Maximum="255"  Value="{Binding ElementName=BTextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
         </StackPanel>
       </StackPanel>
 
       <StackPanel x:Name="APanel" Grid.Row="1" Margin="0,0,0,20">
-        <Label Content="Alpha" FontWeight="ExtraBold" />
+        <Label Content="Alpha (Opacity)" FontWeight="SemiBold" />
 
-        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-          <Label Content="  Opacity" Width="100" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal" Margin="10,4,0,0">
+          <Label Content="O" Width="20" VerticalAlignment="Center" />
           <TextBox x:Name="ATextBox" Width="50" MaxLength="3" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-          <Slider x:Name="ASlider" Margin="8,0,0,0" Width="160" Minimum="0" Maximum="255" Value="{Binding ElementName=ATextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
+          <Slider x:Name="ASlider" Margin="8,0,0,0" Width="128" Minimum="0" Maximum="255" Value="{Binding ElementName=ATextBox, Path=Text, Mode=TwoWay, Converter={StaticResource S2DConverter}, ConverterParameter=N0}" VerticalAlignment="Center" />
         </StackPanel>
       </StackPanel>
 
-      <StackPanel Grid.Row="2" Margin="0,0,0,20" Orientation="Horizontal">
-        <Label Content="Hex" FontWeight="ExtraBold" Width="100" VerticalAlignment="Center" />
-        <TextBox x:Name="HexTextBox" Width="130" MaxLength="9" VerticalContentAlignment="Center" Height="{Binding ElementName=RTextBox, Path=ActualHeight, Mode=OneWay}" />
+      <StackPanel Grid.Row="2" Margin="0,0,0,0">
+        <Label Content="Hex" FontWeight="SemiBold" Width="70" VerticalAlignment="Center" HorizontalAlignment="Left" />
+        <TextBox x:Name="HexTextBox" Width="130" MaxLength="9" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0" Height="{Binding ElementName=RTextBox, Path=ActualHeight, Mode=OneWay}" />
       </StackPanel>
 
-      <StackPanel Grid.Row="3" Margin="0,40,0,20">
-        <Label Content="Preview" FontWeight="ExtraBold" />
-        <Rectangle x:Name="PreviewRectangle"  Height="80" Margin="6,12,3,0" RadiusX="3" RadiusY="3" />
+      <StackPanel Grid.Row="3" Margin="0,20,0,20">
+        <Label Content="Preview" FontWeight="SemiBold" />
+        <Rectangle x:Name="PreviewRectangle"  Height="80" Margin="6,0,6,6" RadiusX="3" RadiusY="3" />
       </StackPanel>
     </Grid>
   </Grid>

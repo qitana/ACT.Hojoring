@@ -136,7 +136,6 @@ namespace ACT.UltraScouter.Config
                     var data = this.Serializer.Deserialize(xr) as Settings;
                     if (data != null)
                     {
-                        this.Migrate(data);
                         instance = data;
                     }
                 }
