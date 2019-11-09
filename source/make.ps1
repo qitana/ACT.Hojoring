@@ -173,6 +173,11 @@ if (Test-Path .\ACT.Hojoring\bin\Release) {
         Copy-Item -Path "..\..\..\ACT.Hojoring.ATDExtractor\bin\Release\ATDExtractor.exe" -Destination "bin\tools\ATDExtractor\" -Force
      }
   
+    'Google Drive に配置するリソースを削除しています...'
+    Remove-Item bin\openJTalk\dic\sys.dic
+    Remove-Item bin\openJTalk\voice\*
+    Remove-Item bin\yukkuri\aq_dic\aqdic.bin
+
     '配布ファイルをアーカイブしています...'
     $archive = "ACT.Hojoring-" + $versionShort
     $archiveZip = $archive + ".zip"
