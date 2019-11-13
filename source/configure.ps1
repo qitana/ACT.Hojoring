@@ -179,7 +179,7 @@ if (!(Test-Path ".\ACT.TTSYukkuri\ACT.TTSYukkuri\Costura32\AquesTalkDriver.dll")
     $hojoringRepo = "anoyetta/ACT.Hojoring"
     $ttsYukkuriDllFileName = "ACT.TTSYukkuri.dll"
     $ttsYukkuriLiFileName = "ACT.TTSYukkuri.li"
-    $hojoringLatest = "https://api.github.com/repos/$hojoringRepo/releases/latest"
+    $hojoringLatest = "https://api.github.com/repos/$hojoringRepo/releases"
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $hojoring_download_url = (Invoke-WebRequest -Uri $hojoringLatest -UseBasicParsing | ConvertFrom-Json)[0].assets[0].browser_download_url
     if ($hojoring_download_url.Length -gt 1) {
