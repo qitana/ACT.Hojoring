@@ -1,4 +1,4 @@
-﻿Param()
+﻿Param([switch]$Force)
 
 $startdir = Get-Location
 $cd = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -64,7 +64,8 @@ Write-Output ""
 $TempFolder = New-TemporaryFile | ForEach-Object { Remove-Item -Path $_; New-Item -Path $_ -ItemType Directory }
 
 # Advanced Combat Tracker
-if (!(Test-Path ".\ThirdParty\Advanced Combat Tracker.exe")) {
+if (($Force) -or 
+    (!(Test-Path ".\ThirdParty\Advanced Combat Tracker.exe"))) {
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
     Write-Output "Advanced Combat Tracker をダウンロードしています..."
@@ -76,7 +77,8 @@ if (!(Test-Path ".\ThirdParty\Advanced Combat Tracker.exe")) {
 }
 
 # FFXIV_ACT_Plugin SDK
-if ((!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Common.dll")) -or
+if (($Force) -or
+    (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Common.dll")) -or
     (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.LogFile.dll")) -or
     (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Resource.dll"))) {
     Write-Output ""
@@ -119,7 +121,8 @@ if ((!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Common.dll")) -or
 }
 
 # Sharlayan
-if (!(Test-Path ".\ThirdParty\Sharlayan.dll")){
+if (($Force) -or 
+    (!(Test-Path ".\ThirdParty\Sharlayan.dll"))) {
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
     Write-Output "qitana/sharlayan をダウンロードしています..."
@@ -142,7 +145,8 @@ if (!(Test-Path ".\ThirdParty\Sharlayan.dll")){
 }
 
 # CeVIO Creative Studio 6
-if (!(Test-Path ".\ThirdParty\CeVIO.Talk.RemoteService.DLL")) {
+if (($Force) -or 
+    (!(Test-Path ".\ThirdParty\CeVIO.Talk.RemoteService.DLL"))) {
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
     Write-Output "CeVIO Creative Studio 6 をダウンロードしています..."
@@ -170,8 +174,9 @@ if (!(Test-Path ".\ThirdParty\CeVIO.Talk.RemoteService.DLL")) {
 }
 
 # anoyetta/ACT.Hojoring AquesTalk
-if (!(Test-Path ".\ACT.TTSYukkuri\ACT.TTSYukkuri\Costura32\AquesTalkDriver.dll") -or 
-    !(Test-Path ".\ACT.TTSYukkuri\ACT.TTSYukkuri\Costura64\AquesTalkDriver.dll")) {
+if (($Force) -or
+    (!(Test-Path ".\ACT.TTSYukkuri\ACT.TTSYukkuri\Costura32\AquesTalkDriver.dll")) -or 
+    (!(Test-Path ".\ACT.TTSYukkuri\ACT.TTSYukkuri\Costura64\AquesTalkDriver.dll"))) {
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
     Write-Output "anoyetta/ACT.Hojoring をダウンロードしています..."
