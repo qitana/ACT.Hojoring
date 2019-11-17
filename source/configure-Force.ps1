@@ -1,0 +1,1 @@
+﻿.\configure.ps1 -Force
