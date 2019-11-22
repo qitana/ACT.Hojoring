@@ -211,6 +211,8 @@ namespace ACT.XIVLog
         {
             ActGlobals.oFormActMain.OnLogLineRead -= this.OnLogLineRead;
 
+            VideoCapture.Instance.FinishRecording();
+
             if (dumpLogTask != null)
             {
                 this.dumpLogTask.Abort();
@@ -246,6 +248,7 @@ namespace ACT.XIVLog
             if (!isImport)
             {
                 this.OpenXIVLogAsync(logInfo.logLine);
+                VideoCapture.Instance.DetectCapture(xivlog);
             }
         }
 
