@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Advanced_Combat_Tracker;
 using FFXIV.Framework.Common;
-using Windows.Media.Capture;
-using Windows.Media.MediaProperties;
-using Windows.Storage;
+using WindowsInput;
 
 namespace ACT.XIVLog
 {
@@ -23,18 +23,7 @@ namespace ACT.XIVLog
 
         #endregion Lazy Instance
 
-        private MediaCapture mediaCapture;
-
-        private async Task<MediaCapture> GetMediaCaptureAsync() => this.mediaCapture ??= await this.InitMediaCaptureAsync();
-
-        private async Task<MediaCapture> InitMediaCaptureAsync()
-        {
-            var mediaCapture = new MediaCapture();
-            await mediaCapture.InitializeAsync();
-            return mediaCapture;
-        }
-
-        private LowLagMediaRecording mediaRecording;
+        private readonly InputSimulator Input = new InputSimulator();
 
         private static readonly Regex ContentStartLogRegex = new Regex(
             "^00:0839:「(?<content>.+)」の攻略を開始した。",
@@ -53,11 +42,6 @@ namespace ACT.XIVLog
         public void DetectCapture(
             XIVLog xivlog)
         {
-            if (!Config.Instance.IsEnabledRecording)
-            {
-                return;
-            }
-
             if (!xivlog.Log.StartsWith("00:") &&
                 !xivlog.Log.StartsWith("02:") &&
                 !xivlog.Log.StartsWith("19:"))
@@ -69,7 +53,7 @@ namespace ACT.XIVLog
             if (match.Success)
             {
                 this.contentName = match.Groups["content"]?.Value;
-                this.tryCount = 0;
+                this.TryCount = 0;
                 return;
             }
 
@@ -78,11 +62,12 @@ namespace ACT.XIVLog
             {
                 this.FinishRecording();
                 this.contentName = string.Empty;
-                this.tryCount = 0;
+                this.TryCount = 0;
                 return;
             }
 
             if (xivlog.Log.StartsWith("00:0139:戦闘開始まで") ||
+                xivlog.Log.StartsWith("00:00b9:戦闘開始まで") ||
                 xivlog.Log.Contains("/xivlog rec"))
             {
                 this.deathCount = 0;
@@ -91,6 +76,7 @@ namespace ACT.XIVLog
             }
 
             if (xivlog.Log.Contains("wipeout") ||
+                xivlog.Log.EndsWith("戦闘開始カウントがキャンセルされました。") ||
                 xivlog.Log.Contains("/xivlog stop"))
             {
                 this.FinishRecording();
@@ -111,73 +97,126 @@ namespace ACT.XIVLog
             }
         }
 
+        private DateTime startTime;
         private string contentName = string.Empty;
-        private int tryCount = 0;
         private int deathCount = 0;
 
-        public async void StartRecording()
+        private int TryCount
         {
-            if (!Config.Instance.IsEnabledRecording)
+            get => Config.Instance.VideoTryCount;
+            set => WPFHelper.Invoke(() => Config.Instance.VideoTryCount = value);
+        }
+
+        public void StartRecording()
+        {
+            lock (this)
             {
-                return;
+                if (Config.Instance.IsRecording)
+                {
+                    return;
+                }
             }
 
-            this.tryCount++;
+            this.TryCount++;
+            this.startTime = DateTime.Now;
 
-            var myVideos = await StorageLibrary.GetLibraryAsync(
-                KnownLibraryId.Videos);
-
-            if (string.IsNullOrEmpty(contentName))
+            if (Config.Instance.IsEnabledRecording)
             {
-                contentName = "UNKNOWN";
+                this.Input.Keyboard.ModifiedKeyStroke(
+                    Config.Instance.StartRecordingShortcut.GetModifiers(),
+                    Config.Instance.StartRecordingShortcut.GetKeys());
             }
 
-            var file = await myVideos.SaveFolder.CreateFileAsync(
-                $"{DateTime.Now:yyyy-MM-dd HH-mm} {contentName} take{tryCount}.mp4",
-                CreationCollisionOption.ReplaceExisting);
-
-            var capture = await this.GetMediaCaptureAsync();
-
-            this.mediaRecording = await capture.PrepareLowLagRecordToStorageFileAsync(
-                MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto),
-                file);
-
-            await this.mediaRecording.StartAsync();
-
-            await WPFHelper.InvokeAsync(() =>
+            WPFHelper.InvokeAsync(async () =>
             {
-                Config.Instance.IsRecording = true;
-                Config.Instance.CurrentVideoFileName = file.Name;
+                if (Config.Instance.IsEnabledRecording)
+                {
+                    lock (this)
+                    {
+                        Config.Instance.IsRecording = true;
+                    }
+                }
+
+                await Task.Delay(TimeSpan.FromSeconds(5));
+
+                var contentName = !string.IsNullOrEmpty(this.contentName) ?
+                    this.contentName :
+                    ActGlobals.oFormActMain.CurrentZone;
+
+                TitleCardView.Show(
+                    contentName,
+                    this.TryCount,
+                    this.startTime);
             });
         }
 
-        public async void FinishRecording()
+        public void FinishRecording()
         {
-            if (this.mediaRecording == null)
+            lock (this)
             {
-                return;
+                if (!Config.Instance.IsRecording)
+                {
+                    return;
+                }
             }
 
-            await this.mediaRecording.FinishAsync();
-            this.mediaRecording = null;
+            this.Input.Keyboard.ModifiedKeyStroke(
+                Config.Instance.StopRecordingShortcut.GetModifiers(),
+                Config.Instance.StopRecordingShortcut.GetKeys());
 
-            if (this.deathCount > 1)
+            var contentName = !string.IsNullOrEmpty(this.contentName) ?
+                this.contentName :
+                ActGlobals.oFormActMain.CurrentZone;
+
+            if (!string.IsNullOrEmpty(Config.Instance.VideoSaveDictory) &&
+                Directory.Exists(Config.Instance.VideoSaveDictory))
             {
-                await Task.Delay(10);
+                Task.Run(async () =>
+                {
+                    var now = DateTime.Now;
 
-                var f = Path.Combine(
-                    Path.GetDirectoryName(Config.Instance.CurrentVideoFileName),
-                    $"{Path.GetFileNameWithoutExtension(Config.Instance.CurrentVideoFileName)} death{this.deathCount - 1}.mp4");
+                    var prefix = Config.Instance.VideFilePrefix.Trim();
+                    prefix = string.IsNullOrEmpty(prefix) ?
+                        string.Empty :
+                        $"{prefix} ";
 
-                File.Move(
-                    Config.Instance.CurrentVideoFileName,
-                    f);
+                    var f = this.deathCount > 1 ?
+                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00} death{this.deathCount - 1}.mp4" :
+                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00}.mp4";
+
+                    await Task.Delay(TimeSpan.FromSeconds(8));
+
+                    var files = Directory.GetFiles(
+                        Config.Instance.VideoSaveDictory,
+                        "*.mp4");
+
+                    var original = files
+                        .OrderByDescending(x => File.GetLastWriteTime(x))
+                        .FirstOrDefault();
+
+                    if (!string.IsNullOrEmpty(original))
+                    {
+                        var timestamp = File.GetLastWriteTime(original);
+                        if (timestamp >= now.AddSeconds(-10))
+                        {
+                            var dest = Path.Combine(
+                                Path.GetDirectoryName(original),
+                                f);
+
+                            File.Move(
+                                original,
+                                dest);
+                        }
+                    }
+                });
             }
 
-            await WPFHelper.InvokeAsync(() =>
+            WPFHelper.InvokeAsync(() =>
             {
-                Config.Instance.IsRecording = false;
-                Config.Instance.CurrentVideoFileName = string.Empty;
+                lock (this)
+                {
+                    Config.Instance.IsRecording = false;
+                }
             });
         }
     }

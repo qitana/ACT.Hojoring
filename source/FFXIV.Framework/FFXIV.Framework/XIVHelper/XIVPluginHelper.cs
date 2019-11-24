@@ -289,7 +289,8 @@ namespace FFXIV.Framework.XIVHelper
             lock (this)
             {
                 if (this.plugin != null ||
-                    ActGlobals.oFormActMain == null)
+                    ActGlobals.oFormActMain == null ||
+                    !ActGlobals.oFormActMain.InitActDone)
                 {
                     return;
                 }
@@ -297,8 +298,7 @@ namespace FFXIV.Framework.XIVHelper
                 var ffxivPlugin = (
                     from x in ActGlobals.oFormActMain.ActPlugins
                     where
-                    x.pluginFile.Name.ToUpper().Contains("FFXIV_ACT_Plugin".ToUpper()) &&
-                    x.lblPluginStatus.Text.ToUpper().Contains("FFXIV Plugin Started.".ToUpper())
+                    x.pluginFile.Name.ToUpper().Contains("FFXIV_ACT_Plugin".ToUpper())
                     select
                     x.pluginObj).FirstOrDefault();
 
