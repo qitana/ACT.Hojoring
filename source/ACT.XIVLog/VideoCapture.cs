@@ -36,12 +36,16 @@ namespace ACT.XIVLog
 
         private readonly InputSimulator Input = new InputSimulator();
 
+        private static readonly Regex StartCountdownRegex = new Regex(
+            @"^00:...9:戦闘開始まで.+）$",
+            RegexOptions.Compiled);
+
         private static readonly Regex ContentStartLogRegex = new Regex(
             "^00:0839:「(?<content>.+)」の攻略を開始した。",
             RegexOptions.Compiled);
 
         private static readonly Regex ContentEndLogRegex = new Regex(
-            "^00:0839:「.+」の攻略を終了した。",
+            "^00:0839:.+を終了した。$",
             RegexOptions.Compiled);
 
         private static readonly Regex PlayerChangedLogRegex = new Regex(
@@ -71,7 +75,8 @@ namespace ACT.XIVLog
                     ActGlobals.oFormActMain.CurrentZone;
 
                 if (Config.Instance.TryCountContentName != contentName ||
-                    (DateTime.Now - Config.Instance.TryCountTimestamp) >= TimeSpan.FromHours(3))
+                    (DateTime.Now - Config.Instance.TryCountTimestamp) >=
+                    TimeSpan.FromHours(Config.Instance.TryCountResetInterval))
                 {
                     this.TryCount = 0;
                 }
@@ -89,8 +94,7 @@ namespace ACT.XIVLog
                 return;
             }
 
-            if (xivlog.Log.StartsWith("00:0139:戦闘開始まで") ||
-                xivlog.Log.StartsWith("00:00b9:戦闘開始まで") ||
+            if (StartCountdownRegex.IsMatch(xivlog.Log) ||
                 xivlog.Log.Contains("/xivlog rec"))
             {
                 this.deathCount = 0;
@@ -292,7 +296,8 @@ namespace ACT.XIVLog
         private async void SendToggleRecording()
         {
             var p = Process.GetProcessesByName("Streamlabs OBS");
-            if (p == null)
+            if (p == null ||
+                p.Length < 1)
             {
                 this.Logger.Info("Tried to record, but Streamlabs OBS is not found.");
                 return;
