@@ -1278,6 +1278,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
                 NotifyQueue.Enqueue(toNotice);
                 tri.Execute();
+                tri.Dump();
             }
 
             WPFHelper.BeginInvoke(() =>
@@ -1479,6 +1480,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
                 NotifyQueue.Enqueue(toNotice);
                 tri.Execute();
+                tri.Dump();
 
                 WPFHelper.BeginInvoke(() =>
                 {
@@ -1763,7 +1765,6 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 from x in currentActivityLine
                 where
                 !x.IsNotified &&
-                x.PredicateExpressions() &&
                 x.Time + TimeSpan.FromSeconds(x.NoticeOffset.Value) <= this.CurrentTime
                 select
                 x;
@@ -1772,6 +1773,13 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 var now = DateTime.Now;
                 foreach (var act in toNotify)
                 {
+                    act.IsNotified = true;
+
+                    if (!act.PredicateExpressions())
+                    {
+                        continue;
+                    }
+
                     var vnotices = act.VisualNoticeStatements.Where(x => x.Enabled.GetValueOrDefault());
                     foreach (var vnotice in vnotices)
                     {
@@ -1824,6 +1832,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                         if (act.PredicateExpressions())
                         {
                             act.SetExpressions();
+                            act.Dump();
                         }
                     }
                 });
@@ -1835,8 +1844,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 where
                 !x.IsActive &&
                 !x.IsDone &&
-                x.PredicateExpressions() &&
-                x.Time <= this.CurrentTime
+                x.Time <= this.CurrentTime &&
+                x.PredicateExpressions()
                 orderby
                 x.Seq descending
                 select
