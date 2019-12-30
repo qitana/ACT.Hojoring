@@ -110,7 +110,7 @@ namespace ACT.SpecialSpellTimer.Views
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (!PluginMainWorker.Instance.IsFFXIVActive &&
+            if ((!PluginMainWorker.Instance.IsFFXIVActive || PluginMainWorker.Instance.InCutScene)&&
                 Settings.Default.HideWhenNotActive)
             {
                 this.BaseGrid.Visibility = Visibility.Hidden;

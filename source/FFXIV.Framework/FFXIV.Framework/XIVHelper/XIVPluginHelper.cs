@@ -203,6 +203,7 @@ namespace FFXIV.Framework.XIVHelper
 
                     SharlayanHelper.Instance.IsScanning = true;
                     this.RefreshCombatantList();
+                    this.RefreshCutScene();
                 }
                 finally
                 {
@@ -646,7 +647,7 @@ namespace FFXIV.Framework.XIVHelper
         {
             var now = DateTime.Now;
 
-            if ((now - this.detectedActiveTimestamp).TotalSeconds <= 5.0)
+            if ((now - this.detectedActiveTimestamp).TotalSeconds <= 2.0)
             {
                 return;
             }
@@ -696,6 +697,31 @@ namespace FFXIV.Framework.XIVHelper
         }
 
         #endregion Refresh Active
+
+        #region Refresh CutScene
+
+        public bool InCutScene
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// カットシーン中か？
+        /// </summary>
+        private void RefreshCutScene()
+        {
+            if (ReaderEx.CurrentPlayer.IconID == 15)
+            {
+                InCutScene = true;
+            }
+            else
+            {
+                InCutScene = false;
+            }
+        }
+
+        #endregion
 
         #region Activator
 

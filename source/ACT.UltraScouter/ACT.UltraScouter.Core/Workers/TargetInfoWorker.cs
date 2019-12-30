@@ -232,6 +232,7 @@ namespace ACT.UltraScouter.Workers
         protected virtual bool IsAllViewOff =>
             Settings.Instance == null ||
             !XIVPluginHelper.Instance.IsFFXIVActive ||
+            XIVPluginHelper.Instance.InCutScene ||
             (
                 !Settings.Instance.TargetName.Visible &&
                 !Settings.Instance.TargetAction.Visible &&
