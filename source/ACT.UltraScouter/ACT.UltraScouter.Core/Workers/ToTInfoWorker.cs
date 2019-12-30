@@ -56,6 +56,7 @@ namespace ACT.UltraScouter.Workers
 
         protected override bool IsAllViewOff =>
             !XIVPluginHelper.Instance.IsFFXIVActive ||
+            XIVPluginHelper.Instance.InCutScene ||
             (
                 !(Settings.Instance?.ToTName?.Visible ?? false) &&
                 !(Settings.Instance?.ToTAction?.Visible ?? false) &&
