@@ -56,6 +56,8 @@ namespace ACT.SpecialSpellTimer
 
         public bool IsFFXIVActive => XIVPluginHelper.Instance.IsFFXIVActive;
 
+        public bool InCutScene => XIVPluginHelper.Instance.InCutScene;
+
         private DateTime lastSaveTickerTableDateTime = DateTime.Now;
 
         public LogBuffer LogBuffer { get; private set; }
@@ -434,7 +436,7 @@ namespace ACT.SpecialSpellTimer
 
             var isHideOverlay =
                 !Settings.Default.OverlayVisible ||
-                (Settings.Default.HideWhenNotActive && !this.IsFFXIVActive);
+                (Settings.Default.HideWhenNotActive && (!this.IsFFXIVActive || this.InCutScene));
 
             // FFXIVが実行されていない？
             if (!this.InSimulation)
@@ -508,7 +510,7 @@ namespace ACT.SpecialSpellTimer
 
             var isHideOverlay =
                 !Settings.Default.OverlayVisible ||
-                (Settings.Default.HideWhenNotActive && !this.IsFFXIVActive);
+                (Settings.Default.HideWhenNotActive && (!this.IsFFXIVActive || this.InCutScene));
 
             // FFXIVが実行されていない？
             if (!this.InSimulation)

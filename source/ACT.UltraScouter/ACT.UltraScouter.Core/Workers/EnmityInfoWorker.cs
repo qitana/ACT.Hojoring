@@ -388,6 +388,7 @@ namespace ACT.UltraScouter.Workers
 
         protected override bool IsAllViewOff =>
             !XIVPluginHelper.Instance.IsFFXIVActive ||
+            XIVPluginHelper.Instance.InCutScene ||
             !Settings.Instance.Enmity.Visible;
 
         public override CombatantEx TargetInfo => TargetInfoWorker.Instance.TargetInfo;

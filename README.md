@@ -46,6 +46,8 @@ Advanced Combat Tracker (ACT) の FFXIV向けプラグインの詰合せです�
     このDLLを抽出するためのプログラム `ATDExtractor` を追加しました。
 - 無効化されていた Camera を使用できるようにしました。
 - Hojoringの終了を高速にしました。
+- カットシーン中はオーバーレイを非表示にするようにしました。
+
 
 ## オリジナルへ行った Pull Request
 

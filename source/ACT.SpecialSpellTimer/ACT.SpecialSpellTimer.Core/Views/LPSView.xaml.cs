@@ -115,7 +115,7 @@ namespace ACT.SpecialSpellTimer.Views
             // アクティブによる表示切り替えは内側のグリッドで切り替える
             if (Settings.Default.HideWhenNotActive)
             {
-                this.BaseGrid.Visibility = PluginMainWorker.Instance.IsFFXIVActive ?
+                this.BaseGrid.Visibility = (PluginMainWorker.Instance.IsFFXIVActive && !PluginMainWorker.Instance.InCutScene) ?
                     Visibility.Visible :
                     Visibility.Collapsed;
             }
