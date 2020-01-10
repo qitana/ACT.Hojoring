@@ -17,7 +17,7 @@ function EndConfigure() {
 $7zPath = ".\tools\7za.exe"
 $msSdkDir = "C:\Program Files (x86)\Microsoft SDKs"
 $actURL = "https://advancedcombattracker.com/includes/page-download.php?id=57"
-$cevioURL = "http://storage.cevio.jp/product/CeVIO_Creative_Studio_Setup_(6.1.53.0).msi"
+$cevioURL = "http://storage.cevio.jp/product/CeVIO_Creative_Studio_x64_Setup_(7.0.9.0).msi"
 
 Write-Output ("*** Configure start.")
 Write-Output ""
@@ -144,12 +144,12 @@ if (($Force) -or
     }
 }
 
-# CeVIO Creative Studio 6
+# CeVIO Creative Studio 7
 if (($Force) -or 
-    (!(Test-Path ".\ThirdParty\CeVIO.Talk.RemoteService.DLL"))) {
+    (!(Test-Path ".\ThirdParty\CeVIO\7\CeVIO.Talk.RemoteService.DLL"))) {
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
-    Write-Output "CeVIO Creative Studio 6 をダウンロードしています..."
+    Write-Output "CeVIO Creative Studio 7 をダウンロードしています..."
     Write-Output ($cevioURL)
     $cevioMsiFileName = [System.IO.Path]::GetFileName($cevioURL)
     $cevioMsiFile = Join-Path $TempFolder $cevioMsiFileName
@@ -164,7 +164,7 @@ if (($Force) -or
     if ($msiexec.ExitCode -eq 0) {
         $cevioDLL = Join-Path $cevioExtractDir "CeVIO.Talk.RemoteService.DLL"
         Write-Output ("必要なファイルをコピーしています...")
-        Copy-Item $cevioDLL ".\ThirdParty\" -Force
+        Copy-Item $cevioDLL ".\ThirdParty\CeVIO\7\" -Force
         Write-Output "完了."
     }
     else {
