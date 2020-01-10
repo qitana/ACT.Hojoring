@@ -75,7 +75,47 @@ namespace FFXIV.Framework.XIVHelper
             this.DataRepository != null &&
             this.DataSubscription != null;
 
-        public Process Process => this.DataRepository?.GetCurrentFFXIVProcess();
+        private dynamic processManager;
+
+        private dynamic ProcessManager => this.processManager ??= this.GetProcessManager();
+
+        private dynamic GetProcessManager()
+        {
+            if (this.DataRepository == null)
+            {
+                return null;
+            }
+
+            var fi = this.DataRepository.GetType().GetField(
+                "_processManager",
+                BindingFlags.NonPublic | BindingFlags.Instance);
+
+            return fi?.GetValue(this.DataRepository);
+        }
+
+        public Process CurrentFFXIVProcess { get; private set; }
+
+        private void RefreshCurrentFFXIVProcess()
+        {
+            var processManager = this.GetProcessManager();
+            if (processManager == null)
+            {
+                this.CurrentFFXIVProcess = null;
+                return;
+            }
+
+            if (this.CurrentFFXIVProcess == null)
+            {
+                this.CurrentFFXIVProcess = processManager.Current.Process;
+            }
+            else
+            {
+                if (this.CurrentFFXIVProcess.Id != processManager.Current.ProcessId)
+                {
+                    this.CurrentFFXIVProcess = processManager.Current.Process;
+                }
+            }
+        }
 
         public bool IsAvailable
         {
@@ -85,7 +125,8 @@ namespace FFXIV.Framework.XIVHelper
                     this.plugin == null ||
                     this.DataRepository == null ||
                     this.DataSubscription == null ||
-                    this.Process == null)
+                    this.CurrentFFXIVProcess == null ||
+                    this.CurrentFFXIVProcess.HasExited)
                 {
                     return false;
                 }
@@ -146,6 +187,7 @@ namespace FFXIV.Framework.XIVHelper
             {
                 try
                 {
+                    this.RefreshCurrentFFXIVProcess();
                     this.Attach();
 
                     if (this.plugin == null ||
@@ -662,14 +704,17 @@ namespace FFXIV.Framework.XIVHelper
                 // プロセスIDに変換する
                 GetWindowThreadProcessId(hWnd, out int pid);
 
-                if (pid == this.Process?.Id)
+                var ffxiv = this.CurrentFFXIVProcess;
+                if (ffxiv != null &&
+                    !ffxiv.HasExited &&
+                    pid == ffxiv.Id)
                 {
                     this.IsFFXIVActive = true;
                     return;
                 }
 
                 // メインモジュールのファイル名を取得する
-                var p = Process.GetProcessById(pid);
+                var p = Process.GetProcesses().FirstOrDefault(x => x.Id == pid);
                 if (p != null)
                 {
                     var fileName = Path.GetFileName(

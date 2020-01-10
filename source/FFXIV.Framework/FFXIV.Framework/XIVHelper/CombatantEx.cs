@@ -148,7 +148,7 @@ namespace FFXIV.Framework.XIVHelper
 
         public bool IsPlayer => this.ID == this.Player?.ID;
 
-        public Actor.Type ActorType => (Actor.Type)Enum.ToObject(typeof(Actor.Type), this.Type);
+        public Actor.Type ActorType => CombatantExtensions.ParseOrDefaultToActorType(this.Type);
 
         public int DisplayOrder =>
             PCOrder.Instance.PCOrders.Any(x => x.Job == this.JobID) ?
@@ -692,6 +692,43 @@ namespace FFXIV.Framework.XIVHelper
     {
         public static Actor.Type GetActorType(
             this Combatant c)
-            => (Actor.Type)Enum.ToObject(typeof(Actor.Type), c.type);
+            => ParseOrDefaultToActorType(c?.type ?? 0);
+
+        public static Actor.Type ParseOrDefaultToActorType(
+            byte actorTypeValue)
+        {
+            switch (actorTypeValue)
+            {
+                case (byte)Actor.Type.PC:
+                    return Actor.Type.PC;
+
+                case (byte)Actor.Type.Monster:
+                    return Actor.Type.Monster;
+
+                case (byte)Actor.Type.NPC:
+                    return Actor.Type.NPC;
+
+                case (byte)Actor.Type.TreasureCoffer:
+                    return Actor.Type.TreasureCoffer;
+
+                case (byte)Actor.Type.Aetheryte:
+                    return Actor.Type.Aetheryte;
+
+                case (byte)Actor.Type.Gathering:
+                    return Actor.Type.Gathering;
+
+                case (byte)Actor.Type.EventObject:
+                    return Actor.Type.EventObject;
+
+                case (byte)Actor.Type.Mount:
+                    return Actor.Type.Mount;
+
+                case (byte)Actor.Type.Minion:
+                    return Actor.Type.Minion;
+
+                default:
+                    return Actor.Type.Unknown;
+            }
+        }
     }
 }
