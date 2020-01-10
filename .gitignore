@@ -369,7 +369,7 @@ merge_into_master.ps1
 /source/archives/back/
 /source/FFXIV.Framework/Thirdparty/*.DLL
 /source/FFXIV.Framework/Thirdparty/*.dll
-/source/ThirdParty/SDK/*.dll
-/source/ThirdParty/*.dll
-/source/ThirdParty/*.exe
+/source/ThirdParty/**/*.dll
+/source/ThirdParty/**/*.DLL
+/source/ThirdParty/**/*.exe
 /source/ACT.TTSYukkuri/ACT.TTSYukkuri/FodyWeavers.xml

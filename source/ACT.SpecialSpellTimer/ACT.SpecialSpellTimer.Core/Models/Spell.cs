@@ -1506,6 +1506,9 @@ namespace ACT.SpecialSpellTimer.Models
             n.OverlapRecastTime = this.OverlapRecastTime;
             n.ReduceIconBrightness = this.ReduceIconBrightness;
             n.Font = this.Font.Clone() as FontInfo;
+            n.IsCircleStyle = this.IsCircleStyle;
+            n.IsCounterToCenter = this.IsCounterToCenter;
+            n.TitleVerticalAlignmentInCircle = this.TitleVerticalAlignmentInCircle;
             n.BarWidth = this.BarWidth;
             n.BarHeight = this.BarHeight;
             n.BackgroundColor = this.BackgroundColor;
@@ -1576,6 +1579,9 @@ namespace ACT.SpecialSpellTimer.Models
             n.BarColor = this.BarColor;
             n.BarOutlineColor = this.BarOutlineColor;
             n.BarBlurRadius = this.BarBlurRadius;
+            n.IsCircleStyle = this.IsCircleStyle;
+            n.IsCounterToCenter = this.IsCounterToCenter;
+            n.TitleVerticalAlignmentInCircle = this.TitleVerticalAlignmentInCircle;
             n.BarWidth = this.BarWidth;
             n.BarHeight = this.BarHeight;
             n.BackgroundColor = this.BackgroundColor;
