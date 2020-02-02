@@ -214,23 +214,19 @@ namespace FFXIV.Framework.XIVHelper
                     }
                 }
 
-                try
+                if (SharlayanHelper.Instance.TryScanning())
                 {
-                    if (SharlayanHelper.Instance.IsScanning)
+                    try
                     {
-                        return;
+                        this.RefreshCombatantList();
                     }
-
-                    SharlayanHelper.Instance.IsScanning = true;
-                    this.RefreshCombatantList();
-                    this.RefreshCutScene();
-                }
-                finally
-                {
-                    SharlayanHelper.Instance.IsScanning = false;
+                    finally
+                    {
+                        SharlayanHelper.Instance.IsScanning = false;
+                    }
                 }
             },
-            pollingInteval * 1.1,
+            pollingInteval * 1.05,
             nameof(this.scanFFXIVWorker),
             ThreadPriority.Lowest);
 
@@ -281,8 +277,14 @@ namespace FFXIV.Framework.XIVHelper
             // sharlayan を止める
             SharlayanHelper.Instance.End();
 
-            this.scanFFXIVWorker?.Abort();
-            this.attachFFXIVPluginWorker?.Abort();
+            try
+            {
+                this.scanFFXIVWorker?.Abort();
+                this.attachFFXIVPluginWorker?.Abort();
+            }
+            catch (ThreadAbortException)
+            {
+            }
 
             this.UnsubscribeXIVPluginEvents();
             this.UnsubscribeParsedLogLine();
@@ -772,7 +774,7 @@ namespace FFXIV.Framework.XIVHelper
         private static readonly Combatant DummyPlayer = new Combatant()
         {
             ID = 1,
-            Name = "Me Taro",
+            Name = "J'ibun T-aro",
             MaxHP = 30000,
             CurrentHP = 30000,
             MaxMP = 12000,

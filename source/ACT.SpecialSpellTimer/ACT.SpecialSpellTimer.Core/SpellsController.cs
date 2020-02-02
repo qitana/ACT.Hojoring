@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using ACT.SpecialSpellTimer.Config;
 using ACT.SpecialSpellTimer.Models;
@@ -540,8 +539,6 @@ namespace ACT.SpecialSpellTimer
                         doneTest = true;
                     }
                 }
-
-                Thread.Yield();
             }
 
             // 不要なWindow（デザインモードの残骸など）を閉じる
