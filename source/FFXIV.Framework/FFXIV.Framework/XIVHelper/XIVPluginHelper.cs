@@ -219,6 +219,7 @@ namespace FFXIV.Framework.XIVHelper
                     try
                     {
                         this.RefreshCombatantList();
+                        this.RefreshCutScene();
                     }
                     finally
                     {
