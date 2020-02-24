@@ -1,5 +1,3 @@
-#define DISABLE_SHARLAYAN
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -746,7 +744,8 @@ namespace FFXIV.Framework.XIVHelper
         /// </summary>
         private void RefreshCutScene()
         {
-            if (ReaderEx.CurrentPlayer.IconID == 15)
+            if (ReaderEx.CurrentPlayer != null &&
+                ReaderEx.CurrentPlayer.IconID == 15)
             {
                 InCutScene = true;
             }
