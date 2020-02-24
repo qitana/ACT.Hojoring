@@ -1,5 +1,3 @@
-#define DISABLE_SHARLAYAN
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
