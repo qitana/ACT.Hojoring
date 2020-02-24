@@ -746,7 +746,8 @@ namespace FFXIV.Framework.XIVHelper
         /// </summary>
         private void RefreshCutScene()
         {
-            if (ReaderEx.CurrentPlayer.IconID == 15)
+            if (ReaderEx.CurrentPlayer != null &&
+                ReaderEx.CurrentPlayer.IconID == 15)
             {
                 InCutScene = true;
             }
