@@ -667,7 +667,7 @@ namespace FFXIV.Framework.XIVHelper
         {
             var now = DateTime.Now;
 
-            if ((now - this.detectedActiveTimestamp).TotalSeconds <= 2.0)
+            if ((now - this.detectedActiveTimestamp).TotalSeconds <= 1.0)
             {
                 return;
             }
