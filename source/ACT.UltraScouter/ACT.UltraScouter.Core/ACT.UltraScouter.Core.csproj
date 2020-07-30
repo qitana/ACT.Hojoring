@@ -482,7 +482,7 @@
       <Version>2.0.4</Version>
     </PackageReference>
     <PackageReference Include="Extended.Wpf.Toolkit">
-      <Version>3.8.1</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="FontAwesome.WPF">
       <Version>4.7.0.9</Version>
@@ -494,7 +494,7 @@
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="NLog.Config">
-      <Version>4.5.11</Version>
+      <Version>4.7.2</Version>
     </PackageReference>
     <PackageReference Include="NLog.StructuredEvents">
       <Version>0.4.0</Version>
