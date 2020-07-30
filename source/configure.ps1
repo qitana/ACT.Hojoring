@@ -17,7 +17,7 @@ function EndConfigure() {
 $7zPath = ".\tools\7za.exe"
 $msSdkDir = "C:\Program Files (x86)\Microsoft SDKs"
 $actURL = "https://advancedcombattracker.com/includes/page-download.php?id=57"
-$cevioURL = "http://storage.cevio.jp/product/CeVIO_Creative_Studio_x64_Setup_(7.0.17.0).msi"
+$cevioURL = "http://storage.cevio.jp/product/CeVIO_Creative_Studio_x64_Setup_(7.0.22.3).msi"
 
 Write-Output ("*** Configure start.")
 Write-Output ""
