@@ -373,3 +373,8 @@ merge_into_master.ps1
 /source/ThirdParty/**/*.DLL
 /source/ThirdParty/**/*.exe
 /source/ACT.TTSYukkuri/ACT.TTSYukkuri/FodyWeavers.xml
+/source/ThirdParty/SDK/*.dll
+/source/ThirdParty/*.dll
+CeVIO.Talk.RemoteService.DLL
+Advanced Combat Tracker.exe
+source_dotnet5/
