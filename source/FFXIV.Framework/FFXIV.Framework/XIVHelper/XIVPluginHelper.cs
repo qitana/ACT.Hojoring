@@ -925,6 +925,7 @@ namespace FFXIV.Framework.XIVHelper
             var result = false;
 
             if (!Config.Instance.IsEnabledSharlayan ||
+                Config.Instance.IsSimplifiedInCombat ||
                 SharlayanHelper.Instance.CurrentPlayer == null)
             {
                 refreshInCombatByParty();
