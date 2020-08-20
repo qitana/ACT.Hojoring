@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Advanced_Combat_Tracker;
 using FFXIV.Framework.Common;
 using NLog;
+using NPOI.OpenXmlFormats.Shared;
 using SLOBSharp.Client;
 using SLOBSharp.Client.Requests;
 using WindowsInput;
@@ -237,6 +238,8 @@ namespace ACT.XIVLog
             });
         }
 
+        private static readonly string VideoDurationPlaceholder = "#duration#";
+
         public void FinishRecording()
         {
             lock (this)
@@ -280,8 +283,8 @@ namespace ACT.XIVLog
                         $"{prefix} ";
 
                     var f = this.deathCount > 1 ?
-                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00} death{this.deathCount - 1}.ext" :
-                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00}.ext";
+                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00} {VideoDurationPlaceholder} death{this.deathCount - 1}.ext" :
+                        $"{prefix}{this.startTime:yyyy-MM-dd HH-mm} {contentName} try{this.TryCount:00} {VideoDurationPlaceholder}.ext";
 
                     await Task.Delay(TimeSpan.FromSeconds(8));
 
@@ -305,16 +308,29 @@ namespace ACT.XIVLog
                                 Path.GetDirectoryName(original),
                                 f);
 
+                            using (var tf = TagLib.File.Create(original))
+                            {
+                                dest = dest.Replace(
+                                    VideoDurationPlaceholder,
+                                    $"{tf.Properties.Duration.TotalSeconds:N0}s");
+
+                                tf.Tag.Title = Path.GetFileNameWithoutExtension(dest);
+                                tf.Tag.Description = 
+                                    $"{prefix} - {contentName}\n" +
+                                    $"{this.startTime:yyyy-MM-dd HH:mm} try{this.TryCount} death{this.deathCount - 1}";
+                                tf.Tag.Album = $"{prefix} - {contentName}";
+                                tf.Tag.Track = (uint)this.TryCount;
+                                tf.Tag.Grouping = "Game";
+                                tf.Save();
+                            }
+
                             File.Move(
                                 original,
                                 dest);
 
-                            var tf = TagLib.File.Create(dest);
-                            tf.Tag.Title = Path.GetFileNameWithoutExtension(dest);
-                            tf.Tag.Album = $"{prefix} - {contentName}";
-                            tf.Tag.Track = (uint)this.TryCount;
-                            tf.Tag.Grouping = "Game";
-                            tf.Save();
+                            XIVLogPlugin.Instance.EnqueueLogLine(
+                                "00",
+                                $"[XIVLog] The video was saved. {Path.GetFileName(dest)}");
                         }
                     }
                 });
