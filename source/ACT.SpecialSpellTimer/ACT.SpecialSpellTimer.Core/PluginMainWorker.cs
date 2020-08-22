@@ -623,7 +623,8 @@ namespace ACT.SpecialSpellTimer
             }
         }
 
-        public void Wipeout()
+        public void Wipeout(
+            bool isRaiseWipeoutLog = true)
         {
             // リセットするのは10秒に1回にする
             // 暗転中もずっとリセットし続けてしまうので
@@ -648,11 +649,14 @@ namespace ACT.SpecialSpellTimer
                     TickerTable.Instance.ResetCount();
 
                     // wipeoutログを発生させる
-                    Task.Run(() =>
+                    if (isRaiseWipeoutLog)
                     {
-                        Thread.Sleep(200);
-                        LogParser.RaiseLog(now, ConstantKeywords.Wipeout);
-                    });
+                        Task.Run(() =>
+                        {
+                            Thread.Sleep(200);
+                            LogParser.RaiseLog(now, ConstantKeywords.Wipeout);
+                        });
+                    }
                 });
             }
         }
