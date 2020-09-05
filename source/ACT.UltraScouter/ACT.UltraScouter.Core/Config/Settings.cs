@@ -1,6 +1,3 @@
-using ACT.UltraScouter.Common;
-using FFXIV.Framework.Common;
-using FFXIV.Framework.Globalization;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,6 +10,9 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using ACT.UltraScouter.Common;
+using FFXIV.Framework.Common;
+using FFXIV.Framework.Globalization;
 
 namespace ACT.UltraScouter.Config
 {
@@ -674,6 +674,12 @@ namespace ACT.UltraScouter.Config
         [DataMember(Order = 155)]
         public MyMarker MyMarker { get; set; }
 
+        /// <summary>
+        /// MyUtility
+        /// </summary>
+        [DataMember(Order = 156)]
+        public MyUtility MyUtility { get; set; }
+
         #endregion Me
 
         #region MobList
@@ -704,7 +710,7 @@ namespace ACT.UltraScouter.Config
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(
-            [CallerMemberName]string propertyName = null)
+            [CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(
                 this,
@@ -714,7 +720,7 @@ namespace ACT.UltraScouter.Config
         protected virtual bool SetProperty<T>(
             ref T field,
             T value,
-            [CallerMemberName]string propertyName = null)
+            [CallerMemberName] string propertyName = null)
         {
             if (Equals(field, value))
             {
