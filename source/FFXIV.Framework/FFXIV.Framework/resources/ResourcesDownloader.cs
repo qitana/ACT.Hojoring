@@ -39,8 +39,8 @@ namespace FFXIV.Framework.resources
                 return;
             }
 
-            var splash = new ResourcesDownloaderView();
-            splash.Show();
+            //var splash = new ResourcesDownloaderView();
+            //splash.Show();
 
             try
             {
@@ -103,8 +103,8 @@ namespace FFXIV.Framework.resources
                                 }
                             }
 
-                            splash.CurrentResources = $"{values[0]}\n{md5Remote}";
-                            splash.Activate();
+                            //splash.CurrentResources = $"{values[0]}\n{md5Remote}";
+                            //splash.Activate();
 
                             FileHelper.CreateDirectory(local);
 
@@ -133,8 +133,8 @@ namespace FFXIV.Framework.resources
                     }
                 }
 
-                splash.CurrentResources = "Completed!";
-                splash.Activate();
+                //splash.CurrentResources = "Completed!";
+                //splash.Activate();
 
                 if (isDownloaded)
                 {
@@ -143,7 +143,7 @@ namespace FFXIV.Framework.resources
             }
             finally
             {
-                splash.Close();
+                //splash.Close();
             }
         }
 
