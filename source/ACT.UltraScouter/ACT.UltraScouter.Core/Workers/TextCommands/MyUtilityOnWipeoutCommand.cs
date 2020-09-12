@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ACT.UltraScouter.Config;
 using FFXIV.Framework.Bridge;
 using FFXIV.Framework.Common;
@@ -23,7 +24,9 @@ namespace ACT.UltraScouter.Workers.TextCommands
         #endregion Lazy Singleton
 
         private static readonly string WipeoutLog = "wipeout";
+
         private static readonly string ChangedZoneLog = "01:Changed Zone to";
+        private static readonly string ContentStartLog = "の攻略を開始した。";
 
         public MyUtility Config => Settings.Instance.MyUtility;
 
@@ -136,15 +139,18 @@ namespace ACT.UltraScouter.Workers.TextCommands
                     isFirst = false;
                 }
 
-                keySet.SendKey(times: 3, interval: 100);
+                keySet.SendKey(times: 1, interval: 100);
             }
         });
+
+        private volatile bool isZoneChanged;
 
         private bool WasZoneChanged(
             string logLine,
             out Match match)
         {
             match = null;
+            this.isZoneChanged = false;
 
             if (!this.Config.RestoreTankStance.IsEnabled &&
                 !this.Config.SummonFairy.IsEnabled &&
@@ -153,7 +159,18 @@ namespace ACT.UltraScouter.Workers.TextCommands
                 return false;
             }
 
-            return logLine.Contains(ChangedZoneLog);
+            if (logLine.Contains(ChangedZoneLog))
+            {
+                this.isZoneChanged = true;
+                return true;
+            }
+
+            if (logLine.Contains(ContentStartLog))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void OnZoneChanged(
@@ -161,67 +178,73 @@ namespace ACT.UltraScouter.Workers.TextCommands
             Match match) => Task.Run(async () =>
         {
             // wipeoutの検出からのディレイ を兼用する
-            await Task.Delay(TimeSpan.FromSeconds(this.Config.DelayFromWipeout));
+            if (this.isZoneChanged)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(this.Config.DelayFromWipeout));
+            }
 
             var sendKeySetList = new List<KeyShortcut>();
 
             var player = CombatantsManager.Instance.Player;
             var playerEffects = player.Effects;
-            var party = CombatantsManager.Instance.GetPartyList();
 
             // タンクスタンスを復元する
-            if (this.Config.RestoreTankStance.IsAvailable())
+            if (this.Config.RestoreTankStance.IsEnabled &&
+                this.Config.RestoreTankStance.KeySet.Key != Key.None)
             {
                 // 自分がタンクかつ、タンクが自分のみ？
-                if (player.Role == Roles.Tank &&
-                    party.Count(x => x.Role == Roles.Tank) <= 1)
+                if (player.Role == Roles.Tank)
                 {
-                    var inTankStanceNow = playerEffects.Any(x =>
-                        x != null &&
-                        TankStanceEffectIDs.Contains(x.BuffID));
-
-                    if (!inTankStanceNow)
+                    var party = CombatantsManager.Instance.GetPartyList();
+                    if (party.Count(x => x.Role == Roles.Tank) <= 1)
                     {
-                        sendKeySetList.Add(this.Config.RestoreTankStance.KeySet);
+                        var inTankStanceNow = playerEffects.Any(x =>
+                            x != null &&
+                            TankStanceEffectIDs.Contains(x.BuffID));
+
+                        if (!inTankStanceNow)
+                        {
+                            sendKeySetList.Add(this.Config.RestoreTankStance.KeySet);
+                        }
                     }
                 }
             }
 
             // フェアリーを召喚する
-            if (this.Config.SummonFairy.IsAvailable())
+            if (this.Config.SummonFairy.IsEnabled &&
+                this.Config.SummonFairy.KeySet.Key != Key.None)
             {
-                if (player.JobID == JobIDs.SCH &&
-                    party.Count(x =>
-                        x.Role == Roles.PetsEgi &&
-                        x.OwnerID == player.ID) < 1)
+                if (player.JobID == JobIDs.SCH)
                 {
-                    sendKeySetList.Add(this.Config.SummonFairy.KeySet);
+                    var combatants = CombatantsManager.Instance.GetCombatants();
+                    if (!combatants.Any(x =>
+                        x.OwnerID == player.ID))
+                    {
+                        sendKeySetList.Add(this.Config.SummonFairy.KeySet);
+                    }
                 }
             }
 
             // エギを召喚する
-            if (this.Config.SummonEgi.IsAvailable())
+            if (this.Config.SummonEgi.IsEnabled &&
+                this.Config.SummonEgi.KeySet.Key != Key.None)
             {
-                if (player.JobID == JobIDs.SMN &&
-                    party.Count(x =>
-                        x.Role == Roles.PetsEgi &&
-                        x.OwnerID == player.ID) < 1)
+                if (player.JobID == JobIDs.SMN)
                 {
-                    sendKeySetList.Add(this.Config.SummonEgi.KeySet);
+                    var combatants = CombatantsManager.Instance.GetCombatants();
+                    if (!combatants.Any(x =>
+                        x.OwnerID == player.ID))
+                    {
+                        sendKeySetList.Add(this.Config.SummonEgi.KeySet);
+                    }
                 }
             }
 
             // キーを送る
-            var isFirst = true;
             foreach (var keySet in sendKeySetList)
             {
-                if (!isFirst)
-                {
-                    Thread.Sleep(TimeSpan.FromSeconds(3));
-                    isFirst = false;
-                }
-
-                keySet.SendKey(times: 3, interval: 100);
+                keySet.SendKey(times: 1, interval: 100);
+                Thread.Sleep(TimeSpan.FromSeconds(4));
             }
         });
 
