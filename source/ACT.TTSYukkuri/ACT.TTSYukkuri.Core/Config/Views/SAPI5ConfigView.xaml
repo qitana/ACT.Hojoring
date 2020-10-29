@@ -26,8 +26,7 @@
   FontSize="12"
   Margin="5"
   d:DesignWidth="480"
-  d:DataContext="{d:DesignInstance Type=vm:SAPI5ConfigViewModel, IsDesignTimeCreatable=True}"
-  DataContext="{Binding RelativeSource={RelativeSource Self}}">
+  d:DataContext="{d:DesignInstance Type=vm:SAPI5ConfigViewModel, IsDesignTimeCreatable=True}">
 
   <UserControl.Resources>
     <ResourceDictionary>
