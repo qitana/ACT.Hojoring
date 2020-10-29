@@ -16,7 +16,6 @@
   d:DataContext="{d:DesignInstance Type=vm:HoyaConfigViewModel, IsDesignTimeCreatable=True}"
   d:DesignWidth="480"
   Background="White"
-  DataContext="{Binding RelativeSource={RelativeSource Self}}"
   FontFamily="Yu Gothic UI, Meiryo UI"
   FontSize="12"
   Margin="5"
