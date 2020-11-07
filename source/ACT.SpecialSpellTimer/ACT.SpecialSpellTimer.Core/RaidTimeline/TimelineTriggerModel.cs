@@ -485,7 +485,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
         {
             if (this.Enabled.GetValueOrDefault())
             {
-                if (this.IsPositionSyncAvailable)
+                if (this.IsPositionSyncAvailable || this.IsHPSyncAvailable)
                 {
                     return true;
                 }
@@ -517,6 +517,17 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                         if (psync != null)
                         {
                             psync.LastSyncTimestamp = DateTime.MinValue;
+                        }
+                    }
+                }
+
+                if (this.HPSyncStatements != null)
+                {
+                    foreach (var hpsync in this.HPSyncStatements)
+                    {
+                        if (hpsync != null)
+                        {
+                            hpsync.IsSynced = false;
                         }
                     }
                 }
