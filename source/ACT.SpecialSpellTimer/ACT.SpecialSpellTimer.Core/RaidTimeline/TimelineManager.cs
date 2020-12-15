@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ACT.SpecialSpellTimer.Models;
 using ACT.SpecialSpellTimer.RaidTimeline.Views;
+using ACT.SpecialSpellTimer.RazorModel;
 using FFXIV.Framework.Bridge;
 using FFXIV.Framework.Common;
 using NLog;
@@ -175,6 +176,9 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
                 // グローバルトリガを初期化する
                 TimelineManager.Instance.InitGlobalTriggers();
+
+                // ゾーングローバルオブジェクトを初期化する
+                TimelineScriptGlobalModel.Instance.DynamicObject.ClearZoneGlobal();
             }
         }
 
@@ -208,10 +212,13 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
             var sampleDirectory = Path.Combine(dir, "sample");
 
-            if (!Directory.EnumerateFiles(dir).Where(x =>
-                x.ToLower().EndsWith(".xml") ||
-                x.ToLower().EndsWith(".cshtml")).
-                Any())
+            var existsSamples =
+                CommonHelper.IsDebugMode ||
+                !Directory.EnumerateFiles(dir).Where(x =>
+                    x.ToLower().EndsWith(".xml") ||
+                    x.ToLower().EndsWith(".cshtml")).Any();
+
+            if (existsSamples)
             {
                 foreach (var file in Directory.GetFiles(sampleDirectory))
                 {
@@ -224,19 +231,19 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     var dest = Path.Combine(dir, Path.GetFileName(file));
                     File.Copy(file, dest, true);
                 }
-            }
-            else
-            {
-                var reference = Path.Combine(dir, "Reference.cshtml");
-                var referenceSample = Path.Combine(sampleDirectory, "Reference.cshtml");
-                if (File.Exists(reference) &&
-                    File.Exists(referenceSample))
-                {
-                    File.Copy(referenceSample, reference, true);
-                }
+
+                await Task.Delay(1);
             }
 
-            await Task.Delay(5);
+            var reference = Path.Combine(dir, "Reference.cshtml");
+            var referenceSample = Path.Combine(sampleDirectory, "Reference.cshtml");
+            if (File.Exists(reference) &&
+                File.Exists(referenceSample))
+            {
+                File.Copy(referenceSample, reference, true);
+            }
+
+            await Task.Yield();
 
             // RazorEngine にわたすモデルを更新する
             TimelineModel.RefreshRazorModel();
@@ -282,7 +289,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                         ex);
                 }
 
-                await Task.Delay(5);
+                await Task.Delay(1);
             }
 
             // グローバルトリガをロードする
@@ -294,7 +301,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             foreach (var tl in globals)
             {
                 this.LoadGlobalTriggers(tl);
-                await Task.Delay(5);
+                await Task.Delay(1);
             }
 
             await WPFHelper.InvokeAsync(() =>
@@ -459,6 +466,16 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 if (element is TimelineImageNoticeModel image)
                 {
                     await WPFHelper.InvokeAsync(image.StanbyNotice);
+                }
+
+                // Script をコンパイルする
+                // スクリプトホストに登録する
+                if (element is TimelineScriptModel script)
+                {
+                    if (script.Compile())
+                    {
+                        TimelineScriptGlobalModel.Instance.ScriptingHost.AddScript(script);
+                    }
                 }
 
                 // アクティビティにスタイルを設定する

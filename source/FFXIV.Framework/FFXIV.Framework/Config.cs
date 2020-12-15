@@ -220,6 +220,19 @@ namespace FFXIV.Framework
             set => this.SetProperty(ref this.xivLocale, value);
         }
 
+        private bool isOverlaysAllLocked;
+
+        public bool IsOverlaysAllLocked
+        {
+#if false
+            get => this.isOverlaysAllLocked;
+            set => this.SetProperty(ref this.isOverlaysAllLocked, value);
+#else
+            get => this.isOverlaysAllLocked;
+            set => this.isOverlaysAllLocked = false;
+#endif
+        }
+
         public static Locales GetDefaultLocale()
             => CultureInfo.CurrentCulture.Name switch
             {
