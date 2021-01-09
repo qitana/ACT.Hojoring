@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -75,6 +77,56 @@ namespace FFXIV.Framework.Extensions
             }
 
             return result.ToArray();
+        }
+
+        private static readonly DataTable dataTable = new DataTable();
+
+        private static readonly HashSet<string> syntaxErrorStrings = new HashSet<string>();
+
+        public static object Eval(
+            this string text,
+            params object[] args)
+        {
+            text = string.Format(text, args);
+
+            try
+            {
+                if (syntaxErrorStrings.Contains(text))
+                {
+                    return null;
+                }
+
+                return dataTable.Compute(text, string.Empty);
+            }
+            catch (SyntaxErrorException)
+            {
+                syntaxErrorStrings.Add(text);
+                return null;
+            }
+        }
+
+        public static bool TryParse0xString2Int(
+            this string text,
+            out int i)
+        {
+            i = 0;
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                if (text.Length > 2 && text.StartsWith("0x"))
+                {
+                    if (int.TryParse(
+                        text.Substring(2),
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out i))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
