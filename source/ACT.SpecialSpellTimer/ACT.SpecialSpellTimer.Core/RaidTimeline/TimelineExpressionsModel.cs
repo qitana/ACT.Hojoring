@@ -108,6 +108,11 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
         private static readonly Dictionary<string, TimelineTable> Tables = new Dictionary<string, TimelineTable>(16);
 
         /// <summary>
+        /// 変数・テーブルを参照しているトリガをリコンパイルするためのデリゲート
+        /// </summary>
+        public static readonly Dictionary<string, Action> ReferedTriggerRecompileDelegates = new Dictionary<string, Action>();
+
+        /// <summary>
         /// テーブルが存在するか？
         /// </summary>
         public static bool IsExistsTables
@@ -285,6 +290,13 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     Variables[set.Name] = variable;
                 }
 
+                variable.Zone = set.Scope switch
+                {
+                    TimelineExpressionsSetModel.Scopes.CurrentZone => TimelineController.CurrentController?.CurrentZoneName ?? string.Empty,
+                    TimelineExpressionsSetModel.Scopes.Global => TimelineModel.GlobalZone,
+                    _ => string.Empty
+                };
+
                 // トグル？
                 if (set.IsToggle.GetValueOrDefault())
                 {
@@ -315,6 +327,14 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     $"{TimelineConstants.LogSymbol} set VAR['{set.Name}'] = {variable.Counter}");
 
                 isVaribleChanged = true;
+
+                if (ReferedTriggerRecompileDelegates.ContainsKey(set.Name))
+                {
+                    lock (variable)
+                    {
+                        ReferedTriggerRecompileDelegates[set.Name]?.Invoke();
+                    }
+                }
             }
 
             // table を処理する
@@ -403,7 +423,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 log = $"predicate ['{pre.Name}':{variable.Counter}] equal [{value}] -> {result}";
             }
 
-            TimelineController.RaiseLog($"{TimelineConstants.LogSymbol} {log}");
+            if (pre.LastestLog != log)
+            {
+                TimelineController.RaiseLog($"{TimelineConstants.LogSymbol} {log}");
+            }
+
+            pre.LastestLog = log;
 
             return result;
         }
@@ -521,13 +546,15 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
         /// <summary>
         /// テキストに含まれるプレースホルダを変数値に置き換える
         /// </summary>
-        /// <param name="text">
+        /// <param name="input">
         /// インプットテキスト</param>
         /// <returns>
         /// 置換後のテキスト</returns>
         public static string ReplaceText(
-            string text)
+            string input)
         {
+            var text = input;
+
             if (text == null)
             {
                 text = string.Empty;
@@ -541,7 +568,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     ph.ReplaceString);
             }
 
-            foreach (var item in Variables)
+            foreach (var item in GetVariables())
             {
                 var variable = item.Value;
 
@@ -558,6 +585,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
                 foreach (var table in tables)
                 {
+                    var before = text;
+
                     foreach (var ph in table.GetPlaceholders())
                     {
                         var valueText = ph.Value?.ToString();
@@ -572,150 +601,80 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
             return text;
         }
-    }
 
-    [XmlType(TypeName = "set")]
-    [Serializable]
-    public class TimelineExpressionsSetModel :
-        TimelineBase
-    {
-        #region TimelineBase
+        private static readonly string EVALKeyword = "EVAL";
 
-        public override TimelineElementTypes TimelineType => TimelineElementTypes.ExpressionsSet;
+        private static readonly Regex EVALRegex = new Regex(
+            @"EVAL\((?<expressions>.+?)(\s*,\s*(?<format>.*))?\)",
+            RegexOptions.Compiled);
 
-        public override IList<TimelineBase> Children => null;
-
-        #endregion TimelineBase
-
-        private object value = null;
-
-        [XmlIgnore]
-        public object Value
+        public static string ReplaceEval(
+            string input)
         {
-            get => this.value;
-            set => this.SetProperty(ref this.value, value);
-        }
+            var text = input;
 
-        [XmlAttribute(AttributeName = "value")]
-        public string ValueXML
-        {
-            get => this.Value?.ToString();
-            set => this.Value = ObjectComparer.ConvertToValue(value);
-        }
-
-        private bool? isToggle = null;
-
-        [XmlIgnore]
-        public bool? IsToggle
-        {
-            get => this.isToggle;
-            set => this.SetProperty(ref this.isToggle, value);
-        }
-
-        [XmlAttribute(AttributeName = "toggle")]
-        public string IsToggleXML
-        {
-            get => this.IsToggle?.ToString();
-            set => this.IsToggle = bool.TryParse(value, out var v) ? v : (bool?)null;
-        }
-
-        private string count = null;
-
-        [XmlAttribute(AttributeName = "count")]
-        public string Count
-        {
-            get => this.count;
-            set => this.SetProperty(ref this.count, value);
-        }
-
-        public int ExecuteCount(
-            int counter)
-        {
-            var result = counter;
-
-            if (string.IsNullOrEmpty(this.Count))
+            if (text == null)
             {
-                return result;
+                text = string.Empty;
             }
 
-            if (!int.TryParse(this.Count, out int i))
+            if (!text.Contains(EVALKeyword))
             {
-                return result;
+                return input;
             }
 
-            if (this.Count.StartsWith("+") ||
-                this.Count.StartsWith("-"))
+            var matches = EVALRegex.Matches(text);
+            if (matches.Count < 1)
             {
-                result += i;
-            }
-            else
-            {
-                result = i;
+                return input;
             }
 
-            return result;
-        }
+            foreach (Match match in matches)
+            {
+                var expressions = match.Groups["expressions"].Value;
+                var format = match.Groups["format"].Value;
 
-        private double? ttl = -1;
+                expressions = expressions?
+                    .Replace("'", string.Empty)
+                    .Replace("\"", string.Empty);
 
-        [XmlIgnore]
-        public double? TTL
-        {
-            get => this.ttl;
-            set => this.SetProperty(ref this.ttl, value);
-        }
+                format = format?
+                    .Replace("'", string.Empty)
+                    .Replace("\"", string.Empty);
 
-        [XmlAttribute(AttributeName = "ttl")]
-        public string TTLXML
-        {
-            get => this.TTL?.ToString();
-            set => this.TTL = double.TryParse(value, out var v) ? v : (double?)null;
-        }
-    }
+                if (string.IsNullOrEmpty(expressions))
+                {
+                    return input;
+                }
 
-    [XmlType(TypeName = "pre")]
-    [Serializable]
-    public class TimelineExpressionsPredicateModel :
-        TimelineBase
-    {
-        #region TimelineBase
+                var result = expressions.Eval();
+                var resultText = string.Empty;
 
-        public override TimelineElementTypes TimelineType => TimelineElementTypes.ExpressionsPredicate;
+                if (result == null)
+                {
+                    return input;
+                }
 
-        public override IList<TimelineBase> Children => null;
+                if (string.IsNullOrEmpty(format))
+                {
+                    resultText = result.ToString();
+                }
+                else
+                {
+                    if (result is IFormattable f)
+                    {
+                        resultText = f.ToString(format, null);
+                    }
+                    else
+                    {
+                        resultText = result.ToString();
+                    }
+                }
 
-        #endregion TimelineBase
+                text = text.Replace(match.Value, resultText);
+            }
 
-        private object value = null;
-
-        [XmlIgnore]
-        public object Value
-        {
-            get => this.value;
-            set => this.SetProperty(ref this.value, value);
-        }
-
-        [XmlAttribute(AttributeName = "value")]
-        public string ValueXML
-        {
-            get => this.Value?.ToString();
-            set => this.Value = ObjectComparer.ConvertToValue(value);
-        }
-
-        private int? count = null;
-
-        [XmlIgnore]
-        public int? Count
-        {
-            get => this.count;
-            set => this.SetProperty(ref this.count, value);
-        }
-
-        [XmlAttribute(AttributeName = "count")]
-        public string CountXML
-        {
-            get => this.Count?.ToString();
-            set => this.Count = int.TryParse(value, out var v) ? v : (int?)null;
+            return text;
         }
     }
 
@@ -742,14 +701,27 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 t = matched.Result(t);
             }
 
+            // EVAL関数を判定する
+            t = TimelineExpressionsModel.ReplaceEval(t);
+
             if (bool.TryParse(t, out bool b))
             {
                 return b;
             }
 
+            if (int.TryParse(t, out int i))
+            {
+                return i;
+            }
+
             if (double.TryParse(t, out double d))
             {
                 return d;
+            }
+
+            if (t.TryParse0xString2Int(out int i2))
+            {
+                return i2;
             }
 
             return t;
@@ -775,7 +747,26 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 t2 = matched.Result(t2);
             }
 
+            // EVAL関数を判定する
+            t2 = TimelineExpressionsModel.ReplaceEval(t2);
+
             expectedValueReplaced = t2;
+
+            // 16進数文字列を10進数文字列に変換する
+            if (t2.TryParse0xString2Int(out int ii))
+            {
+                t2 = ii.ToString();
+            }
+
+            if (int.TryParse(t2, out int i2))
+            {
+                if (!int.TryParse(t1, out int i1))
+                {
+                    i1 = 0;
+                }
+
+                return i1 == i2;
+            }
 
             if (double.TryParse(t2, out double d2))
             {

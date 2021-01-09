@@ -129,6 +129,14 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     raiseLog?.Invoke($"Merge row into TABLE['{queryModel.Table}'] cols ({colLog}) {keyLog}");
                 }
 
+                if (TimelineExpressionsModel.ReferedTriggerRecompileDelegates.ContainsKey(table.Name))
+                {
+                    lock (table)
+                    {
+                        TimelineExpressionsModel.ReferedTriggerRecompileDelegates[table.Name]?.Invoke();
+                    }
+                }
+
                 result = true;
             }
             catch (Exception ex)
