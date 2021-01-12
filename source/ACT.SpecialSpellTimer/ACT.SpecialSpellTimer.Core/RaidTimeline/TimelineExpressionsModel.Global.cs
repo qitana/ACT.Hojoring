@@ -157,7 +157,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
         public const string Origin1B = "1B_ORIGIN";
 
         private static readonly Regex SignRegex = new Regex(
-            @"^(1B|00:0000:Hojoring:1B):[0-9a-fA-F]{8}:.+:[0-9a-fA-F]{4}:[0-9a-fA-F]{4}:(?<sign_code>[0-9a-fA-F]{4}):");
+            @"^(1B|00:0000:Hojoring:1B):[0-9a-fA-F]{8}:[^:]+?:[0-9a-fA-F]{4}:[0-9a-fA-F]{4}:(?<sign_code>[0-9a-fA-F]{4}):",
+            RegexOptions.Compiled);
 
         /// <summary>
         /// 1B Sign の最小値の更新を試みる
@@ -206,7 +207,25 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
             if (Variables.ContainsKey(Origin1B))
             {
-                currentSignValue = (int)(Variables[Origin1B].Value ?? int.MaxValue);
+                if (Variables[Origin1B].Value != null)
+                {
+                    if (Variables[Origin1B].Value is int i)
+                    {
+                        currentSignValue = i;
+                    }
+                    else
+                    {
+                        var currentText = Variables[Origin1B].Value.ToString();
+                        if (int.TryParse(
+                            currentText,
+                            NumberStyles.HexNumber,
+                            CultureInfo.InvariantCulture,
+                            out int j))
+                        {
+                            currentSignValue = j;
+                        }
+                    }
+                }
             }
 
             if (newSignValue < currentSignValue)
