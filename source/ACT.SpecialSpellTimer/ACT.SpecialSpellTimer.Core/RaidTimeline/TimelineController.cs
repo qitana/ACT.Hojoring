@@ -1821,10 +1821,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
             switch (element)
             {
+                /*
                 case TimelineActivityModel act:
                     text = !string.IsNullOrEmpty(act.Text) ? $"text={act.Text}" : string.Empty; ;
                     log = $"{TimelineConstants.LogSymbol} synced-to-activity {string.Join(" ", parts.Where(x => !string.IsNullOrWhiteSpace(x)))}";
                     break;
+                */
 
                 case TimelineTriggerModel tri:
                     text = !string.IsNullOrEmpty(tri.Text) ? $"text={tri.Text}" : string.Empty; ;
@@ -1836,6 +1838,40 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             }
 
             TimelineController.RaiseLog(log);
+        }
+
+        private static volatile string lastRaisedLog = string.Empty;
+        private static long lastRaisedLogTimestamp = DateTime.MinValue.Ticks;
+
+        public static void RaiseLog(
+            string log)
+        {
+            if (string.IsNullOrEmpty(log))
+            {
+                return;
+            }
+
+            Task.Run(() =>
+            {
+                var now = DateTime.Now;
+
+                if (lastRaisedLog == log)
+                {
+                    var timestamp = new DateTime(Interlocked.Read(ref lastRaisedLogTimestamp));
+
+                    if ((now - timestamp).TotalSeconds <= 0.1)
+                    {
+                        return;
+                    }
+                }
+
+                lastRaisedLog = log;
+                Interlocked.Exchange(ref lastRaisedLogTimestamp, now.Ticks);
+
+                log = log.Replace(Environment.NewLine, "\\n");
+
+                LogParser.RaiseLog(DateTime.Now, log);
+            });
         }
 
         #endregion Log 関係のスレッド

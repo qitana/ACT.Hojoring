@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
@@ -311,28 +312,39 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 }
                 else
                 {
-                    variable.Value = ObjectComparer.ConvertToValue(set.Value, matched);
+                    var newValue = ObjectComparer.ConvertToValue(set.Value, matched);
+
+                    if (!ObjectComparer.Equals(variable.Value, newValue))
+                    {
+                        variable.Value = newValue;
+                        isVaribleChanged = true;
+                    }
                 }
 
                 // カウンタを更新する
-                variable.Counter = set.ExecuteCount(variable.Counter);
+                if (!string.IsNullOrEmpty(set.Count))
+                {
+                    variable.Counter = set.ExecuteCount(variable.Counter);
+                    isVaribleChanged = true;
+                }
 
                 // 有効期限を設定する
                 variable.Expiration = expretion;
 
-                // フラグの状況を把握するためにログを出力する
-                TimelineController.RaiseLog(
-                    string.IsNullOrEmpty(set.Count) ?
-                    $"{TimelineConstants.LogSymbol} set VAR['{set.Name}'] = {variable.Value}" :
-                    $"{TimelineConstants.LogSymbol} set VAR['{set.Name}'] = {variable.Counter}");
-
-                isVaribleChanged = true;
-
-                if (ReferedTriggerRecompileDelegates.ContainsKey(set.Name))
+                if (isVaribleChanged)
                 {
-                    lock (variable)
+                    // フラグの状況を把握するためにログを出力する
+                    TimelineController.RaiseLog(
+                        string.IsNullOrEmpty(set.Count) ?
+                        $"{TimelineConstants.LogSymbol} set VAR['{set.Name}'] = {variable.Value}" :
+                        $"{TimelineConstants.LogSymbol} set VAR['{set.Name}'] = {variable.Counter}");
+
+                    if (ReferedTriggerRecompileDelegates.ContainsKey(set.Name))
                     {
-                        ReferedTriggerRecompileDelegates[set.Name]?.Invoke();
+                        lock (variable)
+                        {
+                            ReferedTriggerRecompileDelegates[set.Name]?.Invoke();
+                        }
                     }
                 }
             }
@@ -605,7 +617,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
         private static readonly string EVALKeyword = "EVAL";
 
         private static readonly Regex EVALRegex = new Regex(
-            @"EVAL\((?<expressions>.+?)(\s*,\s*(?<format>.*))?\)",
+            @"EVAL\((?<expressions>.+?)(\s*,\s*(?<format>[^)]*))?\)",
             RegexOptions.Compiled);
 
         public static string ReplaceEval(
@@ -647,11 +659,23 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     return input;
                 }
 
-                var result = expressions.Eval();
+                var result = default(object);
                 var resultText = string.Empty;
 
-                if (result == null)
+                try
                 {
+                    result = expressions.Eval();
+
+                    if (result == null)
+                    {
+                        return input;
+                    }
+                }
+                catch (SyntaxErrorException)
+                {
+                    TimelineController.RaiseLog(
+                        $"{TimelineConstants.LogSymbol} EVAL syntax error. expressions=\"{expressions}\"");
+
                     return input;
                 }
 
