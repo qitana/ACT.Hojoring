@@ -17,7 +17,8 @@ function EndConfigure() {
 $7zPath = ".\tools\7za.exe"
 $msSdkDir = "C:\Program Files (x86)\Microsoft SDKs"
 $actURL = "https://advancedcombattracker.com/includes/page-download.php?id=57"
-$cevioURL = "http://storage.cevio.jp/product/CeVIO_Creative_Studio_x64_Setup_(7.0.22.3).msi"
+$cevioCS7URL = "https://cevio.jp/storage/ccs/CeVIO_Creative_Studio_x64_Setup_(7.0.23.1).msi"
+$cevioAIURL = "https://cevio.jp/storage/cevio_ai/CeVIO_AI_Setup_x64_(8.0.20.0).msi"
 
 Write-Output ("*** Configure start.")
 Write-Output ""
@@ -150,11 +151,11 @@ if (($Force) -or
     Write-Output ""
     Write-Output "-----------------------------------------------------------------------"
     Write-Output "CeVIO Creative Studio 7 をダウンロードしています..."
-    Write-Output ($cevioURL)
-    $cevioMsiFileName = [System.IO.Path]::GetFileName($cevioURL)
+    Write-Output ($cevioCS7URL)
+    $cevioMsiFileName = [System.IO.Path]::GetFileName($cevioCS7URL)
     $cevioMsiFile = Join-Path $TempFolder $cevioMsiFileName
     $cevioExtractDir = Join-Path $TempFolder "CeVIO_Creative_Studio_Extract"
-    Invoke-WebRequest -Uri $cevioURL -OutFile $cevioMsiFile
+    Invoke-WebRequest -Uri $cevioCS7URL -OutFile $cevioMsiFile
     New-Item -Path $cevioExtractDir -ItemType Directory | Out-Null
     Write-Output ""
     Write-Output ($cevioMsiFileName + "を展開しています...")
@@ -165,6 +166,35 @@ if (($Force) -or
         $cevioDLL = Join-Path $cevioExtractDir "CeVIO.Talk.RemoteService.DLL"
         Write-Output ("必要なファイルをコピーしています...")
         Copy-Item $cevioDLL ".\ThirdParty\CeVIO\7\" -Force
+        Write-Output "完了."
+    }
+    else {
+        Write-Output ("エラー: " + $cevioMsiFileName + " の展開に失敗しました")
+        EndConfigure
+    }
+}
+
+# CeVIO AI
+if (($Force) -or 
+    (!(Test-Path ".\ThirdParty\CeVIO\AI\CeVIO.Talk.RemoteService2.DLL"))) {
+    Write-Output ""
+    Write-Output "-----------------------------------------------------------------------"
+    Write-Output "CeVIO AI をダウンロードしています..."
+    Write-Output ($cevioAIURL)
+    $cevioMsiFileName = [System.IO.Path]::GetFileName($cevioAIURL)
+    $cevioMsiFile = Join-Path $TempFolder $cevioMsiFileName
+    $cevioExtractDir = Join-Path $TempFolder "CeVIO_AI_Extract"
+    Invoke-WebRequest -Uri $cevioAIURL -OutFile $cevioMsiFile
+    New-Item -Path $cevioExtractDir -ItemType Directory | Out-Null
+    Write-Output ""
+    Write-Output ($cevioMsiFileName + "を展開しています...")
+    $msiExecArgs = '/a', ('"' + $cevioMsiFile + '"'), ('targetdir="' + $cevioExtractDir + '"'), '/qn'
+    $msiexec = Start-Process -PassThru -Wait msiexec -ArgumentList $msiExecArgs
+
+    if ($msiexec.ExitCode -eq 0) {
+        $cevioDLL = Join-Path $cevioExtractDir "CeVIO.Talk.RemoteService2.DLL"
+        Write-Output ("必要なファイルをコピーしています...")
+        Copy-Item $cevioDLL ".\ThirdParty\CeVIO\AI\" -Force
         Write-Output "完了."
     }
     else {
