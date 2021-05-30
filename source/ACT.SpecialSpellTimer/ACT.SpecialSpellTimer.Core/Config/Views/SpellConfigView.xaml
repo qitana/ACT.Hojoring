@@ -786,11 +786,7 @@
 
                     <StackPanel Orientation="Horizontal">
                       <TextBlock Margin="10 0 5 2" Text="Size" VerticalAlignment="Bottom" />
-<<<<<<< HEAD
-                      <xctk:DoubleUpDown Value="{Binding Model.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
-=======
-                      <xctk:DoubleUpDown Value="{Binding Model.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" Minimum="0" />
->>>>>>> upstream/master
+                      <xctk:DoubleUpDown Value="{Binding Model.SpellIconSize, Mode=TwoWay}" Increment="1" MinWidth="65" VerticalAlignment="Bottom" Minimum="0" FontFamily="Consolas, Yu Gothic UI, Meiryo UI" />
                     </StackPanel>
                   </StackPanel>
                 </StackPanel>
