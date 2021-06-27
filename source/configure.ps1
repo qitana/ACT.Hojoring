@@ -79,6 +79,7 @@ if (($Force) -or
 
 # FFXIV_ACT_Plugin SDK
 if (($Force) -or
+    (!(Test-Path ".\ThirdParty\FFXIV_ACT_Plugin.dll")) -or
     (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Common.dll")) -or
     (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.LogFile.dll")) -or
     (!(Test-Path ".\ThirdParty\SDK\FFXIV_ACT_Plugin.Resource.dll"))) {
@@ -110,6 +111,7 @@ if (($Force) -or
         $srcCosturaDecompress = Get-Content $fileCosturaDecompress | Out-String
         Add-Type -TypeDefinition $srcCosturaDecompress -Language CSharp
 
+        Copy-Item $ffxivActPluginDllFile (Join-Path $cd ".\Thirdparty\FFXIV_ACT_Plugin.dll")
         [ACT.Hojoring.ATDExtractor.CosturaDecompress]::DecompressFile((Join-Path $ffxivActPluginExtractDir "costura.ffxiv_act_plugin.common.dll.compressed"), (Join-Path $cd ".\Thirdparty\SDK\FFXIV_ACT_Plugin.Common.dll"))
         [ACT.Hojoring.ATDExtractor.CosturaDecompress]::DecompressFile((Join-Path $ffxivActPluginExtractDir "costura.ffxiv_act_plugin.logfile.dll.compressed"), (Join-Path $cd ".\Thirdparty\SDK\FFXIV_ACT_Plugin.LogFile.dll"))
         [ACT.Hojoring.ATDExtractor.CosturaDecompress]::DecompressFile((Join-Path $ffxivActPluginExtractDir "costura.ffxiv_act_plugin.resource.dll.compressed"), (Join-Path $cd ".\Thirdparty\SDK\FFXIV_ACT_Plugin.Resource.dll"))
