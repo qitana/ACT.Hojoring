@@ -1,3 +1,13 @@
+using Advanced_Combat_Tracker;
+using FFXIV.Framework.Common;
+using FFXIV.Framework.Globalization;
+using FFXIV_ACT_Plugin.Common;
+using FFXIV_ACT_Plugin.Common.Models;
+using FFXIV_ACT_Plugin.Logfile;
+using FFXIV_ACT_Plugin.Resource;
+using Microsoft.MinIoC;
+using Microsoft.VisualBasic.FileIO;
+using Sharlayan.Core.Enums;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -13,15 +23,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Advanced_Combat_Tracker;
-using FFXIV.Framework.Common;
-using FFXIV.Framework.Globalization;
-using FFXIV_ACT_Plugin.Common;
-using FFXIV_ACT_Plugin.Common.Models;
-using FFXIV_ACT_Plugin.Logfile;
-using FFXIV_ACT_Plugin.Resource;
-using Microsoft.VisualBasic.FileIO;
-using Sharlayan.Core.Enums;
 
 namespace FFXIV.Framework.XIVHelper
 {
@@ -60,7 +61,7 @@ namespace FFXIV.Framework.XIVHelper
 
         private IDataSubscription DataSubscription { get; set; }
 
-        private dynamic IOCContainer { get; set; }
+        private Microsoft.MinIoC.Container IOCContainer { get; set; }
 
         public System.Action ActPluginAttachedCallback { get; set; }
 
@@ -328,7 +329,7 @@ namespace FFXIV.Framework.XIVHelper
                     .GetField(
                         "_iocContainer",
                         BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(ffxivPlugin);
+                    .GetValue(ffxivPlugin) as Microsoft.MinIoC.Container;
 
                 this.SubscribeXIVPluginEvents();
                 this.SubscribeParsedLogLine();
@@ -377,9 +378,6 @@ namespace FFXIV.Framework.XIVHelper
             CombatantsManager.Instance.Clear();
             this.OnZoneChanged?.Invoke(zoneID, zoneName);
         }
-
-        public ResolveType Resolve<ResolveType>() where ResolveType : class
-            => this.IOCContainer?.Resolve<ResolveType>();
 
         #endregion Attach FFXIV Plugin
 
@@ -1699,7 +1697,7 @@ namespace FFXIV.Framework.XIVHelper
                 return;
             }
 
-            var resourcesData = this.Resolve<IResourceData>();
+            var resourcesData = this.IOCContainer?.Resolve<IResourceData>();
             var dataContainer = resourcesData?.GetType()
                 .GetField(
                     "_skillList",
@@ -1755,7 +1753,7 @@ namespace FFXIV.Framework.XIVHelper
                 return;
             }
 
-            var resourcesData = this.Resolve<IResourceData>();
+            var resourcesData = this.IOCContainer?.Resolve<IResourceData>();
             var dataContainer = resourcesData?.GetType()
                 .GetField(
                     "_buffList",
